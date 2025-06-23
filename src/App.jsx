@@ -2,6 +2,10 @@ import React from 'react'
 
 export default function App() {
   return (
-    <h1 className='text-red-500'>App</h1>
+    <>
+ <h1 className='text-red-500'>App</h1>
+    <h2>My New</h2>
+    </>
+   
   )
 }
