@@ -1,6 +1,8 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import cors from 'cors';
+import morgan from 'morgan';
 import userRouter from './routes/user.route.js';
 import authRouter from './routes/auth.route.js';
 
@@ -13,7 +15,15 @@ mongoose.connect(process.env.MONGO).then(() => {
 
 const app = express();
 
+// Use morgan middleware (in 'dev' format)
+app.use(morgan('dev'));
+
 app.use(express.json());
+
+app.use(cors({
+  origin: 'http://localhost:5173', // ✅ allow your frontend
+  credentials: true                // if using cookies or tokens
+}));
 
 app.listen(3000, () => {
     console.log('API started on port 3000');
