@@ -5,6 +5,7 @@ import cors from 'cors';
 import morgan from 'morgan';
 import userRouter from './routes/user.route.js';
 import authRouter from './routes/auth.route.js';
+import cookieParser from 'cookie-parser';
 
 dotenv.config();
 mongoose.connect(process.env.MONGO).then(() => {
@@ -19,6 +20,7 @@ const app = express();
 app.use(morgan('dev'));
 
 app.use(express.json());
+app.use(cookieParser());
 
 app.use(cors({
   origin: 'http://localhost:5173', // ✅ allow your frontend
