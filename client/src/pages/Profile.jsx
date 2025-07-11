@@ -13,9 +13,9 @@ export default function Profile() {
 
         <img onClick={() => fileRef.current.click()} src={currentUser.avatar} alt="profile" className="rounded-full w-32 h-32 object-cover cursor-pointer self-center mt-2" />
 
-        <input type="text" placeholder="username" id="username" className="border p-3 rounded-lg"/>
+        <input type="text" placeholder="username" defaultValue={currentUser.username} id="username" className="border p-3 rounded-lg"/>
         
-        <input type="email" placeholder="email" id="email" className="border p-3 rounded-lg" />
+        <input type="email" placeholder="email" defaultValue={currentUser.email} id="email" className="border p-3 rounded-lg" />
         <input type="text" placeholder="password" id="password" className="border p-3 rounded-lg" />  
         <button className="bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80">Update</button>      
 
