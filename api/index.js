@@ -7,6 +7,7 @@ import userRouter from './routes/user.route.js';
 import authRouter from './routes/auth.route.js';
 import cookieParser from 'cookie-parser';
 import listingRouter from './routes/listing.route.js';
+import adminRouter from './routes/admin.route.js';
 dotenv.config();
 mongoose.connect(process.env.MONGO).then(() => {
     console.log('Connected to MongoDB');
@@ -23,7 +24,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use(cors({
-  origin: 'http://localhost:5173', // ✅ allow your frontend
+  origin: ['http://localhost:5173', 'http://localhost:5174'], // ✅ allow your frontend
   credentials: true                // if using cookies or tokens
 }));
 
@@ -34,6 +35,7 @@ app.listen(3000, () => {
 app.use('/api/user', userRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/listing', listingRouter);
+app.use('/api/admin', adminRouter);
 
 app.use((err, req, res, next) => {
     const statusCode = err.statusCode || 500;

@@ -54,7 +54,33 @@ const listingSchema = new mongoose.Schema(
     type: String,
     required: true,
    },
+
+createdBy: {
+  type: mongoose.Schema.Types.ObjectId,
+  ref: 'User',
+  required: true
+},
+role: {
+  type: String,
+  enum: ['user', 'admin'],
+  required: true
+},
+status: {
+  type: String,
+  enum: ['pending', 'approved', 'rejected'],
+  default: function () {
+    return this.role === 'admin' ? 'approved' : 'pending';
+  }
+}
+
+
+
     },
+
+
+
+
+    
     {
         timestamps: true
 
