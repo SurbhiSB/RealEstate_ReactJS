@@ -8,6 +8,8 @@ import authRouter from './routes/auth.route.js';
 import cookieParser from 'cookie-parser';
 import listingRouter from './routes/listing.route.js';
 import adminRouter from './routes/admin.route.js';
+import groupRouter from './routes/group.route.js';
+
 dotenv.config();
 mongoose.connect(process.env.MONGO).then(() => {
     console.log('Connected to MongoDB');
@@ -36,6 +38,7 @@ app.use('/api/user', userRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/listing', listingRouter);
 app.use('/api/admin', adminRouter);
+app.use('/api/group', groupRouter);
 
 app.use((err, req, res, next) => {
     const statusCode = err.statusCode || 500;

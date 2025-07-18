@@ -1,7 +1,40 @@
+import { useState } from "react";
+import axios from "axios";
 import Header from "../../components/Header";
 import Sidebar from "../../components/Sidebar";
 
 export default function Group() {
+  const [groupName, setGroupName] = useState("");
+  const [userShortName, setUserShortName] = useState("");
+  const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setMessage("");
+    setError("");
+
+    try {
+      const res = await axios.post("http://localhost:3000/api/group/create", {
+        groupName,
+        userShortName,
+      });
+
+      setMessage(res.data.message || "Group created successfully!");
+      setGroupName("");
+      setUserShortName("");
+    } catch (err) {
+      setError(err.response?.data?.message || "Something went wrong.");
+    }
+  };
+
+  const handleReset = () => {
+    setGroupName("");
+    setUserShortName("");
+    setMessage("");
+    setError("");
+  };
+
   return (
     <div className="flex h-screen bg-gray-100">
       <Sidebar />
@@ -12,26 +45,35 @@ export default function Group() {
 
           <div className="bg-white shadow-md rounded-md p-6 border-t-4 border-gray-700">
             <div className="text-lg font-medium text-gray-800 mb-4 flex items-center gap-2">
-              <i className="fas fa-folder-plus"></i> {/* optional icon */}
-              Project Group
+              <i className="fas fa-folder-plus"></i> Project Group
             </div>
 
-            <form className="space-y-4">
+            <form className="space-y-4" onSubmit={handleSubmit} onReset={handleReset}>
               <div>
-                <label className="block text-gray-700 mb-1" htmlFor="groupName">Group Name New</label>
+                <label className="block text-gray-700 mb-1" htmlFor="groupName">
+                  Group Name
+                </label>
                 <input
                   id="groupName"
                   type="text"
+                  value={groupName}
+                  onChange={(e) => setGroupName(e.target.value)}
                   className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-gray-600"
+                  required
                 />
               </div>
 
               <div>
-                <label className="block text-gray-700 mb-1" htmlFor="shortName">Display/Short Name</label>
+                <label className="block text-gray-700 mb-1" htmlFor="shortName">
+                  Display/Short Name
+                </label>
                 <input
                   id="shortName"
                   type="text"
+                  value={userShortName}
+                  onChange={(e) => setUserShortName(e.target.value)}
                   className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-gray-600"
+                  required
                 />
               </div>
 
@@ -49,6 +91,9 @@ export default function Group() {
                   Reset
                 </button>
               </div>
+
+              {message && <p className="text-green-600 pt-2">{message}</p>}
+              {error && <p className="text-red-600 pt-2">{error}</p>}
             </form>
           </div>
         </div>
