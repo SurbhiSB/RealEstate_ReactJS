@@ -18,7 +18,7 @@ export default function Group() {
 
             <form className="space-y-4">
               <div>
-                <label className="block text-gray-700 mb-1" htmlFor="groupName">Group Name</label>
+                <label className="block text-gray-700 mb-1" htmlFor="groupName">Group Name New</label>
                 <input
                   id="groupName"
                   type="text"
