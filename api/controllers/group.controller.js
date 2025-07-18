@@ -39,3 +39,26 @@ export const getAllGroups = async (req, res, next) => {
     next(err);
   }
 };
+
+// Update group
+export const updateGroup = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { groupName, userShortName } = req.body;
+
+    const updatedGroup = await Group.findByIdAndUpdate(
+      id,
+      { groupName, userShortName },
+      { new: true, runValidators: true }
+    );
+
+    if (!updatedGroup) {
+      return res.status(404).json({ success: false, message: 'Group not found' });
+    }
+
+    res.status(200).json({ success: true, message: 'Group updated successfully', data: updatedGroup });
+  } catch (err) {
+    next(err);
+  }
+};
+
