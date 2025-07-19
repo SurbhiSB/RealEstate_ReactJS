@@ -204,6 +204,7 @@ export default function AddMembers() {
                         <input type="checkbox" id="sameAddress" checked={sameAsBilling} onChange={handleSameAsBillingToggle} className="mr-2" />
                         <label htmlFor="sameAddress" className="text-sm">Same As Billing Address</label>
                       </div>
+                      
                       {Object.keys(shippingAddress).map((field) => (
                         <input
                           key={field}
