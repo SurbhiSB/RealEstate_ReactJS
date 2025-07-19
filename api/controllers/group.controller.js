@@ -28,15 +28,23 @@ export const createGroup = async (req, res, next) => {
 };
 
 // Get all groups
-export const getAllGroups = async (req, res, next) => {
+// export const getAllGroups = async (req, res, next) => {
+//   try {
+//     const groups = await Group.find().sort({ createdAt: -1 });
+//     res.status(200).json({
+//       success: true,
+//       data: groups,
+//     });
+//   } catch (err) {
+//     next(err);
+//   }
+// };
+export const getAllGroups = async (req, res) => {
   try {
-    const groups = await Group.find().sort({ createdAt: -1 });
-    res.status(200).json({
-      success: true,
-      data: groups,
-    });
-  } catch (err) {
-    next(err);
+    const groups = await Group.find();
+    res.status(200).json({ success: true, groups });
+  } catch (error) {
+    res.status(500).json({ success: false, message: "Failed to fetch groups" });
   }
 };
 
