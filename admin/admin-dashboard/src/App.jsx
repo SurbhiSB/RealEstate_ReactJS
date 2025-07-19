@@ -16,6 +16,7 @@ import PaymentHistory from './pages/projects/PaymentHistory';
 import CompanyDetailsPage from './pages/CompanyDetails';
 
 import AddMembers from './pages/members/addMembers';
+import AddCustomers from './pages/members/AddCustomer';
 
 
 export default function App() {
@@ -39,6 +40,7 @@ export default function App() {
         <Route path="/projects/payment-history" element={<PaymentHistory />} />
 
         <Route path="/members/addMembers" element={<AddMembers />} />
+        <Route path="/members/addCustomer" element={<AddCustomers />} />
       </Routes>
     </BrowserRouter>
   );

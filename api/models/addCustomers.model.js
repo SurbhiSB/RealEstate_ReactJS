@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const AddMemberSchema = new mongoose.Schema({
+const AddCustomerchema = new mongoose.Schema({
   memberType: String,
   fullName: String,
   email: String,
@@ -19,5 +19,5 @@ const AddMemberSchema = new mongoose.Schema({
   },
 }, { timestamps: true });
 
-const AddMember = mongoose.model('AddMember', AddMemberSchema);
+const AddMember = mongoose.model('AddMember', AddCustomerchema);
 export default AddMember;
