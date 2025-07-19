@@ -1,4 +1,3 @@
-// src/pages/members/AddMembers.jsx
 import React, { useState } from 'react';
 import axios from 'axios';
 import Header from "../../components/Header";
@@ -22,7 +21,11 @@ export default function AddMembers() {
     paymentTerms: '',
     contactPerson: '',
     contactNumber: '',
-    contactEmail: ''
+    contactEmail: '',
+    beneficiaryName: '',
+    accountNumber: '',
+    bankName: '',
+    ifsc: '',
   });
 
   const [billingAddress, setBillingAddress] = useState({
@@ -53,29 +56,46 @@ export default function AddMembers() {
     if (isSame) setShippingAddress({ ...billingAddress });
   };
 
+  const handleSubmitOther = () => {
+    console.log("Other details submitted", formData);
+    setMessage("Other details saved successfully");
+    setActiveTab("address");
+  };
+
   const handleSubmitAddress = () => {
-    alert("Address submitted!");
+    console.log("Address submitted", billingAddress, shippingAddress);
+    setMessage("Address saved successfully");
+    setActiveTab("contact");
   };
 
   const handleSubmitContact = () => {
-    alert("Contact details submitted!");
-  };
-
-   const handleSubmitBank = () => {
-    console.log('Bank Info Submitted:', {
-      beneficiaryName: formData.beneficiaryName,
-      accountNumber: formData.accountNumber,
-      bankName: formData.bankName,
-      ifsc: formData.ifsc,
-    });
+    console.log("Contact Info submitted", formData);
+    setMessage("Contact information saved successfully");
+    setActiveTab("bank");
   };
 
   const handleReset = () => {
     setFormData({
-      memberType: '', fullName: '', email: '', phone: '', remarks: '',
-      companyName: '', displayName: '', mobile: '', tds: '0.00', status: 'Active',
-      gst: '', panNo: '', paymentTerms: '',
-      contactPerson: '', contactNumber: '', contactEmail: ''
+      memberType: '',
+      fullName: '',
+      email: '',
+      phone: '',
+      remarks: '',
+      companyName: '',
+      displayName: '',
+      mobile: '',
+      tds: '0.00',
+      status: 'Active',
+      gst: '',
+      panNo: '',
+      paymentTerms: '',
+      contactPerson: '',
+      contactNumber: '',
+      contactEmail: '',
+      beneficiaryName: '',
+      accountNumber: '',
+      bankName: '',
+      ifsc: '',
     });
     setBillingAddress({ name: '', phone: '', address: '', city: '', state: '', country: '', pinCode: '' });
     setShippingAddress({ name: '', phone: '', address: '', city: '', state: '', country: '', pinCode: '' });
@@ -83,20 +103,26 @@ export default function AddMembers() {
     setMessage('');
   };
 
-  const handleSubmit = async (e) => {
-    e?.preventDefault?.();
+  // ✅ Move handleSubmitBank OUTSIDE of handleSubmit
+  const handleSubmitBank = async () => {
     try {
       const dataToSend = {
         ...formData,
         billingAddress,
         shippingAddress,
       };
+
       const res = await axios.post('http://localhost:3000/api/addMembers/addmembers', dataToSend);
+
       if (res.data.success) {
         setMessage('Member added successfully!');
         handleReset();
+        setActiveTab("other");
+      } else {
+        setMessage('Submission failed');
       }
     } catch (err) {
+      console.error(err);
       setMessage(err.response?.data?.message || 'Error occurred');
     }
   };
@@ -109,8 +135,8 @@ export default function AddMembers() {
         <div className="p-6 max-w-6xl mx-auto bg-white shadow-lg rounded-lg mt-4">
           <h2 className="text-2xl font-bold mb-6 border-b pb-2">Member Details</h2>
 
-          {/* Form: Basic Details */}
-          <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-6">
+          <form className="grid grid-cols-2 gap-6">
+            {/* Left Column */}
             <div>
               <label className="block mb-1 font-medium">Member Type</label>
               <select name="memberType" value={formData.memberType} onChange={handleChange} className="w-full border p-2 rounded mb-4">
@@ -132,6 +158,7 @@ export default function AddMembers() {
               <input name="remarks" value={formData.remarks} onChange={handleChange} className="w-full border p-2 rounded mb-4" />
             </div>
 
+            {/* Right Column */}
             <div>
               <label className="block mb-1 font-medium">Company Name</label>
               <input name="companyName" value={formData.companyName} onChange={handleChange} className="w-full border p-2 rounded mb-4" />
@@ -171,9 +198,7 @@ export default function AddMembers() {
                   <input name="panNo" value={formData.panNo} onChange={handleChange} placeholder="PAN Number" className="w-full border p-2 mb-4 rounded" />
                   <input name="paymentTerms" value={formData.paymentTerms} onChange={handleChange} placeholder="Payment Terms" className="w-full border p-2 mb-4 rounded" />
                   <div className="mt-6">
-                    <button type="submit" className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">
-                      Submit
-                    </button>
+                    <button type="button" onClick={handleSubmitOther} className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">Next</button>
                     {message && <p className="mt-4 text-green-600">{message}</p>}
                   </div>
                 </div>
@@ -182,7 +207,6 @@ export default function AddMembers() {
               {activeTab === 'address' && (
                 <div className="p-6 bg-white rounded shadow-md">
                   <div className="grid grid-cols-2 gap-8">
-                    {/* Billing Address */}
                     <div>
                       <h2 className="text-lg font-semibold mb-4">Billing Address</h2>
                       {Object.keys(billingAddress).map((field) => (
@@ -197,14 +221,12 @@ export default function AddMembers() {
                       ))}
                     </div>
 
-                    {/* Shipping Address */}
                     <div>
                       <h2 className="text-lg font-semibold mb-4">Shipping Address</h2>
                       <div className="flex items-center mb-4">
                         <input type="checkbox" id="sameAddress" checked={sameAsBilling} onChange={handleSameAsBillingToggle} className="mr-2" />
                         <label htmlFor="sameAddress" className="text-sm">Same As Billing Address</label>
                       </div>
-                      
                       {Object.keys(shippingAddress).map((field) => (
                         <input
                           key={field}
@@ -217,14 +239,8 @@ export default function AddMembers() {
                       ))}
                     </div>
                   </div>
-
                   <div className="flex justify-center mt-6">
-                    <button
-                      onClick={handleSubmitAddress}
-                      className="bg-purple-800 text-white px-6 py-2 rounded hover:bg-purple-900 transition"
-                    >
-                      Submit
-                    </button>
+                    <button type="button" onClick={handleSubmitAddress} className="bg-purple-800 text-white px-6 py-2 rounded hover:bg-purple-900 transition">Next</button>
                   </div>
                 </div>
               )}
@@ -233,53 +249,24 @@ export default function AddMembers() {
                 <div className="p-6 bg-white rounded shadow-md max-w-2xl mx-auto">
                   <h2 className="text-lg font-semibold mb-6">Contact Details</h2>
                   <div className="space-y-4">
-                    <input
-                      type="text"
-                      placeholder="Person Name"
-                      name="contactPerson"
-                      value={formData.contactPerson}
-                      onChange={handleChange}
-                      className="w-full p-2 border rounded"
-                    />
-                    <input
-                      type="text"
-                      placeholder="Contact Number"
-                      name="contactNumber"
-                      value={formData.contactNumber}
-                      onChange={handleChange}
-                      className="w-full p-2 border rounded"
-                    />
-                    <input
-                      type="email"
-                      placeholder="Email"
-                      name="contactEmail"
-                      value={formData.contactEmail}
-                      onChange={handleChange}
-                      className="w-full p-2 border rounded"
-                    />
+                    <input type="text" placeholder="Person Name" name="contactPerson" value={formData.contactPerson} onChange={handleChange} className="w-full p-2 border rounded" />
+                    <input type="text" placeholder="Contact Number" name="contactNumber" value={formData.contactNumber} onChange={handleChange} className="w-full p-2 border rounded" />
+                    <input type="email" placeholder="Email" name="contactEmail" value={formData.contactEmail} onChange={handleChange} className="w-full p-2 border rounded" />
                   </div>
                   <div className="flex justify-center mt-6">
-                    <button
-                      onClick={handleSubmitContact}
-                      className="bg-green-600 text-white px-6 py-2 rounded hover:bg-green-700 transition"
-                    >
-                      Submit
-                    </button>
+                    <button type="button" onClick={handleSubmitContact} className="bg-green-600 text-white px-6 py-2 rounded hover:bg-green-700 transition">Next</button>
                   </div>
                 </div>
               )}
 
               {activeTab === 'bank' && (
-                <div>
-                    <div className="space-y-4">
-          <input name="beneficiaryName" placeholder="Beneficiary Name" onChange={handleChange} value={formData.beneficiaryName} className="w-full border p-2 rounded" />
-          <input name="accountNumber" placeholder="Account Number" onChange={handleChange} value={formData.accountNumber} className="w-full border p-2 rounded" />
-          <input name="bankName" placeholder="Bank Name" onChange={handleChange} value={formData.bankName} className="w-full border p-2 rounded" />
-          <input name="ifsc" placeholder="IFSC Code" onChange={handleChange} value={formData.ifsc} className="w-full border p-2 rounded" />
-          <button onClick={handleSubmitBank} className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Submit</button>
-        </div>
-
-
+                <div className="space-y-4">
+                  <input name="beneficiaryName" placeholder="Beneficiary Name" onChange={handleChange} value={formData.beneficiaryName} className="w-full border p-2 rounded" />
+                  <input name="accountNumber" placeholder="Account Number" onChange={handleChange} value={formData.accountNumber} className="w-full border p-2 rounded" />
+                  <input name="bankName" placeholder="Bank Name" onChange={handleChange} value={formData.bankName} className="w-full border p-2 rounded" />
+                  <input name="ifsc" placeholder="IFSC Code" onChange={handleChange} value={formData.ifsc} className="w-full border p-2 rounded" />
+                  <button onClick={handleSubmitBank} className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Submit</button>
+                  {message && <p className="mt-4 text-green-600">{message}</p>}
                 </div>
               )}
             </div>
