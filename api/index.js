@@ -10,9 +10,16 @@ import listingRouter from './routes/listing.route.js';
 import adminRouter from './routes/admin.route.js';
 import groupRouter from './routes/group.route.js';
 import addMembersRouter from './routes/addMembers.route.js';
+import projectRoutes from "./routes/project.route.js";
+import groupRoutes from "./routes/group.route.js";
 
 
 dotenv.config();
+
+
+
+
+
 mongoose.connect(process.env.MONGO).then(() => {
     console.log('Connected to MongoDB');
 }).catch((error) => {
@@ -26,6 +33,7 @@ app.use(morgan('dev'));
 
 app.use(express.json());
 app.use(cookieParser());
+
 
 app.use(cors({
   origin: ['http://localhost:5173', 'http://localhost:5174'], // ✅ allow your frontend
@@ -42,6 +50,8 @@ app.use('/api/listing', listingRouter);
 app.use('/api/admin', adminRouter);
 app.use('/api/group', groupRouter);
 app.use('/api/addMembers', addMembersRouter);
+app.use("/api/project", projectRoutes);
+app.use("/api/group", groupRoutes);
 
 
 app.use((err, req, res, next) => {
