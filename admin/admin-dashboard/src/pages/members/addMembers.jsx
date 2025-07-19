@@ -60,7 +60,7 @@ export default function AddMembers() {
         <Header />
 
         <div className="p-6 max-w-6xl mx-auto bg-white shadow-lg rounded-lg mt-4">
-          <h2 className="text-2xl font-bold mb-6 border-b pb-2">Member Details</h2>
+          <h2 className="text-2xl font-bold mb-6 border-b pb-2">Member</h2>
 
           <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-6">
             {/* Left Column */}
