@@ -15,6 +15,8 @@ import PaymentReceived from './pages/projects/PaymentReceived';
 import PaymentHistory from './pages/projects/PaymentHistory';
 import CompanyDetailsPage from './pages/CompanyDetails';
 
+import AddMembers from './pages/members/addMembers';
+
 
 export default function App() {
   return (
@@ -35,6 +37,8 @@ export default function App() {
         <Route path="/projects/booking-history" element={<BookingHistory />} />
         <Route path="/projects/payment-recieved" element={<PaymentReceived />} />
         <Route path="/projects/payment-history" element={<PaymentHistory />} />
+
+        <Route path="/members/addMembers" element={<AddMembers />} />
       </Routes>
     </BrowserRouter>
   );

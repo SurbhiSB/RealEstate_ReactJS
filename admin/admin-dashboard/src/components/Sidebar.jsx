@@ -37,8 +37,8 @@ export default function Sidebar() {
             {isMembersOpen && (
               <ul className="ml-6 mt-1 space-y-1">
                 <li>
-                  <Link to="/admin/members/all" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
-                    <Circle size={10} /> All Members
+                  <Link to="/members/addMembers" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                    <Circle size={10} /> Add Vendor/Contractor
                   </Link>
                 </li>
                 <li>
