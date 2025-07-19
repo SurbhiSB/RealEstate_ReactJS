@@ -11,6 +11,7 @@ import adminRouter from './routes/admin.route.js';
 import groupRouter from './routes/group.route.js';
 import addMembersRouter from './routes/addMembers.route.js';
 
+
 dotenv.config();
 mongoose.connect(process.env.MONGO).then(() => {
     console.log('Connected to MongoDB');
@@ -41,6 +42,7 @@ app.use('/api/listing', listingRouter);
 app.use('/api/admin', adminRouter);
 app.use('/api/group', groupRouter);
 app.use('/api/addMembers', addMembersRouter);
+
 
 app.use((err, req, res, next) => {
     const statusCode = err.statusCode || 500;
