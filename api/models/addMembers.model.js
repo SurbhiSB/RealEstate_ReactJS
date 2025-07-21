@@ -1,52 +1,55 @@
 import mongoose from 'mongoose';
 
 const AddressSchema = new mongoose.Schema({
-  name: String,
-  phone: String,
-  address: String,
-  city: String,
-  state: String,
-  country: String,
-  pinCode: String,
+  name: { type: String, required: true },
+  phone: { type: String, required: true },
+  address: { type: String, required: true },
+  city: { type: String, required: true },
+  state: { type: String, required: true },
+  country: { type: String, required: true },
+  pinCode: { type: String, required: true },
 });
 
 const AddMemberSchema = new mongoose.Schema({
-  memberType: String,
-  fullName: String,
-  email: String,
-  phone: String,
-  remarks: String,
-  companyName: String,
-  displayName: String,
-  mobile: String,
+  memberType: { type: String, required: true },
+  fullName: { type: String, required: true },
+  email: { type: String, required: true },
+  phone: { type: String, required: true },
+  remarks: { type: String, required: true },
+  companyName: { type: String, required: true },
+  displayName: { type: String, required: true },
+  mobile: { type: String, required: true },
   tds: {
     type: String,
+    required: true,
     default: '0.00',
   },
   status: {
     type: String,
+    required: true,
     default: 'Active',
   },
 
   // Other Tab Fields
-  gst: String,
-  panNo: String,
-  paymentTerms: String,
+  gst: { type: String, required: true },
+  panNo: { type: String, required: true },
+  paymentTerms: { type: String, required: true },
 
   // Address
-  billingAddress: AddressSchema,
-  shippingAddress: AddressSchema,
+  billingAddress: { type: AddressSchema, required: false },
+  shippingAddress: { type: AddressSchema, required: false },
 
   // Contact
-  contactPerson: String,
-  contactNumber: String,
-  contactEmail: String,
+  contactPerson: { type: String, required: true },
+  contactNumber: { type: String, required: true },
+  contactEmail: { type: String, required: true },
 
   // Bank
-  beneficiaryName: String,
-  accountNumber: String,
-  bankName: String,
-  ifsc: String,
+  beneficiaryName: { type: String, required: true },
+  accountNumber: { type: String, required: true },
+  bankName: { type: String, required: true },
+  ifsc: { type: String, required: true },
+
 }, { timestamps: true });
 
 const AddMember = mongoose.model('AddMember', AddMemberSchema);

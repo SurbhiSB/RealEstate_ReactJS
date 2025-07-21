@@ -104,28 +104,31 @@ export default function AddMembers() {
   };
 
   // ✅ Move handleSubmitBank OUTSIDE of handleSubmit
-  const handleSubmitBank = async () => {
-    try {
-      const dataToSend = {
-        ...formData,
-        billingAddress,
-        shippingAddress,
-      };
+const handleSubmitBank = async () => {
+  try {
+    const dataToSend = {
+      ...formData,
+      billingAddress,
+      shippingAddress,
+    };
 
-      const res = await axios.post('http://localhost:3000/api/addMembers/addmembers', dataToSend);
+    console.log("🔍 Final payload to be submitted:", dataToSend); // <-- Add this line
 
-      if (res.data.success) {
-        setMessage('Member added successfully!');
-        handleReset();
-        setActiveTab("other");
-      } else {
-        setMessage('Submission failed');
-      }
-    } catch (err) {
-      console.error(err);
-      setMessage(err.response?.data?.message || 'Error occurred');
+    const res = await axios.post('http://localhost:3000/api/addMembers/addmembers', dataToSend);
+
+    if (res.data.success) {
+      
+      handleReset();
+      setActiveTab("other");
+      setMessage('Member added successfully!');
+    } else {
+      setMessage('Submission failed');
     }
-  };
+  } catch (err) {
+    console.error("❌ Submission error:", err);
+    setMessage(err.response?.data?.message || 'Error occurred');
+  }
+};
 
   return (
     <div className="flex">
@@ -262,6 +265,7 @@ export default function AddMembers() {
               {activeTab === 'bank' && (
                 <div className="space-y-4">
                   <input name="beneficiaryName" placeholder="Beneficiary Name" onChange={handleChange} value={formData.beneficiaryName} className="w-full border p-2 rounded" />
+                  
                   <input name="accountNumber" placeholder="Account Number" onChange={handleChange} value={formData.accountNumber} className="w-full border p-2 rounded" />
                   <input name="bankName" placeholder="Bank Name" onChange={handleChange} value={formData.bankName} className="w-full border p-2 rounded" />
                   <input name="ifsc" placeholder="IFSC Code" onChange={handleChange} value={formData.ifsc} className="w-full border p-2 rounded" />
