@@ -3,7 +3,7 @@ import { createProject, getAllProjects } from "../controllers/project.controller
 
 const router = express.Router();
 
-router.post("/create", createProject);
-router.get("/all", getAllProjects);
+router.post("/create", createProject);   // POST /api/projects/create
+router.get("/all", getAllProjects);      // GET  /api/projects/all
 
 export default router;

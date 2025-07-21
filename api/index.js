@@ -14,6 +14,7 @@ import projectRoutes from "./routes/project.route.js";
 import groupRoutes from "./routes/group.route.js";
 
 
+
 dotenv.config();
 
 
@@ -52,6 +53,7 @@ app.use('/api/group', groupRouter);
 app.use('/api/addMembers', addMembersRouter);
 app.use("/api/project", projectRoutes);
 app.use("/api/group", groupRoutes);
+app.use("/api/projects", projectRoutes);
 
 
 app.use((err, req, res, next) => {

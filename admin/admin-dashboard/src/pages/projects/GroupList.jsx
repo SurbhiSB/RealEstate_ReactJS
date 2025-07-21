@@ -10,38 +10,38 @@ export default function GroupList() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-
   const [editId, setEditId] = useState(null);
-const [editGroupName, setEditGroupName] = useState("");
-const [editShortName, setEditShortName] = useState("");
+  const [editGroupName, setEditGroupName] = useState("");
+  const [editShortName, setEditShortName] = useState("");
 
-const handleUpdate = async (id) => {
-  try {
-    const res = await axios.put(`http://localhost:3000/api/group/update/${id}`, {
-      groupName: editGroupName,
-      userShortName: editShortName,
-    });
+  const handleUpdate = async (id) => {
+    try {
+      const res = await axios.put(`http://localhost:3000/api/group/update/${id}`, {
+        groupName: editGroupName,
+        userShortName: editShortName,
+      });
 
-    const updated = res.data.data;
-    const updatedGroups = groups.map((group) =>
-      group._id === id ? updated : group
-    );
-    setGroups(updatedGroups);
-    setEditId(null);
-  } catch (error) {
-    alert("Failed to update group. Try again.");
-    console.error(error);
-  }
-};
-
+      const updated = res.data.data;
+      const updatedGroups = groups.map((group) =>
+        group._id === id ? updated : group
+      );
+      setGroups(updatedGroups);
+      setEditId(null);
+    } catch (err) {
+      alert("Failed to update group. Try again.");
+      console.error(err);
+    }
+  };
 
   // Fetch groups on mount
   useEffect(() => {
     const fetchGroups = async () => {
       try {
         const res = await axios.get("http://localhost:3000/api/group/all");
-        setGroups(res.data.data); // make sure your controller sends `data: groups`
-        setFilteredGroups(res.data.data);
+       const groupList = res.data?.groups ?? [];
+
+        setGroups(groupList);
+        setFilteredGroups(groupList);
       } catch (err) {
         setError("Failed to load groups");
       } finally {
@@ -54,11 +54,14 @@ const handleUpdate = async (id) => {
 
   // Filter on search
   useEffect(() => {
-    const filtered = groups.filter(
-      (group) =>
-        group.groupName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        group.userShortName.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    const filtered = groups.filter((group) => {
+      const name = group.groupName?.toLowerCase() || "";
+      const short = group.userShortName?.toLowerCase() || "";
+      return (
+        name.includes(searchTerm.toLowerCase()) ||
+        short.includes(searchTerm.toLowerCase())
+      );
+    });
     setFilteredGroups(filtered);
   }, [searchTerm, groups]);
 
@@ -94,66 +97,66 @@ const handleUpdate = async (id) => {
                     <th className="py-2 px-4 border-b text-left">#</th>
                     <th className="py-2 px-4 border-b text-left">Group Name</th>
                     <th className="py-2 px-4 border-b text-left">Short Name</th>
+                    <th className="py-2 px-4 border-b text-left">Action</th>
                   </tr>
                 </thead>
-          <tbody>
-  {filteredGroups.map((group, index) => (
-    <tr key={group._id} className="hover:bg-gray-50">
-      <td className="py-2 px-4 border-b">{index + 1}</td>
+                <tbody>
+                  {filteredGroups.map((group, index) => (
+                    <tr key={group._id} className="hover:bg-gray-50">
+                      <td className="py-2 px-4 border-b">{index + 1}</td>
 
-      {editId === group._id ? (
-        <>
-          <td className="py-2 px-4 border-b">
-            <input
-              value={editGroupName}
-              onChange={(e) => setEditGroupName(e.target.value)}
-              className="border px-2 py-1 rounded w-full"
-            />
-          </td>
-          <td className="py-2 px-4 border-b">
-            <input
-              value={editShortName}
-              onChange={(e) => setEditShortName(e.target.value)}
-              className="border px-2 py-1 rounded w-full"
-            />
-          </td>
-          <td className="py-2 px-4 border-b">
-            <button
-              onClick={() => handleUpdate(group._id)}
-              className="bg-green-600 text-white px-3 py-1 rounded mr-2"
-            >
-              Save
-            </button>
-            <button
-              onClick={() => setEditId(null)}
-              className="bg-gray-400 text-white px-3 py-1 rounded"
-            >
-              Cancel
-            </button>
-          </td>
-        </>
-      ) : (
-        <>
-          <td className="py-2 px-4 border-b">{group.groupName}</td>
-          <td className="py-2 px-4 border-b">{group.userShortName}</td>
-          <td className="py-2 px-4 border-b">
-            <button
-              onClick={() => {
-                setEditId(group._id);
-                setEditGroupName(group.groupName);
-                setEditShortName(group.userShortName);
-              }}
-              className="bg-blue-600 text-white px-3 py-1 rounded"
-            >
-              Edit
-            </button>
-          </td>
-        </>
-      )}
-    </tr>
-  ))}
-</tbody>
-
+                      {editId === group._id ? (
+                        <>
+                          <td className="py-2 px-4 border-b">
+                            <input
+                              value={editGroupName}
+                              onChange={(e) => setEditGroupName(e.target.value)}
+                              className="border px-2 py-1 rounded w-full"
+                            />
+                          </td>
+                          <td className="py-2 px-4 border-b">
+                            <input
+                              value={editShortName}
+                              onChange={(e) => setEditShortName(e.target.value)}
+                              className="border px-2 py-1 rounded w-full"
+                            />
+                          </td>
+                          <td className="py-2 px-4 border-b">
+                            <button
+                              onClick={() => handleUpdate(group._id)}
+                              className="bg-green-600 text-white px-3 py-1 rounded mr-2"
+                            >
+                              Save
+                            </button>
+                            <button
+                              onClick={() => setEditId(null)}
+                              className="bg-gray-400 text-white px-3 py-1 rounded"
+                            >
+                              Cancel
+                            </button>
+                          </td>
+                        </>
+                      ) : (
+                        <>
+                          <td className="py-2 px-4 border-b">{group.groupName}</td>
+                          <td className="py-2 px-4 border-b">{group.userShortName}</td>
+                          <td className="py-2 px-4 border-b">
+                            <button
+                              onClick={() => {
+                                setEditId(group._id);
+                                setEditGroupName(group.groupName);
+                                setEditShortName(group.userShortName);
+                              }}
+                              className="bg-blue-600 text-white px-3 py-1 rounded"
+                            >
+                              Edit
+                            </button>
+                          </td>
+                        </>
+                      )}
+                    </tr>
+                  ))}
+                </tbody>
               </table>
             )}
           </div>

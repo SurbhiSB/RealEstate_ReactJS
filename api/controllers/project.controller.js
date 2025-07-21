@@ -3,7 +3,44 @@ import Project from "../models/project.model.js";
 // Create a new project
 export const createProject = async (req, res) => {
   try {
-    const newProject = new Project(req.body);
+    const {
+      groupId,
+      projectName,
+      displayName,
+      mouza,
+      khNo,
+      address,
+      locationMapLink,
+      state,
+      city,
+      pinCode,
+      status,
+      registrarOffice,
+      reraNumber,
+      imageUrl,
+      projectType,
+      documents, // array of { documentName, documentUrl, status }
+    } = req.body;
+
+    const newProject = new Project({
+      groupId,
+      projectName,
+      displayName,
+      mouza,
+      khNo,
+      address,
+      locationMapLink,
+      state,
+      city,
+      pinCode,
+      status,
+      registrarOffice,
+      reraNumber,
+      imageUrl,
+      projectType,
+      documents,
+    });
+
     await newProject.save();
     res.status(201).json({ success: true, project: newProject });
   } catch (error) {
