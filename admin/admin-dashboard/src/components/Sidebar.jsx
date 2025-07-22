@@ -47,6 +47,11 @@ export default function Sidebar() {
                   </Link>
                 </li>
                 <li>
+                  <Link to="/members/AddAgent" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                    <Circle size={10} /> Add Agent
+                  </Link>
+                </li>
+                <li>
                   <Link to="/admin/members/add" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
                     <Circle size={10} /> Add New
                   </Link>

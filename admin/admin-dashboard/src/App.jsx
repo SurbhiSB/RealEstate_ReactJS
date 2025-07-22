@@ -17,6 +17,7 @@ import CompanyDetailsPage from './pages/CompanyDetails';
 
 import AddMembers from './pages/members/addMembers';
 import AddCustomers from './pages/members/AddCustomer';
+import AddAgent from './pages/members/AddAgent';
 
 
 export default function App() {
@@ -41,6 +42,7 @@ export default function App() {
 
         <Route path="/members/addMembers" element={<AddMembers />} />
         <Route path="/members/addCustomer" element={<AddCustomers />} />
+        <Route path="/members/AddAgent" element={<AddAgent />} />
         <Route path="/projects/create" element={<Project />} />
         <Route path="/projects/edit/:id" element={<Project />} /> // ✅ reuse same Project component
 
