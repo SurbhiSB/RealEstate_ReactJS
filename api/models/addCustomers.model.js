@@ -1,23 +1,38 @@
 import mongoose from 'mongoose';
 
-const AddCustomerchema = new mongoose.Schema({
-  memberType: String,
-  fullName: String,
+const CustomerDocumentSchema = new mongoose.Schema({
+  documentName: String,
+  file: String,
+  status: String,
+});
+
+const AddCustomerSchema = new mongoose.Schema({
+  firstName: String,
+  lastName: String,
+  address: String,
+  city: String,
+  state: String,
+  pinCode: String,
+  country: {
+    type: String,
+    default: 'India',
+  },
   email: String,
   phone: String,
-  remarks: String,
-  companyName: String,
-  displayName: String,
   mobile: String,
-  tds: {
-    type: String,
-    default: '0.00',
-  },
+  nomineeName: String,
+  nomineeDOB: String,
+  nomineeContact: String,
+  nomineeRelation: String,
+  panNo: String,
+  gstNo: String,
+  paymentTerms: String,
   status: {
     type: String,
     default: 'Active',
   },
+  documents: [CustomerDocumentSchema], // Embedded docs
 }, { timestamps: true });
 
-const AddMember = mongoose.model('AddMember', AddCustomerchema);
-export default AddMember;
+const AddCustomer = mongoose.model('AddCustomer', AddCustomerSchema);
+export default AddCustomer;

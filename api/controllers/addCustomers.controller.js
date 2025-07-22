@@ -1,24 +1,24 @@
-import AddMember from '../models/AddCustomer.model.js';
+import AddCustomers from '../models/addCustomers.model.js';
 
-// Create a new member
+// Create a new Customers
 export const createAddCustomer = async (req, res) => {
   try {
-    const newMember = new AddMember(req.body);
-    await newMember.save();
-    res.status(201).json({ success: true, message: 'Member created successfully', data: newMember });
+    const newCustomers = new AddCustomers(req.body);
+    await newCustomers.save();
+    res.status(201).json({ success: true, message: 'Customers created successfully', data: newCustomers });
   } catch (error) {
     console.error('Error in createAddCustomer:', error);
-    res.status(500).json({ success: false, message: 'Failed to create member', error: error.message });
+    res.status(500).json({ success: false, message: 'Failed to create Customers', error: error.message });
   }
 };
 
-// Get all members
+// Get all Customerss
 export const getAllAddCustomers = async (req, res) => {
   try {
-    const members = await AddMember.find().sort({ createdAt: -1 });
-    res.status(200).json({ success: true, data: members });
+    const Customerss = await AddCustomers.find().sort({ createdAt: -1 });
+    res.status(200).json({ success: true, data: Customerss });
   } catch (error) {
     console.error('Error in getAllAddCustomers:', error);
-    res.status(500).json({ success: false, message: 'Failed to fetch members', error: error.message });
+    res.status(500).json({ success: false, message: 'Failed to fetch Customerss', error: error.message });
   }
 };
