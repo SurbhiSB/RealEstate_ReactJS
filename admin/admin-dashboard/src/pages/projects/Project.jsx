@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
 import Header from "../../components/Header";
 import Sidebar from "../../components/Sidebar";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 
 export default function Project() {
+const { id } = useParams(); // will be undefined for create mode
+const isEdit = Boolean(id);
+
   const [groups, setGroups] = useState([]);
 
   const [formData, setFormData] = useState({
@@ -32,6 +36,39 @@ export default function Project() {
     status: "Pending",
   },
 ]);
+
+
+// ------------------------------
+useEffect(() => {
+  if (isEdit) {
+    axios.get(`http://localhost:3000/api/projects/${id}`)
+      .then((res) => {
+        const project = res.data.project;
+
+        setFormData({
+          groupId: project.groupId?._id || "",
+          projectName: project.projectName || "",
+          displayName: project.displayName || "",
+          mouza: project.mouza || "",
+          khNo: project.khNo || "",
+          address: project.address || "",
+          locationMapLink: project.locationMapLink || "",
+          pinCode: project.pinCode || "",
+          reraNo: project.reraNo || "",
+          state: project.state || "",
+          city: project.city || "",
+          status: project.status || "",
+          registrarOffice: project.registrarOffice || "",
+          projectType: project.projectType || "",
+          documents: project.documents || [],
+          noOfUnits: project.noOfUnits || ""
+        });
+      })
+      .catch((err) => console.error("Error loading project:", err));
+  }
+}, [id]);
+
+// ------------------------------
 
 
   useEffect(() => {
@@ -84,46 +121,59 @@ export default function Project() {
  const handleSubmit = async (e) => {
   e.preventDefault();
 
- const payload = {
-  ...formData,
-  documents: projectDocuments,
-};
+  const payload = {
+    ...formData,
+    documents: projectDocuments,
+  };
 
   try {
-    const response = await axios.post("http://localhost:3000/api/projects/create", payload);
+    let response;
 
-    if (response.data.success) {
-      alert("✅ Project submitted successfully!");
-      // Optional: Reset form after submission
-      setFormData({
-        groupId: "",
-        projectName: "",
-        displayName: "",
-        mouza: "",
-        khNo: "",
-        address: "",
-        locationMapLink: "",
-        state: "",
-        city: "",
-        pinCode: "",
-        status: "Ongoing",
-        registrarOffice: "",
-        reraNumber: "",
-        imageUrl: "",
-        projectType: "",
-      });
-      setProjectDocuments([
-        { documentName: "", documentUrl: "", status: "Pending" }
-      ]);
+    if (isEdit) {
+      // ✅ Edit Mode: PUT request
+      response = await axios.put(`http://localhost:3000/api/projects/${id}`, payload);
+
+      if (response.data.success) {
+        alert("✅ Project updated successfully!");
+      } else {
+        alert("❌ Project update failed.");
+      }
     } else {
-      alert("❌ Project submission failed.");
-    }
+      // ✅ Create Mode: POST request
+      response = await axios.post("http://localhost:3000/api/projects/create", payload);
 
+      if (response.data.success) {
+        alert("✅ Project submitted successfully!");
+
+        // Reset form after submission
+        setFormData({
+          groupId: "",
+          projectName: "",
+          displayName: "",
+          mouza: "",
+          khNo: "",
+          address: "",
+          locationMapLink: "",
+          state: "",
+          city: "",
+          pinCode: "",
+          status: "Ongoing",
+          registrarOffice: "",
+          reraNumber: "",
+          imageUrl: "",
+          projectType: "",
+        });
+        setProjectDocuments([{ documentName: "", documentUrl: "", status: "Pending" }]);
+      } else {
+        alert("❌ Project submission failed.");
+      }
+    }
   } catch (error) {
     console.error("Submission error:", error);
     alert("❌ Server error. Try again later.");
   }
 };
+
 
 
   const handleReset = () => {

@@ -1,9 +1,14 @@
 import express from "express";
-import { createProject, getAllProjects } from "../controllers/project.controller.js";
+import {
+  createProject,
+  getAllProjects,
+  updateProject, // ✅ this should now work
+} from "../controllers/project.controller.js";
 
 const router = express.Router();
 
-router.post("/create", createProject);   // POST /api/projects/create
-router.get("/all", getAllProjects);      // GET  /api/projects/all
+router.post("/create", createProject);
+router.get("/all", getAllProjects);
+router.put("/:id", updateProject); // ✅ Add update route
 
 export default router;

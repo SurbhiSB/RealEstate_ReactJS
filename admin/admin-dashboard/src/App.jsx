@@ -41,6 +41,9 @@ export default function App() {
 
         <Route path="/members/addMembers" element={<AddMembers />} />
         <Route path="/members/addCustomer" element={<AddCustomers />} />
+        <Route path="/projects/create" element={<Project />} />
+        <Route path="/projects/edit/:id" element={<Project />} /> // ✅ reuse same Project component
+
       </Routes>
     </BrowserRouter>
   );
