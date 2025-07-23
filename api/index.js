@@ -14,6 +14,7 @@ import addCustomersRouter from './routes/addCustomers.route.js';
 import addAgentRouter from './routes/addagent.route.js';
 import projectRoutes from "./routes/project.route.js";
 import groupRoutes from "./routes/group.route.js";
+import stateRoutes from "./routes/stateRoutes.js";
 
 dotenv.config();
 mongoose.connect(process.env.MONGO).then(() => {
@@ -23,6 +24,7 @@ mongoose.connect(process.env.MONGO).then(() => {
 })
 
 const app = express();
+
 
 // Use morgan middleware (in 'dev' format)
 app.use(morgan('dev'));
@@ -51,6 +53,7 @@ app.use('/api/AddAgent', addAgentRouter);
 app.use("/api/project", projectRoutes);
 app.use("/api/group", groupRoutes);
 app.use("/api/projects", projectRoutes);
+app.use('/api/states', stateRoutes);
 
 app.use((err, req, res, next) => {
     const statusCode = err.statusCode || 500;

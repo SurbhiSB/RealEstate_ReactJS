@@ -1,61 +1,88 @@
-
 import AddAgent from '../models/addagent.model.js';
 
 // Create a new Agent
 export const createAddAgent = async (req, res) => {
   try {
-    // Optional fields default to empty string if not provided
     const {
-      AgentType,
-      fullName,
+      // Basic Details
+       fullName,
+      mobile,
+      panNo,
+      referByMobile,
+      commission,
+      activeFlag,
       email,
       phone,
-      mobile, // 👈 This was missing
-      remarks,
-      companyName,
-      displayName,
-      contactPerson,
-      contactEmail,
-      contactNumber,
-      gst,
-      panNo,
-      tds,
-      paymentTerms,
-      status,
-      beneficiaryName = '',
-      accountNumber = '',
-      ifsc = '',
-      bankName = ''
+      aadhar,
+      referByName,
+      remarkNotes,
+      gender,
+      joiningDate,
+      dob,
+      anniversaryDate,
+      education,
+      nomineeName,
+      nomineeRelation,
+      nomineeDob,
+      nomineeContact,
+       paymentTerms,
+       profilePic,
+      idProof,
+      addressProof,
+      otherDoc,
+      address,
+      city,
+      state,
+      pinCode,
+      beneficiaryName,
+      accountNumber,
+      bankName,
+      ifsc
     } = req.body;
 
-     if (!beneficiaryName || !accountNumber || !ifsc || !bankName) {
+    // Validation for Bank Details
+    if (!beneficiaryName || !accountNumber || !ifsc || !bankName) {
       return res.status(400).json({
         success: false,
-        message: 'Bank details (Beneficiary Name, Account Number, IFSC, Bank Name) are required'
+        message: 'Bank details (Beneficiary Name, Account Number, IFSC, Bank Name) are required',
       });
     }
 
     const newAgent = new AddAgent({
-      AgentType,
-      fullName,
+      // Basic
+       fullName,
+      mobile,
+      panNo,
+      referByMobile,
+      commission,
+      activeFlag,
       email,
       phone,
-      mobile, // 👈 This was missing
-      remarks,
-      companyName,
-      displayName,
-      contactPerson,
-      contactEmail,
-      contactNumber,
-      gst,
-      panNo,
-      tds,
-      paymentTerms,
-      status,
+      aadhar,
+      referByName,
+      remarkNotes,
+      gender,
+      joiningDate,
+      dob,
+      anniversaryDate,
+      education,
+      nomineeName,
+      nomineeRelation,
+      nomineeDob,
+      nomineeContact,
+       paymentTerms,
+       profilePic,
+      idProof,
+      addressProof,
+      otherDoc,
+      address,
+      city,
+      state,
+      pinCode,
       beneficiaryName,
       accountNumber,
+      bankName,
       ifsc,
-      bankName
     });
 
     await newAgent.save();
@@ -63,14 +90,14 @@ export const createAddAgent = async (req, res) => {
     res.status(201).json({
       success: true,
       message: 'Agent created successfully',
-      data: newAgent
+      data: newAgent,
     });
   } catch (error) {
     console.error('Error in createAddAgent:', error);
     res.status(500).json({
       success: false,
       message: 'Failed to create Agent',
-      error: error.message
+      error: error.message,
     });
   }
 };
@@ -78,68 +105,77 @@ export const createAddAgent = async (req, res) => {
 // Get all Agents
 export const getAllAddAgents = async (req, res) => {
   try {
-    const Agents = await AddAgent.find().sort({ createdAt: -1 });
-    res.status(200).json({ success: true, data: Agents });
+    const agents = await AddAgent.find().sort({ createdAt: -1 });
+    res.status(200).json({ success: true, data: agents });
   } catch (error) {
     console.error('Error in getAllAddAgents:', error);
     res.status(500).json({
       success: false,
       message: 'Failed to fetch Agents',
-      error: error.message
+      error: error.message,
     });
   }
 };
 
-// Get single Agent
+// Get single Agent by ID
 export const getSingleAgent = async (req, res) => {
   try {
-    const Agent = await AddAgent.findById(req.params.id);
-    if (!Agent) {
+    const agent = await AddAgent.findById(req.params.id);
+    if (!agent) {
       return res.status(404).json({ success: false, message: 'Agent not found' });
     }
-    res.status(200).json({ success: true, data: Agent });
+    res.status(200).json({ success: true, data: agent });
   } catch (error) {
     console.error('Error in getSingleAgent:', error);
     res.status(500).json({
       success: false,
       message: 'Failed to get Agent',
-      error: error.message
+      error: error.message,
     });
   }
 };
 
-// Update Agent
+// Update Agent by ID
 export const updateAgent = async (req, res) => {
   try {
-    const updated = await AddAgent.findByIdAndUpdate(req.params.id, req.body, { new: true });
-    if (!updated) {
+    const updatedAgent = await AddAgent.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
+    if (!updatedAgent) {
       return res.status(404).json({ success: false, message: 'Agent not found for update' });
     }
-    res.status(200).json({ success: true, message: 'Agent updated successfully', data: updated });
+    res.status(200).json({
+      success: true,
+      message: 'Agent updated successfully',
+      data: updatedAgent,
+    });
   } catch (error) {
     console.error('Error in updateAgent:', error);
     res.status(500).json({
       success: false,
       message: 'Failed to update Agent',
-      error: error.message
+      error: error.message,
     });
   }
 };
 
-// Delete Agent
+// Delete Agent by ID
 export const deleteAgent = async (req, res) => {
   try {
-    const deleted = await AddAgent.findByIdAndDelete(req.params.id);
-    if (!deleted) {
+    const deletedAgent = await AddAgent.findByIdAndDelete(req.params.id);
+    if (!deletedAgent) {
       return res.status(404).json({ success: false, message: 'Agent not found for deletion' });
     }
-    res.status(200).json({ success: true, message: 'Agent deleted successfully' });
+    res.status(200).json({
+      success: true,
+      message: 'Agent deleted successfully',
+    });
   } catch (error) {
     console.error('Error in deleteAgent:', error);
     res.status(500).json({
       success: false,
       message: 'Failed to delete Agent',
-      error: error.message
+      error: error.message,
     });
   }
 };
