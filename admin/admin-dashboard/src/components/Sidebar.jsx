@@ -42,8 +42,18 @@ export default function Sidebar() {
                   </Link>
                 </li>
                 <li>
+                  <Link to="/members/MemberList" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                    <Circle size={10} /> Vendor/Contractor List
+                  </Link>
+                </li>
+                <li>
                   <Link to="/members/AddCustomer" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
                     <Circle size={10} /> Add Customer
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/members/CustomerList" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                    <Circle size={10} /> Customer List
                   </Link>
                 </li>
                 <li>
@@ -52,10 +62,15 @@ export default function Sidebar() {
                   </Link>
                 </li>
                 <li>
+                  <Link to="/members/AgentList" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                    <Circle size={10} />  Agent List
+                  </Link>
+                </li>
+                {/* <li>
                   <Link to="/admin/members/add" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
                     <Circle size={10} /> Add New
                   </Link>
-                </li>
+                </li> */}
               </ul>
             )}
           </li>
