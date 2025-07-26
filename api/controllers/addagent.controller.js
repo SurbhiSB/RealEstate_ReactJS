@@ -106,7 +106,7 @@ export const createAddAgent = async (req, res) => {
 export const getAllAddAgents = async (req, res) => {
   try {
     const agents = await AddAgent.find().sort({ createdAt: -1 });
-    res.status(200).json({ success: true, data: agents });
+    res.status(200).json(agents); // 👈 return array directly
   } catch (error) {
     console.error('Error in getAllAddAgents:', error);
     res.status(500).json({

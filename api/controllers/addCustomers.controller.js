@@ -1,24 +1,54 @@
 import AddCustomers from '../models/addCustomers.model.js';
 
-// Create a new Customers
+// Create a new Customer
 export const createAddCustomer = async (req, res) => {
   try {
-    const newCustomers = new AddCustomers(req.body);
-    await newCustomers.save();
-    res.status(201).json({ success: true, message: 'Customers created successfully', data: newCustomers });
+    const newCustomer = new AddCustomers(req.body);
+    await newCustomer.save();
+    res.status(201).json({
+      success: true,
+      message: 'Customer created successfully',
+      data: newCustomer
+    });
   } catch (error) {
     console.error('Error in createAddCustomer:', error);
-    res.status(500).json({ success: false, message: 'Failed to create Customers', error: error.message });
+    res.status(500).json({
+      success: false,
+      message: 'Failed to create customer',
+      error: error.message
+    });
   }
 };
 
-// Get all Customerss
+// Get all Customers with pagination
 export const getAllAddCustomers = async (req, res) => {
   try {
-    const Customerss = await AddCustomers.find().sort({ createdAt: -1 });
-    res.status(200).json({ success: true, data: Customerss });
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
+    const skip = (page - 1) * limit;
+
+    const total = await AddCustomers.countDocuments();
+    const customers = await AddCustomers.find()
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(limit);
+
+    res.status(200).json({
+      success: true,
+      data: customers,
+      pagination: {
+        total,
+        page,
+        pages: Math.ceil(total / limit),
+        limit
+      }
+    });
   } catch (error) {
     console.error('Error in getAllAddCustomers:', error);
-    res.status(500).json({ success: false, message: 'Failed to fetch Customerss', error: error.message });
+    res.status(500).json({
+      success: false,
+      message: 'Failed to fetch customers',
+      error: error.message
+    });
   }
 };

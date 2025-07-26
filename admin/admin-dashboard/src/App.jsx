@@ -20,6 +20,8 @@ import AddCustomers from './pages/members/AddCustomer';
 import AddAgent from './pages/members/AddAgent';
 
 import MemberList from './pages/members/MemberList';
+import CustomerList from './pages/members/CustomerList';
+import AgentList from './pages/members/AgentList';
 
 
 export default function App() {
@@ -46,6 +48,8 @@ export default function App() {
         <Route path="/members/addCustomer" element={<AddCustomers />} />
         <Route path="/members/AddAgent" element={<AddAgent />} />
         <Route path="/members/MemberList" element={<MemberList />} />
+        <Route path="/members/CustomerList" element={<CustomerList />} />
+        <Route path="/members/AgentList" element={<AgentList />} />
 
 
         <Route path="/projects/create" element={<Project />} />
