@@ -1,82 +1,68 @@
 import mongoose from 'mongoose';
 
-const AddressSchema = new mongoose.Schema({
-  name: { type: String, required: true, trim: true },
-  phone: { 
-    type: String, 
-    required: true, 
-    match: [/^\d{10}$/, 'Phone number must be 10 digits'] 
-  },
-  address: { type: String, required: true, trim: true },
-  city: { type: String, required: true, trim: true },
-  state: { type: String, required: true, trim: true },
-  country: { type: String, required: true, trim: true },
-  pinCode: { type: String, required: true, trim: true },
-});
-
 const AddAgentSchema = new mongoose.Schema({
-  memberType: { type: String, required: true, trim: true },
   fullName: { type: String, required: true, trim: true },
+  mobile: {
+    type: String,
+    required: true,
+    match: [/^\d{10}$/, 'Mobile number must be 10 digits']
+  },
+  panNo: { type: String, required: true, trim: true },
+  referByMobile: {
+    type: String,
+    trim: true,
+    match: [/^\d{10}$/, 'Refer By Mobile number must be 10 digits']
+  },
+  commission: { type: String, trim: true, default: '0.00' },
+  activeFlag: {
+    type: String,
+    enum: ['Active', 'Inactive'],
+    default: 'Active'
+  },
   email: {
     type: String,
     required: true,
     trim: true,
     match: [/^\S+@\S+\.\S+$/, 'Please use a valid email address']
   },
-  phone: { 
-    type: String, 
-    required: true,
-    match: [/^\d{10}$/, 'Phone number must be 10 digits']
-  },
-  remarks: { type: String, required: true, trim: true },
-  companyName: { type: String, required: true, trim: true },
-  displayName: { type: String, required: true, trim: true },
-  mobile: {
+  phone: {
     type: String,
-    required: true,
-    match: [/^\d{10}$/, 'Mobile number must be 10 digits']
+    match: [/^\d{10}$/, 'Phone number must be 10 digits'],
+    trim: true
   },
-  tds: {
+  aadhar: { type: String, trim: true },
+  referByName: { type: String, trim: true },
+  remarkNotes: { type: String, trim: true },
+  gender: { type: String, trim: true },
+  joiningDate: { type: String, trim: true },
+  dob: { type: String, trim: true },
+  anniversaryDate: { type: String, trim: true },
+  education: { type: String, trim: true },
+  nomineeName: { type: String, trim: true },
+  nomineeRelation: { type: String, trim: true },
+  nomineeDob: { type: String, trim: true },
+  nomineeContact: {
     type: String,
-    required: true,
-    default: '0.00',
     trim: true,
+    match: [/^\d{10}$/, 'Nominee contact must be 10 digits']
   },
-  status: {
-    type: String,
-    enum: ['Active', 'Inactive'],
-    default: 'Active',
-    required: true,
-  },
-
-  // Other Tab Fields
-  gst: { type: String, required: true, trim: true },
-  panNo: { type: String, required: true, trim: true },
-  paymentTerms: { type: String, required: true, trim: true },
+  paymentTerms: { type: String, trim: true },
+  profilePic: { type: String, trim: true },
+  idProof: { type: String, trim: true },
+  addressProof: { type: String, trim: true },
+  otherDoc: { type: String, trim: true },
 
   // Address
-  billingAddress: { type: AddressSchema, required: false },
-  shippingAddress: { type: AddressSchema, required: false },
+  address: { type: String, trim: true },
+  city: { type: String, trim: true },
+  state: { type: String, trim: true },
+  pinCode: { type: String, trim: true },
 
-  // Contact
-  contactPerson: { type: String, required: true, trim: true },
-  contactNumber: {
-    type: String,
-    required: true,
-    match: [/^\d{10}$/, 'Contact number must be 10 digits']
-  },
-  contactEmail: {
-    type: String,
-    required: true,
-    trim: true,
-    match: [/^\S+@\S+\.\S+$/, 'Please use a valid contact email']
-  },
-
-  // Bank
-  beneficiaryName: { type: String, required: true, trim: true },
-  accountNumber: { type: String, required: true, trim: true },
-  bankName: { type: String, required: true, trim: true },
-  ifsc: { type: String, required: true, trim: true },
+  // Bank Details
+  beneficiaryName: { type: String, trim: true },
+  accountNumber: { type: String, trim: true },
+  bankName: { type: String, trim: true },
+  ifsc: { type: String, trim: true }
 
 }, { timestamps: true });
 
