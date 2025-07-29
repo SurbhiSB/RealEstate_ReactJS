@@ -14,14 +14,14 @@ import addCustomersRouter from './routes/addCustomers.route.js';
 import addAgentRouter from './routes/addagent.route.js';
 import projectRoutes from "./routes/project.route.js";
 import groupRoutes from "./routes/group.route.js";
-<<<<<<< HEAD
+
 import bookingRoutes from "./routes/booking.route.js";
 import plotRoutes from "./routes/plot.route.js";
 import associateRoutes from "./routes/associate.route.js";
 
-=======
+
 import stateRoutes from "./routes/stateRoutes.js";
->>>>>>> b9d6d123a526bee71165a8f11409e23e8118a492
+
 
 dotenv.config();
 mongoose.connect(process.env.MONGO).then(() => {
@@ -60,14 +60,14 @@ app.use('/api/AddAgent', addAgentRouter);
 app.use("/api/project", projectRoutes);
 app.use("/api/group", groupRoutes);
 app.use("/api/projects", projectRoutes);
-<<<<<<< HEAD
+
 app.use("/api/bookings", bookingRoutes);
 app.use("/api/plots", plotRoutes); // ✅ This enables the endpoint!
 app.use("/api/associates", associateRoutes); // ✅ Plug in the route
 
-=======
+
 app.use('/api/states', stateRoutes);
->>>>>>> b9d6d123a526bee71165a8f11409e23e8118a492
+
 
 app.use((err, req, res, next) => {
     const statusCode = err.statusCode || 500;
