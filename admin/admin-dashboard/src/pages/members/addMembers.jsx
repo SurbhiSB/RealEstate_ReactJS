@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 import Header from "../../components/Header";
 import Sidebar from "../../components/Sidebar";
 
 export default function AddMembers() {
   const [activeTab, setActiveTab] = useState('other');
+  const { id } = useParams();
+
   const [formData, setFormData] = useState({
     memberType: '',
     fullName: '',
@@ -37,6 +40,42 @@ export default function AddMembers() {
   const [sameAsBilling, setSameAsBilling] = useState(false);
   const [message, setMessage] = useState('');
 
+  useEffect(() => {
+    if (id) {
+      axios.get(`http://localhost:3000/api/addMembers/addmembers/${id}`)
+        .then((res) => {
+          const data = res.data.data;
+          setFormData({
+            memberType: data.memberType || '',
+            fullName: data.fullName || '',
+            email: data.email || '',
+            phone: data.phone || '',
+            remarks: data.remarks || '',
+            companyName: data.companyName || '',
+            displayName: data.displayName || '',
+            mobile: data.mobile || '',
+            tds: data.tds || '0.00',
+            status: data.status || 'Active',
+            gst: data.gst || '',
+            panNo: data.panNo || '',
+            paymentTerms: data.paymentTerms || '',
+            contactPerson: data.contactPerson || '',
+            contactNumber: data.contactNumber || '',
+            contactEmail: data.contactEmail || '',
+            beneficiaryName: data.beneficiaryName || '',
+            accountNumber: data.accountNumber || '',
+            bankName: data.bankName || '',
+            ifsc: data.ifsc || ''
+          });
+          setBillingAddress(data.billingAddress || billingAddress);
+          setShippingAddress(data.shippingAddress || shippingAddress);
+        })
+        .catch((err) => {
+          console.error("Error fetching member:", err);
+        });
+    }
+  }, [id]);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -57,21 +96,43 @@ export default function AddMembers() {
   };
 
   const handleSubmitOther = () => {
-    console.log("Other details submitted", formData);
     setMessage("Other details saved successfully");
     setActiveTab("address");
   };
 
   const handleSubmitAddress = () => {
-    console.log("Address submitted", billingAddress, shippingAddress);
     setMessage("Address saved successfully");
     setActiveTab("contact");
   };
 
   const handleSubmitContact = () => {
-    console.log("Contact Info submitted", formData);
     setMessage("Contact information saved successfully");
     setActiveTab("bank");
+  };
+
+  const handleSubmitBank = async () => {
+    try {
+      const dataToSend = {
+        ...formData,
+        billingAddress,
+        shippingAddress,
+      };
+
+      const res = id
+        ? await axios.put(`http://localhost:3000/api/addMembers/addmembers/${id}`, dataToSend)
+        : await axios.post('http://localhost:3000/api/addMembers/addmembers', dataToSend);
+
+      if (res.data.success) {
+        handleReset();
+        setActiveTab("other");
+        setMessage('Member saved successfully!');
+      } else {
+        setMessage('Submission failed');
+      }
+    } catch (err) {
+      console.error("❌ Submission error:", err);
+      setMessage(err.response?.data?.message || 'Error occurred');
+    }
   };
 
   const handleReset = () => {
@@ -102,33 +163,6 @@ export default function AddMembers() {
     setSameAsBilling(false);
     setMessage('');
   };
-
-  // ✅ Move handleSubmitBank OUTSIDE of handleSubmit
-const handleSubmitBank = async () => {
-  try {
-    const dataToSend = {
-      ...formData,
-      billingAddress,
-      shippingAddress,
-    };
-
-    console.log("🔍 Final payload to be submitted:", dataToSend); // <-- Add this line
-
-    const res = await axios.post('http://localhost:3000/api/addMembers/addmembers', dataToSend);
-
-    if (res.data.success) {
-      
-      handleReset();
-      setActiveTab("other");
-      setMessage('Member added successfully!');
-    } else {
-      setMessage('Submission failed');
-    }
-  } catch (err) {
-    console.error("❌ Submission error:", err);
-    setMessage(err.response?.data?.message || 'Error occurred');
-  }
-};
 
   return (
     <div className="flex">

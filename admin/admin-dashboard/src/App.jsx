@@ -17,6 +17,7 @@ import CompanyDetailsPage from './pages/CompanyDetails';
 
 import AddMembers from './pages/members/addMembers';
 import AddCustomers from './pages/members/AddCustomer';
+
 import ItemMasterPage from './pages/purchase/ItemMaster';
 import PurchaseOrderPage from './pages/purchase/PurchaseOrder';
 import POListPage from './pages/purchase/POList';
@@ -32,6 +33,19 @@ import StockReportPage from './pages/purchase/StockReport';
 import ProjectPlots from './pages/projects/ProjectPlots';
   
 
+import AddAgent from './pages/members/AddAgent';
+
+import MemberList from './pages/members/MemberList';
+import CustomerList from './pages/members/CustomerList';
+import AgentList from './pages/members/AgentList';
+
+
+
+
+
+
+
+
 
 export default function App() {
   return (
@@ -42,7 +56,7 @@ export default function App() {
         <Route path="/users" element={<UserManagement />} />
         <Route path="/listings" element={<ListingManagement />} />
         <Route path="/create-listing" element={<CreateListing />} />
-        <Route path="/company-details" element={<CompanyDetailsPage />} />
+        <Route path="/CompanyDetails" element={<CompanyDetailsPage />} />
         <Route path="/projects/group" element={<Group />} />
         <Route path="/projects/group-list" element={<GroupList />} />
         <Route path="/projects/project" element={<Project />} />
@@ -53,8 +67,16 @@ export default function App() {
         <Route path="/projects/payment-recieved" element={<PaymentReceived />} />
         <Route path="/projects/payment-history" element={<PaymentHistory />} />
 
-        <Route path="/members/addMembers" element={<AddMembers />} />
+        <Route path="/members/addmembers" element={<AddMembers />} />
         <Route path="/members/addCustomer" element={<AddCustomers />} />
+        <Route path="/members/AddAgent" element={<AddAgent />} />
+        <Route path="/members/MemberList" element={<MemberList />} />
+        <Route path="/members/CustomerList" element={<CustomerList />} />
+        <Route path="/members/AgentList" element={<AgentList />} />
+         <Route path="/members/addmembers/:id" element={<AddMembers />} />
+        
+
+
         <Route path="/projects/create" element={<Project />} />
         <Route path="/projects/edit/:id" element={<Project />} /> // ✅ reuse same Project component
         <Route path="/purchase/item-master" element={<ItemMasterPage />} />

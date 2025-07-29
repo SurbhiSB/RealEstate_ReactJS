@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Header from "../../components/Header";
 import Sidebar from "../../components/Sidebar";
+import axios from 'axios';
 
 const AddCustomer = () => {
   const [formData, setFormData] = useState({
@@ -39,9 +40,15 @@ const AddCustomer = () => {
   };
 
   const handleDocChange = (index, field, value) => {
-    const updatedDocs = [...documents];
-    updatedDocs[index][field] = value;
-    setDocuments(updatedDocs);
+    const updatedDocuments = [...documents];
+    updatedDocuments[index][field] = value;
+    setDocuments(updatedDocuments);
+  };
+
+  const handleStatusChange = (index, newStatus) => {
+    const updatedDocuments = [...documents];
+    updatedDocuments[index].status = newStatus;
+    setDocuments(updatedDocuments);
   };
 
   const addRow = () => {
@@ -52,13 +59,6 @@ const AddCustomer = () => {
     const updatedDocs = [...documents];
     updatedDocs.splice(index, 1);
     setDocuments(updatedDocs);
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('Form Data:', formData);
-    console.log('Documents:', documents);
-    setMessage('Customer added successfully!');
   };
 
   const resetForm = () => {
@@ -86,6 +86,53 @@ const AddCustomer = () => {
     setMessage('');
   };
 
+  const toBase64 = (file) =>
+    new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = reject;
+    });
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const processedDocuments = await Promise.all(
+        documents.map(async (doc) => {
+          let fileBase64 = '';
+          if (doc.file) {
+            fileBase64 = await toBase64(doc.file);
+          }
+          return {
+            documentName: doc.docName,
+            file: fileBase64,
+            status: doc.status
+          };
+        })
+      );
+
+      const dataToSend = {
+        ...formData,
+        documents: processedDocuments
+      };
+
+      console.log("🔍 Final payload to be submitted:", dataToSend);
+
+      const res = await axios.post('http://localhost:3000/api/AddCustomer/AddCustomer', dataToSend);
+
+      if (res.data.success) {
+        resetForm();
+        setMessage('Customer added successfully!');
+      } else {
+        setMessage('Submission failed');
+      }
+    } catch (err) {
+      console.error("❌ Submission error:", err);
+      setMessage(err.response?.data?.message || 'Error occurred');
+    }
+  };
+
   return (
     <div className="flex">
       <Sidebar />
@@ -95,76 +142,31 @@ const AddCustomer = () => {
           <h2 className="text-xl font-bold text-purple-700 border-b pb-2 mb-4">Customer Details</h2>
 
           <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-6">
-            {/* Left */}
-              <div>
-          <label className="block text-sm font-medium text-gray-700">First Name</label>
-          <input type="text" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm" />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-gray-700">Last Name</label>
-          <input type="text" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm" />
-        </div>
-
-        <div className="md:col-span-2">
-          <label className="block text-sm font-medium text-gray-700">Address</label>
-          <textarea rows="2" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm"></textarea>
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-gray-700">City</label>
-          <input type="text" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm" />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-gray-700">State</label>
-          <input type="text" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm" />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-gray-700">Country</label>
-          <input type="text" defaultValue="India" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm" />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-gray-700">Pin Code</label>
-          <input type="text" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm" />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-gray-700">Email</label>
-          <input type="email" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm" />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-gray-700">Mobile</label>
-          <input type="tel" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm" />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-gray-700">Phone</label>
-          <input type="tel" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm" />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-gray-700">Nominee Name</label>
-          <input type="text" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm" />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-gray-700">PAN Number</label>
-          <input type="text" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm" />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-gray-700">GST Number</label>
-          <input type="text" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm" />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-gray-700">Payment Terms</label>
-          <input type="text" placeholder="e.g., Advance / 50% on booking / EMI" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm" />
-        </div>
+            {[
+              { label: "First Name", name: "firstName" },
+              { label: "Last Name", name: "lastName" },
+              { label: "Address", name: "address", type: "textarea" },
+              { label: "City", name: "city" },
+              { label: "State", name: "state" },
+              { label: "Country", name: "country", defaultValue: "India" },
+              { label: "Pin Code", name: "pinCode" },
+              { label: "Email", name: "email", type: "email" },
+              { label: "Mobile", name: "mobile", type: "tel" },
+              { label: "Phone", name: "phone", type: "tel" },
+              { label: "Nominee Name", name: "nomineeName" },
+              { label: "PAN Number", name: "panNo" },
+              { label: "GST Number", name: "gstNo" },
+              { label: "Payment Terms", name: "paymentTerms", placeholder: "e.g., Advance / 50% on booking / EMI" },
+            ].map(({ label, name, type = "text", placeholder = "", defaultValue = "" }) => (
+              <div key={name} className={name === "address" ? "col-span-2" : ""}>
+                <label className="block text-sm font-medium text-gray-700">{label}</label>
+                {type === "textarea" ? (
+                  <textarea name={name} value={formData[name]} onChange={handleChange} rows="2" className="mt-1 block w-full rounded-md border border-gray-300 shadow-sm" />
+                ) : (
+                  <input type={type} name={name} value={formData[name]} onChange={handleChange} placeholder={placeholder} defaultValue={defaultValue} className="mt-1 block w-full rounded-md border border-gray-300 shadow-sm" />
+                )}
+              </div>
+            ))}
           </form>
 
           {/* Document Table */}
@@ -197,17 +199,24 @@ const AddCustomer = () => {
                         onChange={(e) => handleDocChange(index, 'file', e.target.files[0])}
                       />
                     </td>
-                    <td className="border px-2 py-1">{doc.status}</td>
+                    <td className="border px-2 py-1">
+                      <select
+                        className="border border-gray-300 rounded px-2 py-1 w-full"
+                        value={doc.status}
+                        onChange={(e) => handleStatusChange(index, e.target.value)}
+                      >
+                        <option value="Received">Received</option>
+                        <option value="Not Received">Not Received</option>
+                      </select>
+                    </td>
                     <td className="border px-2 py-1 text-center">
-                      {documents.length > 1 && (
-                        <button
-                          type="button"
-                          onClick={() => removeRow(index)}
-                          className="text-red-500 font-bold"
-                        >
-                          X
-                        </button>
-                      )}
+                      <button
+                        type="button"
+                        onClick={() => removeRow(index)}
+                        className="text-red-500 font-bold text-xl hover:text-red-700"
+                      >
+                        ✖
+                      </button>
                     </td>
                   </tr>
                 ))}
