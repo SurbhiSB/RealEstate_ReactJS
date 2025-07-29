@@ -17,6 +17,20 @@ import CompanyDetailsPage from './pages/CompanyDetails';
 
 import AddMembers from './pages/members/addMembers';
 import AddCustomers from './pages/members/AddCustomer';
+import ItemMasterPage from './pages/purchase/ItemMaster';
+import PurchaseOrderPage from './pages/purchase/PurchaseOrder';
+import POListPage from './pages/purchase/POList';
+import CompanyPaymentPage from './pages/purchase/CompanyPayment';
+import PaymentHistoryPage from './pages/purchase/PaymentHistory';
+import PurchaseBillPage from './pages/purchase/PurchaseBill';
+import PurchaseBillHistoryPage from './pages/purchase/PurchaseBillHistory';
+import InStockPage from './pages/purchase/InStock';
+import InStockReportPage from './pages/purchase/InStockReport';
+import OutStockPage from './pages/purchase/OutStock';
+import OutStockReportPage from './pages/purchase/OutStockReport';
+import StockReportPage from './pages/purchase/StockReport';
+import ProjectPlots from './pages/projects/ProjectPlots';
+  
 
 
 export default function App() {
@@ -43,6 +57,20 @@ export default function App() {
         <Route path="/members/addCustomer" element={<AddCustomers />} />
         <Route path="/projects/create" element={<Project />} />
         <Route path="/projects/edit/:id" element={<Project />} /> // ✅ reuse same Project component
+        <Route path="/purchase/item-master" element={<ItemMasterPage />} />
+        <Route path="/purchase/purchase-order" element={<PurchaseOrderPage />} />
+        <Route path="/purchase/po-list" element={<POListPage />} />
+        <Route path="/purchase/company-payment" element={<CompanyPaymentPage />} />
+        <Route path="/purchase/payment-history" element={<PaymentHistoryPage />} />
+        <Route path="/purchase/purchase-bill" element={<PurchaseBillPage />} />
+        <Route path="/purchase/purchase-bill-history" element={<PurchaseBillHistoryPage />} />
+        <Route path="/purchase/in-stock" element={<InStockPage />} />
+        <Route path="/purchase/in-stock-report" element={<InStockReportPage />} />
+        <Route path="/purchase/out-stock" element={<OutStockPage />} />
+        <Route path="/purchase/out-stock-report" element={<OutStockReportPage />} />
+        <Route path="/purchase/stock-report" element={<StockReportPage />} />
+        <Route path="/projects/:projectId/plots" element={<ProjectPlots />} />
+
 
       </Routes>
     </BrowserRouter>

@@ -28,6 +28,10 @@ export default function ProjectList() {
     navigate(`/projects/edit/${projectId}`);
   };
 
+  const handlePlots = (projectId) => {
+  navigate(`/projects/${projectId}/plots`);
+};
+
 
   useEffect(() => {
     axios.get("http://localhost:3000/api/projects/all").then((res) => {
@@ -77,9 +81,13 @@ export default function ProjectList() {
           Edit
         </button>
 
-        <button className="bg-orange-400 text-white px-2 py-1 rounded text-sm">
-          Plots
-        </button>
+      <button
+  onClick={() => handlePlots(project._id)}
+  className="bg-orange-400 text-white px-2 py-1 rounded text-sm"
+>
+  Plots
+</button>
+
       </div>
     );
   },

@@ -10,11 +10,13 @@ import {
   ChevronUp,
   Circle,
   Building,
+  ShoppingCart, // Import the ShoppingCart icon from lucide-react
 } from 'lucide-react';
 
 export default function Sidebar() {
   const [isProjectsOpen, setIsProjectsOpen] = useState(false);
   const [isMembersOpen, setIsMembersOpen] = useState(false);
+  const [isPurchaseOpen, setIsPurchaseOpen] = useState(false);
 
   return (
     <aside className="w-64 bg-gray-900 text-white p-4 flex flex-col">
@@ -129,6 +131,82 @@ export default function Sidebar() {
               </ul>
             )}
           </li>
+          <li>
+          <button
+              onClick={() => setIsPurchaseOpen(!isPurchaseOpen)}
+              className="flex items-center w-full gap-2 py-2 px-4 rounded hover:bg-gray-700 focus:outline-none"
+            >
+              <ShoppingCart size={18} /> Purchase/Bill/Stock
+              {isPurchaseOpen ? <ChevronUp size={16} className="ml-auto" /> : <ChevronDown size={16} className="ml-auto" />}
+            </button>
+            {isPurchaseOpen && (
+              <ul className="ml-6 mt-1 space-y-1">
+                <li>
+                  <Link to="/purchase/item-master" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                    <Circle size={10} /> Item Master
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/purchase/purchase-order" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                    <Circle size={10} /> Purchase Order
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/purchase/po-list" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                    <Circle size={10} /> PO List
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/purchase/company-payment" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                    <Circle size={10} /> Company Payment
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/purchase/payment-history" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                    <Circle size={10} /> Payment History
+                  </Link>
+                </li>
+                 <li>
+                  <Link to="/purchase/purchase-bill" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                    <Circle size={10} /> Purchase Bill
+                  </Link>
+                </li>
+                 <li>
+                  <Link to="/purchase/purchase-bill-history" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                    <Circle size={10} /> Purchase Bill History
+                  </Link>
+                </li>
+                 <li>
+                  <Link to="/purchase/in-stock" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                    <Circle size={10} /> In Stock
+                  </Link>
+                </li>                
+                 <li>
+                  <Link to="/purchase/in-stock-report" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                    <Circle size={10} /> In Stock Report
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/purchase/out-stock" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                    <Circle size={10} /> Out Stock
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/purchase/out-stock-report" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                    <Circle size={10} /> Out Stock Report
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/purchase/stock-report" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                    <Circle size={10} /> Stock Report
+                  </Link>
+                </li>
+
+              </ul>
+            )}
+
+          </li>
+
         </ul>
       </nav>
     </aside>

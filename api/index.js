@@ -12,6 +12,10 @@ import groupRouter from './routes/group.route.js';
 import addMembersRouter from './routes/addMembers.route.js';
 import projectRoutes from "./routes/project.route.js";
 import groupRoutes from "./routes/group.route.js";
+import bookingRoutes from "./routes/booking.route.js";
+import plotRoutes from "./routes/plot.route.js";
+import associateRoutes from "./routes/associate.route.js";
+
 
 dotenv.config();
 mongoose.connect(process.env.MONGO).then(() => {
@@ -47,6 +51,10 @@ app.use('/api/addMembers', addMembersRouter);
 app.use("/api/project", projectRoutes);
 app.use("/api/group", groupRoutes);
 app.use("/api/projects", projectRoutes);
+app.use("/api/bookings", bookingRoutes);
+app.use("/api/plots", plotRoutes); // ✅ This enables the endpoint!
+app.use("/api/associates", associateRoutes); // ✅ Plug in the route
+
 
 app.use((err, req, res, next) => {
     const statusCode = err.statusCode || 500;
