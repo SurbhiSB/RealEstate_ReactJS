@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom"; // ✅ Add this line
 import axios from "axios";
 import Header from "../../components/Header";
 import Sidebar from "../../components/Sidebar";
 import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
 import jsPDF from 'jspdf';
-import autoTable from 'jspdf-autotable'; 
+import autoTable from 'jspdf-autotable';
 
 export default function MemberList() {
   const [members, setMembers] = useState([]);
@@ -13,6 +14,8 @@ export default function MemberList() {
   const [memberType, setMemberType] = useState("All");
   const [totalPages, setTotalPages] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
+
+  const navigate = useNavigate(); // ✅ Initialize navigation
 
   useEffect(() => {
     fetchMembers(currentPage);
@@ -38,37 +41,31 @@ export default function MemberList() {
   });
 
   const exportToPDF = () => {
-  const doc = new jsPDF();
+    const doc = new jsPDF();
+    doc.setFontSize(16);
+    doc.text("Member List", 14, 22);
+    autoTable(doc, {
+      startY: 28,
+      head: [["#", "Name", "Email", "Phone"]],
+      body: filteredMembers.map((m, i) => [
+        i + 1,
+        m.fullName || "-",
+        m.email || "-",
+        m.phone || "-",
+      ]),
+    });
+    doc.save("members.pdf");
+  };
 
-  // Optional title
-  doc.setFontSize(16);
-  doc.text("Member List", 14, 22);
-
-  autoTable(doc, {
-    startY: 28,
-    head: [["#", "Name", "Email", "Phone"]],
-    body: filteredMembers.map((m, i) => [
-      i + 1,
-      m.fullName || "-",
-      m.email || "-",
-      m.phone || "-",
-    ]),
-  });
-
-  doc.save("members.pdf");
-};
-
-const copyToClipboard = () => {
-  let copyText = "Name\tEmail\tPhone\n"; // header
-
-  filteredMembers.forEach((m) => {
-    copyText += `${m.fullName || "-"}\t${m.email || "-"}\t${m.phone || "-"}\n`;
-  });
-
-  navigator.clipboard.writeText(copyText)
-    .then(() => alert("Copied to clipboard!"))
-    .catch((err) => alert("Failed to copy: " + err));
-};
+  const copyToClipboard = () => {
+    let copyText = "Name\tEmail\tPhone\n";
+    filteredMembers.forEach((m) => {
+      copyText += `${m.fullName || "-"}\t${m.email || "-"}\t${m.phone || "-"}\n`;
+    });
+    navigator.clipboard.writeText(copyText)
+      .then(() => alert("Copied to clipboard!"))
+      .catch((err) => alert("Failed to copy: " + err));
+  };
 
   const handlePrint = () => {
     const printContent = document.getElementById("print-section").innerHTML;
@@ -153,22 +150,13 @@ const copyToClipboard = () => {
               <button onClick={copyToClipboard} className="bg-purple-800 text-white px-3 py-1 rounded">
                 Copy
               </button>
-              <button
-                onClick={exportToExcel}
-                className="bg-purple-800 text-white px-3 py-1 rounded"
-              >
+              <button onClick={exportToExcel} className="bg-purple-800 text-white px-3 py-1 rounded">
                 Excel
               </button>
-              <button
-                onClick={exportToPDF}
-                className="bg-purple-800 text-white px-3 py-1 rounded"
-              >
+              <button onClick={exportToPDF} className="bg-purple-800 text-white px-3 py-1 rounded">
                 PDF
               </button>
-              <button
-                onClick={handlePrint}
-                className="bg-purple-800 text-white px-3 py-1 rounded"
-              >
+              <button onClick={handlePrint} className="bg-purple-800 text-white px-3 py-1 rounded">
                 Print
               </button>
             </div>
@@ -182,10 +170,7 @@ const copyToClipboard = () => {
           </div>
 
           {/* Table */}
-          <div
-            id="print-section"
-            className="overflow-auto max-h-[60vh] border rounded"
-          >
+          <div id="print-section" className="overflow-auto max-h-[60vh] border rounded">
             <table className="min-w-full bg-white text-sm">
               <thead className="bg-gray-200 text-gray-700">
                 <tr>
@@ -216,9 +201,12 @@ const copyToClipboard = () => {
                       <td className="p-2 text-right border">0.0</td>
                       <td className="p-2 text-right border">0.0</td>
                       <td className="p-2 text-center text-green-600 border">✔</td>
-                      <td className="p-2 text-center  border">
-                        <button className="bg-purple-800 text-white px-3 py-1 rounded text-sm">
-                          ✎ Edit
+                      <td className="p-2 text-center border">
+                        <button
+                          onClick={() => navigate(`/members/addMembers/${member._id}`)} // ✅ Navigate with ID
+                          className="bg-purple-800 text-white px-3 py-1 rounded text-sm"
+                        >
+                          ✎ Edit Now
                         </button>
                       </td>
                     </tr>
@@ -239,11 +227,7 @@ const copyToClipboard = () => {
             {[...Array(totalPages)].map((_, i) => (
               <button
                 key={i}
-                className={`px-3 py-1 rounded ${
-                  currentPage === i + 1
-                    ? "bg-purple-800 text-white"
-                    : "bg-white border"
-                }`}
+                className={`px-3 py-1 rounded ${currentPage === i + 1 ? "bg-purple-800 text-white" : "bg-white border"}`}
                 onClick={() => setCurrentPage(i + 1)}
               >
                 {i + 1}

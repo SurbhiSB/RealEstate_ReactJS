@@ -45,7 +45,7 @@ export default function CustomerList() {
       head: [["#", "Name", "Mobile", "Email", "Address", "Reg Date", "Status"]],
       body: filteredCustomers.map((c, i) => [
         i + 1,
-        c.fullName || "-",
+        c.firstName || "-",
         c.phone || "-",
         c.email || "-",
         c.Address || "-",
@@ -59,7 +59,7 @@ export default function CustomerList() {
   const exportToExcel = () => {
     const worksheet = XLSX.utils.json_to_sheet(
       filteredCustomers.map((c) => ({
-        Name: c.fullName,
+        Name: c.firstName,
         Mobile: c.phone,
         Email: c.email,
         Address: c.Address,
@@ -199,7 +199,7 @@ export default function CustomerList() {
                   filteredCustomers.map((c, index) => (
                     <tr key={c._id} className="hover:bg-gray-50">
                       <td className="p-2 text-center border">{index + 1}</td>
-                      <td className="p-2 border">{c.fullName}</td>
+                      <td className="p-2 border">{c.firstName}</td>
                       <td className="p-2 border">{c.phone}</td>
                       <td className="p-2 border">{c.email}</td>
                       <td className="p-2 border">{c.Address || "-"}</td>
