@@ -21,6 +21,8 @@ import associateRoutes from "./routes/associate.route.js";
 
 
 import stateRoutes from "./routes/stateRoutes.js";
+import CompanyDetailsRouter from './routes/CompanyDetails.route.js';
+import HeadMastersRouter from './routes/HeadMaster.route.js';
 
 
 dotenv.config();
@@ -67,6 +69,9 @@ app.use("/api/associates", associateRoutes); // ✅ Plug in the route
 
 
 app.use('/api/states', stateRoutes);
+
+app.use('/api/company', CompanyDetailsRouter);
+app.use('/api/HeadMasters', HeadMastersRouter);
 
 
 app.use((err, req, res, next) => {
