@@ -247,67 +247,67 @@ export default function Sidebar() {
                   </Link>
                 </li>
                 <li>
-                  <Link to="/members/MemberList" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                  <Link to="/Expenses/officeExpenses" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
                     <Circle size={10} /> Office Expenses
                   </Link>
                 </li>
                 <li>
-                  <Link to="/members/AddCustomer" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                  <Link to="/Expenses/OfficeExpensesReport" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
                     <Circle size={10} /> Office Expenses Report
                   </Link>
                 </li>
                 <li>
-                  <Link to="/members/CustomerList" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                  <Link to="/Expenses/miscExpenses" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
                     <Circle size={10} /> Misce. Expenses
                   </Link>
                 </li>
                 <li>
-                  <Link to="/members/AddAgent" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                  <Link to="/Expenses/AddAgent" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
                     <Circle size={10} />Misce. Expenses Report
                   </Link>
                 </li>
                 <li>
-                  <Link to="/members/AgentList" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                  <Link to="/Expenses/AgentList" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
                     <Circle size={10} />  Machine Expenses
                   </Link>
                 </li>
                 <li>
-                  <Link to="/members/AgentList" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                  <Link to="/Expenses/AgentList" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
                     <Circle size={10} />  Machine Expenses Report
                   </Link>
                 </li>
                 <li>
-                  <Link to="/members/AgentList" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                  <Link to="/Expenses/AgentList" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
                     <Circle size={10} />  Site Fees/Other Expenses
                   </Link>
                 </li>
                 <li>
-                  <Link to="/members/AgentList" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                  <Link to="/Expenses/AgentList" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
                     <Circle size={10} />  Site Fees/Other Expenses Report
                   </Link>
                 </li>
                 <li>
-                  <Link to="/members/AgentList" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                  <Link to="/Expenses/AgentList" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
                     <Circle size={10} />  FD/SD Expenses
                   </Link>
                 </li>
                 <li>
-                  <Link to="/members/AgentList" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                  <Link to="/Expenses/AgentList" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
                     <Circle size={10} />  FD/SD Expenses
                   </Link>
                 </li>
                 <li>
-                  <Link to="/members/AgentList" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                  <Link to="/Expenses/AgentList" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
                     <Circle size={10} />  FD/SD Report
                   </Link>
                 </li>
                 <li>
-                  <Link to="/members/AgentList" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                  <Link to="/Expenses/AgentList" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
                     <Circle size={10} />  Land Purchase
                   </Link>
                 </li>
                 <li>
-                  <Link to="/members/AgentList" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                  <Link to="/Expenses/AgentList" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
                     <Circle size={10} />  Land Purchase List
                   </Link>
                 </li>
