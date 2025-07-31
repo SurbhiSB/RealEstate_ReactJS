@@ -38,6 +38,10 @@ import AddAgent from './pages/members/AddAgent';
 import MemberList from './pages/members/MemberList';
 import CustomerList from './pages/members/CustomerList';
 import AgentList from './pages/members/AgentList';
+import HeadMaster from './pages/Expenses/HeadMaster';
+import OfficeExpenses from './pages/Expenses/officeExpenses';
+import OfficeExpensesReport from './pages/Expenses/OfficeExpensesReport';
+import MiscExpenses from './pages/Expenses/miscExpenses';
 
 
 
@@ -74,6 +78,10 @@ export default function App() {
         <Route path="/members/CustomerList" element={<CustomerList />} />
         <Route path="/members/AgentList" element={<AgentList />} />
          <Route path="/members/addmembers/:id" element={<AddMembers />} />
+         <Route path="/Expenses/HeadMaster" element={<HeadMaster />} />
+         <Route path="/Expenses/OfficeExpenses" element={<OfficeExpenses />} />
+         <Route path="/Expenses/OfficeExpensesReport" element={<OfficeExpensesReport />} />
+         <Route path="/Expenses/miscExpenses" element={<MiscExpenses />} />
         
 
 
@@ -92,6 +100,7 @@ export default function App() {
         <Route path="/purchase/out-stock-report" element={<OutStockReportPage />} />
         <Route path="/purchase/stock-report" element={<StockReportPage />} />
         <Route path="/projects/:projectId/plots" element={<ProjectPlots />} />
+        
 
 
       </Routes>
