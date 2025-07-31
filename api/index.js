@@ -21,6 +21,7 @@ import associateRoutes from "./routes/associate.route.js";
 
 
 import stateRoutes from "./routes/stateRoutes.js";
+import paymentRoute from "./routes/payment.route.js";
 
 
 dotenv.config();
@@ -67,6 +68,7 @@ app.use("/api/associates", associateRoutes); // ✅ Plug in the route
 
 
 app.use('/api/states', stateRoutes);
+app.use("/api/payments", paymentRoute);
 
 
 app.use((err, req, res, next) => {
