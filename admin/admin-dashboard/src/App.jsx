@@ -45,15 +45,10 @@ import MiscExpenses from './pages/Expenses/miscExpenses';
 import MiscExpensesReport from './pages/Expenses/MiscExpensesReport';
 import MachineryExpenses from './pages/Expenses/MachineryExpenses'; 
 import MachineryExpensesReport from './pages/Expenses/MachineryExpensesReport';
-import SiteFeesExpenses from './pages/Expenses/SiteFeesExpenses';  
-
-
-
-
-
-
-
-
+import SiteFeesExpenses from './pages/Expenses/SiteFeesExpenses'; 
+import SiteFeesReport from './pages/Expenses/SiteFeesReport'; 
+import FdSdExpenses from './pages/Expenses/FdSdExpenses'; 
+import FdSdExpReport from './pages/Expenses/FdSdExpReport';
 
 export default function App() {
   return (
@@ -89,7 +84,10 @@ export default function App() {
          <Route path="/Expenses/MiscExpensesReport" element={<MiscExpensesReport />} />
          <Route path="/Expenses/MachineryExpenses" element={<MachineryExpenses />} />   
          <Route path="/Expenses/MachineryExpensesReport" element={<MachineryExpensesReport />} />
-         <Route path="/Expenses/SiteFeesExpenses" element={<SiteFeesExpenses />} />  
+         <Route path="/Expenses/SiteFeesExpenses" element={<SiteFeesExpenses />} /> 
+         <Route path="/Expenses/SiteFeesReport" element={<SiteFeesReport />} />
+          <Route path="/Expenses/FdSdExpenses" element={<FdSdExpenses />} />   
+          <Route path="/Expenses/FdSdExpReport" element={<FdSdExpReport />} />
         
 
 

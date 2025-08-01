@@ -17,7 +17,7 @@ const MachineryExpenses = () => {
 
   const [formData, setFormData] = useState(initialFormData);
   const [memberList, setMemberList] = useState([]);
-  const [headMasterList, setHeadMasterList] = useState([]);
+  const [itemList, setItemList] = useState([]);
   const [projectList, setProjectList] = useState([]);
 
   useEffect(() => {
@@ -37,20 +37,20 @@ const MachineryExpenses = () => {
   }, []);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:3000/api/HeadMasters/HeadMaster")
-      .then((res) => {
-        if (res.data.success && Array.isArray(res.data.data)) {
-          setHeadMasterList(res.data.data);
-        } else {
-          setHeadMasterList([]);
-        }
-      })
-      .catch((err) => {
-        console.error("Error fetching headmaster list:", err);
-        setHeadMasterList([]);
-      });
-  }, []);
+  axios
+    .get("http://localhost:3000/api/items")
+    .then((res) => {
+      if (res.data.success && Array.isArray(res.data.items)) {
+        setItemList(res.data.items); // ✅ change 'data' to 'items'
+      } else {
+        setItemList([]);
+      }
+    })
+    .catch((err) => {
+      console.error("Error fetching item list:", err);
+      setItemList([]);
+    });
+}, []);
 
 
   
@@ -164,9 +164,9 @@ const MachineryExpenses = () => {
                 className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2"
               >
                 <option value="">-- Select Item --</option>
-                {headMasterList.map((headmaster) => (
-                  <option key={headmaster._id} value={headmaster.HeadMasterName}>
-                    {headmaster.HeadMasterName}
+                {itemList.map((item) => (
+                  <option key={item._id} value={item.itemName}>
+                    {item.itemName}
                   </option>
                 ))}
               </select>
