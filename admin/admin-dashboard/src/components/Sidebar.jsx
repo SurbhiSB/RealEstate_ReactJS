@@ -282,22 +282,18 @@ export default function Sidebar() {
                   </Link>
                 </li>
                 <li>
-                  <Link to="/Expenses/AgentList" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                  <Link to="/Expenses/SiteFeesReport" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
                     <Circle size={10} />  Site Fees/Other Expenses Report
                   </Link>
                 </li>
                 <li>
-                  <Link to="/Expenses/AgentList" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                  <Link to="/Expenses/FdSdExpenses" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
                     <Circle size={10} />  FD/SD Expenses
                   </Link>
                 </li>
+                
                 <li>
-                  <Link to="/Expenses/AgentList" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
-                    <Circle size={10} />  FD/SD Expenses
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/Expenses/AgentList" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                  <Link to="/Expenses/FdSdExpReport" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
                     <Circle size={10} />  FD/SD Report
                   </Link>
                 </li>
