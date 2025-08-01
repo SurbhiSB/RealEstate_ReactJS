@@ -128,6 +128,15 @@ export default function PaymentReceived() {
     setPlots([]);
   };
 
+  const handleInputChange = (e) => {
+  const { name, value } = e.target;
+  setFormData((prevData) => ({
+    ...prevData,
+    [name]: value,
+  }));
+};
+
+
   return (
     <div className="flex h-screen bg-gray-100">
       <Sidebar />
@@ -188,22 +197,19 @@ export default function PaymentReceived() {
                   <span className="label-text">Select Plot</span>
                 </label>
                 <select
-                  name="plotNo"
-                  value={formData.plotNo}
-                  onChange={handleChange}
-                  className="select select-bordered w-full"
-                >
-                  <option value="">Select Plot</option>
-                  {Array.isArray(plots) && plots.length > 0 ? (
-                    plots.map((plot) => (
-                      <option key={plot._id} value={plot._id}>
-                        {plot.plotName}
-                      </option>
-                    ))
-                  ) : (
-                    <option disabled>No plots found</option>
-                  )}
-                </select>
+  className="select select-bordered w-full"
+  name="plotNo"
+  value={formData.plotNo}
+  onChange={handleInputChange}
+>
+  <option value="">Select Plot</option>
+  {plots && plots.length > 0 && plots.map((plot) => (
+    <option key={plot._id} value={plot._id}>
+      {plot.plotName}
+    </option>
+  ))}
+</select>
+
                 <div className="text-sm text-gray-600 mt-1">
                   Total Plots Fetched: {plots.length}
                 </div>
