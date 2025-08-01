@@ -262,22 +262,22 @@ export default function Sidebar() {
                   </Link>
                 </li>
                 <li>
-                  <Link to="/Expenses/AddAgent" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                  <Link to="/Expenses/MiscExpensesReport" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
                     <Circle size={10} />Misce. Expenses Report
                   </Link>
                 </li>
                 <li>
-                  <Link to="/Expenses/AgentList" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                  <Link to="/Expenses/MachineryExpenses" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
                     <Circle size={10} />  Machine Expenses
                   </Link>
                 </li>
                 <li>
-                  <Link to="/Expenses/AgentList" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                  <Link to="/Expenses/MachineryExpensesReport" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
                     <Circle size={10} />  Machine Expenses Report
                   </Link>
                 </li>
                 <li>
-                  <Link to="/Expenses/AgentList" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                  <Link to="/Expenses/SiteFeesExpenses" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
                     <Circle size={10} />  Site Fees/Other Expenses
                   </Link>
                 </li>

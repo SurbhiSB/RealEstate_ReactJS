@@ -42,6 +42,10 @@ import HeadMaster from './pages/Expenses/HeadMaster';
 import OfficeExpenses from './pages/Expenses/officeExpenses';
 import OfficeExpensesReport from './pages/Expenses/OfficeExpensesReport';
 import MiscExpenses from './pages/Expenses/miscExpenses';
+import MiscExpensesReport from './pages/Expenses/MiscExpensesReport';
+import MachineryExpenses from './pages/Expenses/MachineryExpenses'; 
+import MachineryExpensesReport from './pages/Expenses/MachineryExpensesReport';
+import SiteFeesExpenses from './pages/Expenses/SiteFeesExpenses';  
 
 
 
@@ -82,6 +86,10 @@ export default function App() {
          <Route path="/Expenses/OfficeExpenses" element={<OfficeExpenses />} />
          <Route path="/Expenses/OfficeExpensesReport" element={<OfficeExpensesReport />} />
          <Route path="/Expenses/miscExpenses" element={<MiscExpenses />} />
+         <Route path="/Expenses/MiscExpensesReport" element={<MiscExpensesReport />} />
+         <Route path="/Expenses/MachineryExpenses" element={<MachineryExpenses />} />   
+         <Route path="/Expenses/MachineryExpensesReport" element={<MachineryExpensesReport />} />
+         <Route path="/Expenses/SiteFeesExpenses" element={<SiteFeesExpenses />} />  
         
 
 

@@ -27,7 +27,9 @@ import paymentRoute from "./routes/payment.route.js";
 import CompanyDetailsRouter from './routes/CompanyDetails.route.js';
 import HeadMastersRouter from './routes/HeadMaster.route.js';
 import officeExpensesRouter from './routes/officeExpenses.route.js';
-import miscExpensesRouter from './routes/miscExpenses.route.js';
+import miscExpensesRouter from './routes/miscExpenses.route.js'; 
+import MachineryExpensesRouter from './routes/MachineryExpenses.route.js'; 
+import SiteFeesExpensesRouter from './routes/SiteFeesExpenses.route.js'; 
 
 
 
@@ -81,6 +83,8 @@ app.use('/api/company', CompanyDetailsRouter);
 app.use('/api/HeadMasters', HeadMastersRouter);
 app.use('/api/officeExpenses', officeExpensesRouter);
 app.use('/api/miscExpenses', miscExpensesRouter);
+app.use('/api/MachineryExpenses', MachineryExpensesRouter);
+app.use('/api/SiteFeesExpenses', SiteFeesExpensesRouter);
 
 
 app.use((err, req, res, next) => {

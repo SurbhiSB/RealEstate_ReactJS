@@ -3,7 +3,7 @@ import Header from "../../components/Header";
 import Sidebar from "../../components/Sidebar";
 import axios from "axios";
 
-const MiscExpenses = () => {
+const SiteFeesExpenses = () => {
   const initialFormData = {
     partyName: "",
     projectName: "",
@@ -80,18 +80,18 @@ const MiscExpenses = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/miscExpenses/miscExpenses",
+        "http://localhost:3000/api/SiteFeesExpenses/SiteFeesExpenses",
         formData
       );
 
       if (response.data.success) {
-        alert("Miscellaneous expense submitted successfully");
+        alert("SiteFees expense submitted successfully");
         handleReset();
       } else {
-        alert("Failed to submit Miscellaneous expense");
+        alert("Failed to submit SiteFees expense");
       }
     } catch (error) {
-      console.error("Error submitting Miscellaneous expense:", error);
+      console.error("Error submitting SiteFees expense:", error);
       alert("Error occurred while submitting");
     }
   };
@@ -107,7 +107,7 @@ const MiscExpenses = () => {
         <Header />
         <div className="p-6 bg-white rounded-md shadow-md w-full">
           <h2 className="text-xl font-semibold text-gray-800 border-b-2 pb-2 mb-4">
-            📦 Miscellaneous Expenses
+            📦 SiteFees Expenses
           </h2>
 
           <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4">
@@ -269,4 +269,4 @@ const MiscExpenses = () => {
   );
 };
 
-export default MiscExpenses;
+export default SiteFeesExpenses;
