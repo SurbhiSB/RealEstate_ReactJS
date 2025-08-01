@@ -33,8 +33,6 @@ const fetchItems = async () => {
 };
 
 
-
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
@@ -61,10 +59,6 @@ const fetchItems = async () => {
     console.error("Submit Error:", err.response?.data || err.message);
   }
 };
-
-
-
-
 
   const handleReset = () => {
     setFormData({
