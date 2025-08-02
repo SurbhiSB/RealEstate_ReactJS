@@ -2,11 +2,11 @@ import PurchaseOrder from "../models/purchaseOrder.model.js";
 
 export const createPurchaseOrder = async (req, res) => {
   try {
-    const newPO = new PurchaseOrder(req.body);
-    await newPO.save();
-    res.status(201).json({ success: true, message: "Purchase Order saved", data: newPO });
+    const newOrder = new PurchaseOrder(req.body);
+    await newOrder.save();
+    res.status(201).json({ success: true, data: newOrder });
   } catch (err) {
-    console.error("Error saving purchase order:", err);
-    res.status(500).json({ success: false, message: "Server error", error: err.message });
+    console.error("Purchase Order Create Error:", err);
+    res.status(500).json({ success: false, message: "Server Error" });
   }
 };

@@ -1,20 +1,22 @@
 import mongoose from "mongoose";
 
-const ItemSchema = new mongoose.Schema({
+const itemSchema = new mongoose.Schema({
   itemName: String,
   quantity: Number,
-  unit: String,
   rate: Number,
   amount: Number,
 });
 
-const PurchaseOrderSchema = new mongoose.Schema({
+const purchaseOrderSchema = new mongoose.Schema({
+  memberName: String,
   vendorName: String,
-  purchaseOrderNo: String,
-  purchaseOrderDate: String,
-  paymentTerms: String,
-  deliveryDate: String,
-  subTotal: Number,
+  projectName: String,
+  poNumber: String,
+  workType: String,
+  siteEngineer: String,
+  contactNumber: String,
+  poDate: Date,
+  deliveryDate: Date,
   discountAmount: Number,
   adjustmentAmount: Number,
   igstRate: Number,
@@ -23,8 +25,12 @@ const PurchaseOrderSchema = new mongoose.Schema({
   cgstAmount: Number,
   sgstRate: Number,
   sgstAmount: Number,
+  subTotal: Number,
   totalAmount: Number,
-  items: [ItemSchema],
-});
+  remarks: String,
+  items: [itemSchema],
+  fileTitle: String,
+  file: String, // file name or URL
+}, { timestamps: true });
 
-export default mongoose.model("PurchaseOrder", PurchaseOrderSchema);
+export default mongoose.model("PurchaseOrder", purchaseOrderSchema);
