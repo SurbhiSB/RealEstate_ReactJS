@@ -138,18 +138,18 @@ const MiscExpenses = () => {
               </label>
               
               <select
-  name="projectName"
-  value={formData.projectName}
-  onChange={handleChange}
-  className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2"
->
-  <option value="">-- Select Project --</option>
-  {projectList.map((project) => (
-    <option key={project._id} value={project.projectName}>
-      {project.projectName || project.projectName}
-    </option>
-  ))}
-</select>
+      name="projectName"
+      value={formData.projectName}
+      onChange={handleChange}
+      className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2"
+    >
+      <option value="">-- Select Project --</option>
+      {projectList.map((project) => (
+        <option key={project._id} value={project.projectName}>
+          {project.projectName || project.projectName}
+        </option>
+      ))}
+    </select>
             </div>
 
             {/* Item Name */}
