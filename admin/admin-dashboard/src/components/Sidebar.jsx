@@ -18,6 +18,8 @@ export default function Sidebar() {
   const [isMembersOpen, setIsMembersOpen] = useState(false);
   const [isPurchaseOpen, setIsPurchaseOpen] = useState(false);
    const [isExpensesOpen, setIsExpensesOpen] = useState(false);
+   const [isManagementOpen, setIsManagementOpen] = useState(false);
+   const [isLabourOpen, setIsLabourOpen] = useState(false);
 
   return (
     <aside className="w-64 bg-gray-900 text-white p-4 flex flex-col">
@@ -305,6 +307,113 @@ export default function Sidebar() {
                 <li>
                   <Link to="/Expenses/LandPurchaseList" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
                     <Circle size={10} />  Land Purchase List
+                  </Link>
+                </li>
+                {/* <li>
+                  <Link to="/admin/members/add" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                    <Circle size={10} /> Add New
+                  </Link>
+                </li> */}
+              </ul>
+            )}
+          </li>
+
+           {/* Management with submenu */}
+          <li>
+            <button
+              onClick={() => setIsManagementOpen(!isManagementOpen)}
+              className="flex items-center w-full gap-2 py-2 px-4 rounded hover:bg-gray-700 focus:outline-none"
+            >
+              <Users size={18} /> Management
+              {isManagementOpen ? <ChevronUp size={16} className="ml-auto" /> : <ChevronDown size={16} className="ml-auto" />}
+            </button>
+            {isManagementOpen && (
+              <ul className="ml-6 mt-1 space-y-1">
+                <li>
+                  <Link to="/BankMaster" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                    <Circle size={10} /> Bank Master
+                  </Link>
+                </li>
+                
+              </ul>
+            )}
+          </li>
+
+           {/* Labour with submenu */}
+          <li>
+            <button
+              onClick={() => setIsLabourOpen(!isLabourOpen)}
+              className="flex items-center w-full gap-2 py-2 px-4 rounded hover:bg-gray-700 focus:outline-none"
+            >
+              <Users size={18} /> Labour
+              {isLabourOpen ? <ChevronUp size={16} className="ml-auto" /> : <ChevronDown size={16} className="ml-auto" />}
+            </button>
+            {isLabourOpen && (
+              <ul className="ml-6 mt-1 space-y-1">
+                <li>
+                  <Link to="/Labour/Addsite" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                    <Circle size={10} /> Add Site
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/Labour/LbDesignation" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                    <Circle size={10} /> Designation
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/Labour/AddLabour" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                    <Circle size={10} /> Labour
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/Labour/LabourList" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                    <Circle size={10} /> Labour List
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/Labour/WorkStatus" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                    <Circle size={10} />Work Status
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/Labour/AdvancePayment" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                    <Circle size={10} />  Labour Payment
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/Labour/AdvanceReport" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                    <Circle size={10} />  Payment Report
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/Labour/SiteAttendance" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                    <Circle size={10} />  Site Attendance
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/Labour/AttendanceByMonth" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                    <Circle size={10} />  Attendance By Month
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/Labour/AttendanceByDay" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                    <Circle size={10} />  Attendance By Day
+                  </Link>
+                </li>
+                
+                <li>
+                  <Link to="/Labour/WorkTypeList" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                    <Circle size={10} />  Work Type
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/Labour/WorkAllotment" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                    <Circle size={10} />  Work Allotment
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/Labour/WorkAllotmentHistory" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                    <Circle size={10} />  Work Allotment History
                   </Link>
                 </li>
                 {/* <li>

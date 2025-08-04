@@ -35,12 +35,12 @@ import itemRoutes from "./routes/itemMaster.route.js";
 import MachineryExpensesRouter from './routes/MachineryExpenses.route.js'; 
 import SiteFeesExpensesRouter from './routes/SiteFeesExpenses.route.js';
 import FdSdExpensesRouter from './routes/FdSdExpenses.route.js'; 
-<<<<<<< HEAD
+
 import LandPurchaseRouter from './routes/LandPurchase.route.js'; 
-=======
+
 import purchaseOrderRoutes from "./routes/purchaseOrder.routes.js";
 
->>>>>>> 6fff266ba6cec4bc33753447eec50675e1644693
+
 
 
 
@@ -100,11 +100,11 @@ app.use("/api/items", itemRoutes);
 app.use('/api/MachineryExpenses', MachineryExpensesRouter);
 app.use('/api/SiteFeesExpenses', SiteFeesExpensesRouter);
 app.use('/api/FdSdExpenses', FdSdExpensesRouter);
-<<<<<<< HEAD
+
 app.use('/api/LandPurchase', LandPurchaseRouter);
-=======
+
 app.use("/api/purchase-orders", purchaseOrderRoutes);
->>>>>>> 6fff266ba6cec4bc33753447eec50675e1644693
+
 
 
 
