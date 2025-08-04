@@ -14,35 +14,22 @@ import addCustomersRouter from './routes/addCustomers.route.js';
 import addAgentRouter from './routes/addagent.route.js';
 import projectRoutes from "./routes/project.route.js";
 import groupRoutes from "./routes/group.route.js";
-
 import bookingRoutes from "./routes/booking.route.js";
 import plotRoutes from "./routes/plot.route.js";
 import associateRoutes from "./routes/associate.route.js";
-
-
 import stateRoutes from "./routes/stateRoutes.js";
-
 import paymentRoute from "./routes/payment.route.js";
-
 import CompanyDetailsRouter from './routes/CompanyDetails.route.js';
 import HeadMastersRouter from './routes/HeadMaster.route.js';
 import officeExpensesRouter from './routes/officeExpenses.route.js';
-
 import miscExpensesRouter from './routes/miscExpenses.route.js';
 import itemRoutes from "./routes/itemMaster.route.js";
-
-
 import MachineryExpensesRouter from './routes/MachineryExpenses.route.js'; 
 import SiteFeesExpensesRouter from './routes/SiteFeesExpenses.route.js';
 import FdSdExpensesRouter from './routes/FdSdExpenses.route.js'; 
-
 import LandPurchaseRouter from './routes/LandPurchase.route.js'; 
-
 import purchaseOrderRoutes from "./routes/purchaseOrder.routes.js";
 import companyPaymentRoutes from "./routes/companyPayment.route.js";
-
-
-
 
 
 dotenv.config();
@@ -82,33 +69,23 @@ app.use('/api/AddAgent', addAgentRouter);
 app.use("/api/project", projectRoutes);
 app.use("/api/group", groupRoutes);
 app.use("/api/projects", projectRoutes);
-
 app.use("/api/bookings", bookingRoutes);
 app.use("/api/plots", plotRoutes); // ✅ This enables the endpoint!
 app.use("/api/associates", associateRoutes); // ✅ Plug in the route
-
-
 app.use('/api/states', stateRoutes);
 app.use("/api/payments", paymentRoute);
-
 app.use('/api/company', CompanyDetailsRouter);
 app.use('/api/HeadMasters', HeadMastersRouter);
 app.use('/api/officeExpenses', officeExpensesRouter);
 app.use('/api/miscExpenses', miscExpensesRouter);
-
 app.use("/api/items", itemRoutes);
-
 app.use('/api/MachineryExpenses', MachineryExpensesRouter);
 app.use('/api/SiteFeesExpenses', SiteFeesExpensesRouter);
 app.use('/api/FdSdExpenses', FdSdExpensesRouter);
 app.use('/api/LandPurchase', LandPurchaseRouter);
-
 app.use("/api/purchase-orders", purchaseOrderRoutes);
 app.use("/api/company-payments", companyPaymentRoutes);
  
-
-
-
 app.use((err, req, res, next) => {
     const statusCode = err.statusCode || 500;
     const message = err.message || 'Internal server error';
