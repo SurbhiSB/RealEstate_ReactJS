@@ -39,6 +39,7 @@ import FdSdExpensesRouter from './routes/FdSdExpenses.route.js';
 import LandPurchaseRouter from './routes/LandPurchase.route.js'; 
 
 import purchaseOrderRoutes from "./routes/purchaseOrder.routes.js";
+import BankMasterRoutes from "./routes/BankMaster.route.js";
 
 
 
@@ -104,6 +105,7 @@ app.use('/api/FdSdExpenses', FdSdExpensesRouter);
 app.use('/api/LandPurchase', LandPurchaseRouter);
 
 app.use("/api/purchase-orders", purchaseOrderRoutes);
+app.use("/api/BankMaster", BankMasterRoutes);
 
 
 
