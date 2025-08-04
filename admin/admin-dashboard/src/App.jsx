@@ -51,6 +51,7 @@ import FdSdExpenses from './pages/Expenses/FdSdExpenses';
 import FdSdExpReport from './pages/Expenses/FdSdExpReport';
 import LandPurchase from './pages/Expenses/LandPurchase';
 import LandPurchaseList from './pages/Expenses/LandPurchaseList';
+import BankMaster from './pages/BankMaster';
 
 export default function App() {
   return (
@@ -92,6 +93,7 @@ export default function App() {
           <Route path="/Expenses/FdSdExpReport" element={<FdSdExpReport />} />
           <Route path="/Expenses/LandPurchase" element={<LandPurchase />} /> 
           <Route path="/Expenses/LandPurchaseList" element={<LandPurchaseList />} /> 
+          <Route path="/BankMaster" element={<BankMaster />} />
         
 
 
