@@ -100,10 +100,7 @@ app.use("/api/items", itemRoutes);
 app.use('/api/MachineryExpenses', MachineryExpensesRouter);
 app.use('/api/SiteFeesExpenses', SiteFeesExpensesRouter);
 app.use('/api/FdSdExpenses', FdSdExpensesRouter);
-app.use('/api/LandPurchase', LandPurchaseRouter);
-
 app.use("/api/purchase-orders", purchaseOrderRoutes);
- 
 
 
 
