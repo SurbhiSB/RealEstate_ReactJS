@@ -35,7 +35,11 @@ import itemRoutes from "./routes/itemMaster.route.js";
 import MachineryExpensesRouter from './routes/MachineryExpenses.route.js'; 
 import SiteFeesExpensesRouter from './routes/SiteFeesExpenses.route.js';
 import FdSdExpensesRouter from './routes/FdSdExpenses.route.js'; 
+
+import LandPurchaseRouter from './routes/LandPurchase.route.js'; 
+
 import purchaseOrderRoutes from "./routes/purchaseOrder.routes.js";
+
 
 
 
@@ -96,7 +100,10 @@ app.use("/api/items", itemRoutes);
 app.use('/api/MachineryExpenses', MachineryExpensesRouter);
 app.use('/api/SiteFeesExpenses', SiteFeesExpensesRouter);
 app.use('/api/FdSdExpenses', FdSdExpensesRouter);
+app.use('/api/LandPurchase', LandPurchaseRouter);
+
 app.use("/api/purchase-orders", purchaseOrderRoutes);
+ 
 
 
 

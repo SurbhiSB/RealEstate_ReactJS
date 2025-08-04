@@ -298,12 +298,12 @@ export default function Sidebar() {
                   </Link>
                 </li>
                 <li>
-                  <Link to="/Expenses/AgentList" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                  <Link to="/Expenses/LandPurchase" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
                     <Circle size={10} />  Land Purchase
                   </Link>
                 </li>
                 <li>
-                  <Link to="/Expenses/AgentList" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                  <Link to="/Expenses/LandPurchaseList" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
                     <Circle size={10} />  Land Purchase List
                   </Link>
                 </li>
