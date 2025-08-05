@@ -29,6 +29,22 @@ useEffect(() => {
   fetchVendors();
 }, []);
 
+const [orders, setOrders] = useState([]);
+
+useEffect(() => {
+  const fetchOrders = async () => {
+    try {
+      const res = await axios.get("http://localhost:3000/api/purchase-orders");
+      if (res.data.success) {
+        setOrders(res.data.data);
+      }
+    } catch (err) {
+      console.error("Error fetching purchase orders:", err);
+    }
+  };
+
+  fetchOrders();
+}, []);
 
 
 
@@ -102,13 +118,45 @@ useEffect(() => {
                   <th className="px-4 py-2">Action</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-200">
-                <tr>
-                  <td className="px-4 py-2 text-center" colSpan="9">
-                    No data available in table
-                  </td>
-                </tr>
-              </tbody>
+           <tbody className="divide-y divide-gray-200">
+  {orders.length === 0 ? (
+    <tr>
+      <td className="px-4 py-2 text-center" colSpan="9">
+        No data available in table
+      </td>
+    </tr>
+  ) : (
+    orders.map((order, index) => (
+      <tr key={order._id}>
+        <td className="px-4 py-2">{index + 1}</td>
+        <td className="px-4 py-2">{order.poDate?.slice(0, 10)}</td>
+        <td className="px-4 py-2">{order.poNumber}</td>
+        <td className="px-4 py-2">{order.vendorName}</td>
+        <td className="px-4 py-2">{order.projectName}</td>
+        <td className="px-4 py-2">₹{order.totalAmount?.toLocaleString("en-IN", { minimumFractionDigits: 2 })}</td>
+        <td className="px-4 py-2">{order.deliveryDate?.slice(0, 10)}</td>
+        <td className="px-4 py-2">
+          {order.fileTitle ? (
+            <a
+              href={order.fileUrl || "#"}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-600 underline"
+            >
+              {order.fileTitle}
+            </a>
+          ) : (
+            "-"
+          )}
+        </td>
+        <td className="px-4 py-2">
+          <button className="text-blue-600 hover:underline">View</button>
+        </td>
+      </tr>
+    ))
+  )}
+</tbody>
+
             </table>
           </div>
 

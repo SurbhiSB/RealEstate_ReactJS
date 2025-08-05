@@ -30,6 +30,22 @@ useEffect(() => {
 }, []);
 
 
+const [payments, setPayments] = useState([]);
+
+useEffect(() => {
+  const fetchPayments = async () => {
+    try {
+      const res = await axios.get("http://localhost:3000/api/company-payments");
+      if (res.data.success) {
+        setPayments(res.data.data);
+      }
+    } catch (err) {
+      console.error("Error fetching payments:", err);
+    }
+  };
+
+  fetchPayments();
+}, []);
 
 
   return (
@@ -104,13 +120,34 @@ useEffect(() => {
                   <th className="px-4 py-2">Action</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-200">
-                <tr>
-                  <td className="px-4 py-2 text-center" colSpan="9">
-                    No data available in table
-                  </td>
-                </tr>
-              </tbody>
+             <tbody className="divide-y divide-gray-200">
+  {payments.length === 0 ? (
+    <tr>
+      <td className="px-4 py-2 text-center" colSpan="11">
+        No data available in table
+      </td>
+    </tr>
+  ) : (
+    payments.map((pay, index) => (
+      <tr key={pay._id}>
+        <td className="px-4 py-2">{index + 1}</td>
+        <td className="px-4 py-2">{pay.issueDate?.slice(0, 10)}</td>
+        <td className="px-4 py-2">{pay.paymentType}</td>
+        <td className="px-4 py-2">-</td> {/* Optional: If vendor name is needed, add it to schema */}
+        <td className="px-4 py-2">{pay.projectName}</td>
+        <td className="px-4 py-2">{pay.paymentMode}</td>
+        <td className="px-4 py-2">₹{parseFloat(pay.amount).toFixed(2)}</td>
+        <td className="px-4 py-2">-</td> {/* Optional: TDS if implemented */}
+        <td className="px-4 py-2">₹{parseFloat(pay.amountToPay).toFixed(2)}</td>
+        <td className="px-4 py-2">{pay.remarks}</td>
+        <td className="px-4 py-2">
+          <button className="text-blue-600 hover:underline">View</button>
+        </td>
+      </tr>
+    ))
+  )}
+</tbody>
+
             </table>
           </div>
 

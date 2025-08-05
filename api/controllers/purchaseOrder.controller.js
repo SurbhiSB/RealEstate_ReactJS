@@ -10,3 +10,15 @@ export const createPurchaseOrder = async (req, res) => {
     res.status(500).json({ success: false, message: "Server Error" });
   }
 };
+
+
+
+export const getAllPurchaseOrders = async (req, res) => {
+  try {
+    const orders = await PurchaseOrder.find().sort({ createdAt: -1 });
+    res.status(200).json({ success: true, data: orders });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+};
+

@@ -29,9 +29,8 @@ import SiteFeesExpensesRouter from './routes/SiteFeesExpenses.route.js';
 import FdSdExpensesRouter from './routes/FdSdExpenses.route.js'; 
 import LandPurchaseRouter from './routes/LandPurchase.route.js'; 
 import purchaseOrderRoutes from "./routes/purchaseOrder.routes.js";
-
+import purchaseBillRoutes from "./routes/purchaseBill.route.js";
 import BankMasterRoutes from "./routes/BankMaster.route.js";
-
 import companyPaymentRoutes from "./routes/companyPayment.route.js";
 
 
@@ -88,16 +87,9 @@ app.use('/api/SiteFeesExpenses', SiteFeesExpensesRouter);
 app.use('/api/FdSdExpenses', FdSdExpensesRouter);
 app.use('/api/LandPurchase', LandPurchaseRouter);
 app.use("/api/purchase-orders", purchaseOrderRoutes);
-
+app.use("/api/purchase-bills", purchaseBillRoutes);
 app.use("/api/BankMaster", BankMasterRoutes);
-
-
-
-
-
 app.use("/api/company-payments", companyPaymentRoutes);
- 
-
 app.use((err, req, res, next) => {
     const statusCode = err.statusCode || 500;
     const message = err.message || 'Internal server error';

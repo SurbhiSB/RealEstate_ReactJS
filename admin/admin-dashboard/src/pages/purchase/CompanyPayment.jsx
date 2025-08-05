@@ -1,4 +1,3 @@
-
 import Header from "../../components/Header";
 import Sidebar from "../../components/Sidebar";
 import React, { useEffect, useState } from 'react';
@@ -132,7 +131,7 @@ export default function CompanyPayment() {
 </div>
 
 
-              {/* Amount */}
+         {/* Amount */}
               <div>
                 <label className="block mb-1 font-medium">Amount</label>
                 <input

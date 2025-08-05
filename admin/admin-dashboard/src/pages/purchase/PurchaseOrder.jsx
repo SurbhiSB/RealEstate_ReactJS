@@ -4,7 +4,6 @@ import Sidebar from "../../components/Sidebar";
 import Header from "../../components/Header";
 
 
-
 export default function PurchaseOrder() {
   const [items, setItems] = useState([
     { itemName: '', unit: '', quantity: '', rate: '', amount: '' }
@@ -519,12 +518,25 @@ useEffect(() => {
 
               </div>
 
-              <div>
-                <label className="text-sm font-medium text-gray-700 block mb-1">PO File Title</label>
-                <input type="text" className="w-full border border-gray-300 rounded-lg px-3 py-2 mb-2" />
-                <label className="text-sm font-medium text-gray-700 block mb-1">PO File</label>
-                <input type="file" className="w-full" />
-              </div>
+             <div>
+  <label className="text-sm font-medium text-gray-700 block mb-1">PO File Title</label>
+  <input
+    type="text"
+    name="fileTitle"
+    value={formData.fileTitle}
+    onChange={handleInputChange}
+    className="w-full border border-gray-300 rounded-lg px-3 py-2 mb-2"
+  />
+
+  <label className="text-sm font-medium text-gray-700 block mb-1">PO File</label>
+  <input
+    type="file"
+    name="file"
+    onChange={handleInputChange}
+    className="w-full"
+  />
+</div>
+
             </div>
 
             {/* Terms & Conditions */}
