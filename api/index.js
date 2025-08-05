@@ -31,6 +31,13 @@ import LandPurchaseRouter from './routes/LandPurchase.route.js';
 import purchaseOrderRoutes from "./routes/purchaseOrder.routes.js";
 import purchaseBillRoutes from "./routes/purchaseBill.route.js";
 import BankMasterRoutes from "./routes/BankMaster.route.js";
+<<<<<<< HEAD
+=======
+import AddsiteRoutes from "./routes/Addsite.route.js";
+import LbDesignationRoutes from "./routes/LbDesignation.route.js";
+import addLabourRoutes from "./routes/addLabour.route.js";
+
+>>>>>>> 26174963054d44fdccbbb22713a7244e5adcd14c
 import companyPaymentRoutes from "./routes/companyPayment.route.js";
 
 
@@ -89,6 +96,17 @@ app.use('/api/LandPurchase', LandPurchaseRouter);
 app.use("/api/purchase-orders", purchaseOrderRoutes);
 app.use("/api/purchase-bills", purchaseBillRoutes);
 app.use("/api/BankMaster", BankMasterRoutes);
+<<<<<<< HEAD
+=======
+app.use("/api/Addsite", AddsiteRoutes);
+app.use("/api/LbDesignation", LbDesignationRoutes);
+app.use("/api/AddLabour", addLabourRoutes);
+
+
+
+
+
+>>>>>>> 26174963054d44fdccbbb22713a7244e5adcd14c
 app.use("/api/company-payments", companyPaymentRoutes);
 app.use((err, req, res, next) => {
     const statusCode = err.statusCode || 500;
