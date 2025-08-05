@@ -31,6 +31,9 @@ import LandPurchaseRouter from './routes/LandPurchase.route.js';
 import purchaseOrderRoutes from "./routes/purchaseOrder.routes.js";
 
 import BankMasterRoutes from "./routes/BankMaster.route.js";
+import AddsiteRoutes from "./routes/Addsite.route.js";
+import LbDesignationRoutes from "./routes/LbDesignation.route.js";
+import addLabourRoutes from "./routes/addLabour.route.js";
 
 import companyPaymentRoutes from "./routes/companyPayment.route.js";
 
@@ -90,6 +93,9 @@ app.use('/api/LandPurchase', LandPurchaseRouter);
 app.use("/api/purchase-orders", purchaseOrderRoutes);
 
 app.use("/api/BankMaster", BankMasterRoutes);
+app.use("/api/Addsite", AddsiteRoutes);
+app.use("/api/LbDesignation", LbDesignationRoutes);
+app.use("/api/AddLabour", addLabourRoutes);
 
 
 

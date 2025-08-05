@@ -52,6 +52,9 @@ import FdSdExpReport from './pages/Expenses/FdSdExpReport';
 import LandPurchase from './pages/Expenses/LandPurchase';
 import LandPurchaseList from './pages/Expenses/LandPurchaseList';
 import BankMaster from './pages/BankMaster';
+import Addsite from './pages/Labour/Addsite';
+import LbDesignation from './pages/Labour/LbDesignation';
+import AddLabour from './pages/Labour/addLabour';
 
 export default function App() {
   return (
@@ -94,6 +97,9 @@ export default function App() {
           <Route path="/Expenses/LandPurchase" element={<LandPurchase />} /> 
           <Route path="/Expenses/LandPurchaseList" element={<LandPurchaseList />} /> 
           <Route path="/BankMaster" element={<BankMaster />} />
+          <Route path="/Labour/Addsite" element={<Addsite />} />
+          <Route path="/Labour/LbDesignation" element={<LbDesignation />} />
+          <Route path="/Labour/addLabour" element={<AddLabour />} />
         
 
 
