@@ -39,6 +39,8 @@ import addLabourRoutes from "./routes/addLabour.route.js";
 
 
 import companyPaymentRoutes from "./routes/companyPayment.route.js";
+import inStockRoutes from "./routes/inStock.route.js";
+import outStockRoutes from './routes/outStock.route.js';
 
 
 
@@ -101,6 +103,8 @@ app.use("/api/BankMaster", BankMasterRoutes);
 app.use("/api/Addsite", AddsiteRoutes);
 app.use("/api/LbDesignation", LbDesignationRoutes);
 app.use("/api/AddLabour", addLabourRoutes);
+app.use("/api/instock", inStockRoutes);
+app.use('/api/outstock', outStockRoutes);
 
 
 
