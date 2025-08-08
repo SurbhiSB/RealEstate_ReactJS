@@ -43,6 +43,10 @@ import AdvancePaymentRoutes from "./routes/AdvancePayment.route.js";
 import companyPaymentRoutes from "./routes/companyPayment.route.js";
 import inStockRoutes from "./routes/inStock.route.js";
 import outStockRoutes from './routes/outStock.route.js';
+import departmentRoutes from './routes/department.route.js';
+import designationRoutes from './routes/designation.route.js';
+import bankRoutes from './routes/bank.route.js';
+import employeeRoutes from './routes/employee.route.js';
 
 
 
@@ -111,7 +115,10 @@ app.use("/api/AdvancePayment", AdvancePaymentRoutes);
 
 app.use("/api/instock", inStockRoutes);
 app.use('/api/outstock', outStockRoutes);
-
+app.use('/api/departments', departmentRoutes);
+app.use('/api/designations', designationRoutes);
+app.use('/api/banks', bankRoutes);
+app.use('/api/employees', employeeRoutes);
 
 
 
