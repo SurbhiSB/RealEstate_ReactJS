@@ -54,13 +54,13 @@ import BankMaster from './pages/BankMaster';
 import Addsite from './pages/Labour/Addsite';
 import LbDesignation from './pages/Labour/LbDesignation';
 import AddLabour from './pages/Labour/addLabour';
-<<<<<<< HEAD
+
 import LabourList from './pages/Labour/LabourList';
 import WorkStatus from './pages/Labour/WorkStatus';
 import AdvancePayment from './pages/Labour/AdvancePayment';
 import AdvanceReport from './pages/Labour/AdvanceReport';
 
-=======
+
 import Department from './pages/hr/department';
 import Designation from './pages/hr/designation';
 import BankList from './pages/hr/bank-list';
@@ -71,7 +71,7 @@ import AttendanceByMonth from './pages/hr/attendance-by-month';
 import AttendanceSummary from './pages/hr/attendance-summary';
 import DocumentFormat from './pages/hr/document-format';
 import DocumentFormatList from './pages/hr/document-format-list';
->>>>>>> 7c37646084ce1608771fd2a2475d531d3523d12b
+
 
 export default function App() {
   return (
@@ -99,7 +99,6 @@ export default function App() {
         <Route path="/members/MemberList" element={<MemberList />} />
         <Route path="/members/CustomerList" element={<CustomerList />} />
         <Route path="/members/AgentList" element={<AgentList />} />
-<<<<<<< HEAD
          <Route path="/members/addmembers/:id" element={<AddMembers />} />
          <Route path="/Expenses/HeadMaster" element={<HeadMaster />} />
          <Route path="/Expenses/OfficeExpenses" element={<OfficeExpenses />} />
@@ -123,7 +122,7 @@ export default function App() {
             <Route path="/Labour/AdvancePayment" element={<AdvancePayment />} />
             <Route path="/Labour/AdvanceReport" element={<AdvanceReport />} />
         
-=======
+
         <Route path="/members/addmembers/:id" element={<AddMembers />} />
         <Route path="/Expenses/HeadMaster" element={<HeadMaster />} />
         <Route path="/Expenses/OfficeExpenses" element={<OfficeExpenses />} />
@@ -142,7 +141,7 @@ export default function App() {
         <Route path="/Labour/Addsite" element={<Addsite />} />
         <Route path="/Labour/LbDesignation" element={<LbDesignation />} />
         <Route path="/Labour/addLabour" element={<AddLabour />} />
->>>>>>> 7c37646084ce1608771fd2a2475d531d3523d12b
+
 
         <Route path="/hr/department" element={<Department />} />
         <Route path="/hr/designation" element={<Designation />} />
