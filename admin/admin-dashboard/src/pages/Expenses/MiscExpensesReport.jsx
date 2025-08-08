@@ -126,7 +126,7 @@ export default function MiscExpensesReport() {
           <div className="flex-1">
             <Header />
     <div className="p-4">
-      <h2 className="text-lg font-semibold mb-4">Office Expenses Report</h2>
+      <h2 className="text-lg font-semibold mb-4">Miscellaneous Expenses List</h2>
 
       <div className="mb-4 flex gap-2">
         <button className="bg-purple-700 text-white px-3 py-1 rounded" onClick={() => navigator.clipboard.writeText(JSON.stringify(data))}>Copy</button>

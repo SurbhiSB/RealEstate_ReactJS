@@ -36,6 +36,8 @@ import BankMasterRoutes from "./routes/BankMaster.route.js";
 import AddsiteRoutes from "./routes/Addsite.route.js";
 import LbDesignationRoutes from "./routes/LbDesignation.route.js";
 import addLabourRoutes from "./routes/addLabour.route.js";
+import WorkStatusRoutes from "./routes/WorkStatus.route.js";
+import AdvancePaymentRoutes from "./routes/AdvancePayment.route.js";
 
 
 import companyPaymentRoutes from "./routes/companyPayment.route.js";
@@ -103,6 +105,10 @@ app.use("/api/BankMaster", BankMasterRoutes);
 app.use("/api/Addsite", AddsiteRoutes);
 app.use("/api/LbDesignation", LbDesignationRoutes);
 app.use("/api/AddLabour", addLabourRoutes);
+app.use("/api/WorkStatus", WorkStatusRoutes);
+app.use("/api/AdvancePayment", AdvancePaymentRoutes);
+
+
 app.use("/api/instock", inStockRoutes);
 app.use('/api/outstock', outStockRoutes);
 

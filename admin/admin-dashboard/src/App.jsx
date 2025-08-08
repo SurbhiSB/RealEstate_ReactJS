@@ -55,6 +55,11 @@ import BankMaster from './pages/BankMaster';
 import Addsite from './pages/Labour/Addsite';
 import LbDesignation from './pages/Labour/LbDesignation';
 import AddLabour from './pages/Labour/addLabour';
+import LabourList from './pages/Labour/LabourList';
+import WorkStatus from './pages/Labour/WorkStatus';
+import AdvancePayment from './pages/Labour/AdvancePayment';
+import AdvanceReport from './pages/Labour/AdvanceReport';
+
 
 export default function App() {
   return (
@@ -100,6 +105,10 @@ export default function App() {
           <Route path="/Labour/Addsite" element={<Addsite />} />
           <Route path="/Labour/LbDesignation" element={<LbDesignation />} />
           <Route path="/Labour/addLabour" element={<AddLabour />} />
+          <Route path="/Labour/LabourList" element={<LabourList />} />
+           <Route path="/Labour/WorkStatus" element={<WorkStatus />} />
+            <Route path="/Labour/AdvancePayment" element={<AdvancePayment />} />
+            <Route path="/Labour/AdvanceReport" element={<AdvanceReport />} />
         
 
 
