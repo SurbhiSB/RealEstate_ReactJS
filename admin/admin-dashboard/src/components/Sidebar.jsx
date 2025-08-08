@@ -17,9 +17,12 @@ export default function Sidebar() {
   const [isProjectsOpen, setIsProjectsOpen] = useState(false);
   const [isMembersOpen, setIsMembersOpen] = useState(false);
   const [isPurchaseOpen, setIsPurchaseOpen] = useState(false);
-   const [isExpensesOpen, setIsExpensesOpen] = useState(false);
-   const [isManagementOpen, setIsManagementOpen] = useState(false);
-   const [isLabourOpen, setIsLabourOpen] = useState(false);
+  const [isExpensesOpen, setIsExpensesOpen] = useState(false);
+  const [isManagementOpen, setIsManagementOpen] = useState(false);
+  const [isLabourOpen, setIsLabourOpen] = useState(false);
+  const [isHrPayrollOpen, setIsHrPayrollOpen] = useState(false);
+  const [isHrOpen, setIsHrOpen] = useState(false);
+  const [isLeaveManagementOpen, setIsLeaveManagementOpen] = useState(false);
 
   return (
     <aside className="w-64 bg-gray-900 text-white p-4 flex flex-col">
@@ -30,12 +33,12 @@ export default function Sidebar() {
               <LayoutDashboard size={18} /> Dashboard
             </Link>
           </li>
-           <li>
+          <li>
             <Link to="/CompanyDetails" className="flex items-center gap-2 py-2 px-4 rounded hover:bg-gray-700">
               <Building size={18} /> Company Details
             </Link>
           </li>
-           {/* Projects with submenu */}
+          {/* Projects with submenu */}
           <li>
             <button
               onClick={() => setIsProjectsOpen(!isProjectsOpen)}
@@ -153,11 +156,10 @@ export default function Sidebar() {
               <PlusSquare size={18} /> Create Listing
             </Link>
           </li>
-         
 
-         
+
           <li>
-          <button
+            <button
               onClick={() => setIsPurchaseOpen(!isPurchaseOpen)}
               className="flex items-center w-full gap-2 py-2 px-4 rounded hover:bg-gray-700 focus:outline-none"
             >
@@ -191,22 +193,22 @@ export default function Sidebar() {
                     <Circle size={10} /> Payment History
                   </Link>
                 </li>
-                 <li>
+                <li>
                   <Link to="/purchase/purchase-bill" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
                     <Circle size={10} /> Purchase Bill
                   </Link>
                 </li>
-                 <li>
+                <li>
                   <Link to="/purchase/purchase-bill-history" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
                     <Circle size={10} /> Purchase Bill History
                   </Link>
                 </li>
-                 <li>
+                <li>
                   <Link to="/purchase/in-stock" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
                     <Circle size={10} /> In Stock
                   </Link>
-                </li>                
-                 <li>
+                </li>
+                <li>
                   <Link to="/purchase/in-stock-report" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
                     <Circle size={10} /> In Stock Report
                   </Link>
@@ -232,7 +234,7 @@ export default function Sidebar() {
 
           </li>
 
-           {/* Expenses with submenu */}
+          {/* Expenses with submenu */}
           <li>
             <button
               onClick={() => setIsExpensesOpen(!isExpensesOpen)}
@@ -318,7 +320,7 @@ export default function Sidebar() {
             )}
           </li>
 
-           {/* Management with submenu */}
+          {/* Management with submenu */}
           <li>
             <button
               onClick={() => setIsManagementOpen(!isManagementOpen)}
@@ -339,7 +341,7 @@ export default function Sidebar() {
             )}
           </li>
 
-           {/* Labour with submenu */}
+          {/* Labour with submenu */}
           <li>
             <button
               onClick={() => setIsLabourOpen(!isLabourOpen)}
@@ -425,6 +427,86 @@ export default function Sidebar() {
             )}
           </li>
 
+          {/* HR/Payroll with submenu */}
+          <li>
+            <button
+              onClick={() => setIsHrPayrollOpen(!isHrPayrollOpen)}
+              className="flex items-center w-full gap-2 py-2 px-4 rounded hover:bg-gray-700 focus:outline-none"
+            >
+              <Users size={18} /> HR/Payroll
+              {isHrPayrollOpen ? <ChevronUp size={16} className="ml-auto" /> : <ChevronDown size={16} className="ml-auto" />}
+            </button>
+            {isHrPayrollOpen && (
+              <ul className="ml-6 mt-1 space-y-1">
+                <li>
+                  <button
+                    onClick={() => setIsHrOpen(!isHrOpen)}
+                    className="flex items-center w-full gap-2 py-1 px-4 rounded hover:bg-gray-700 focus:outline-none"
+                  >
+                    <Circle size={10} /> HR
+                    {isHrOpen ? <ChevronUp size={16} className="ml-auto" /> : <ChevronDown size={16} className="ml-auto" />}
+                  </button>
+                  {isHrOpen && (
+                    <ul className="ml-6 mt-1 space-y-1">
+                      <li>
+                        <Link to="/hr/department" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                          <Circle size={10} /> Department
+                        </Link>
+                      </li>
+                      <li>
+                        <Link to="/hr/designation" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                          <Circle size={10} /> Designation
+                        </Link>
+                      </li>
+                      <li>
+                        <Link to="/hr/bank-list" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                          <Circle size={10} /> Bank List
+                        </Link>
+                      </li>
+                      <li>
+                        <Link to="/hr/employee" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                          <Circle size={10} /> Employee
+                        </Link>
+                      </li>
+                      <li>
+                        <Link to="/hr/employee-list" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                          <Circle size={10} /> Employee List
+                        </Link>
+                      </li>
+                      <li>
+                        <Link to="/hr/employee-attendance" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                          <Circle size={10} /> Employee Attendance
+                        </Link>
+                      </li>
+                      <li>
+                        <Link to="/hr/attendance-by-month" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                          <Circle size={10} /> Attendance By Month
+                        </Link>
+                      </li>
+                      <li>
+                        <Link to="/hr/attendance-summary" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                          <Circle size={10} /> Attendance Summary
+                        </Link>
+                      </li>
+                      <li>
+                        <Link to="/hr/document-format" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                          <Circle size={10} /> Document Format
+                        </Link>
+                      </li>
+                      <li>
+                        <Link to="/hr/document-format-list" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                          <Circle size={10} /> Document Format List
+                        </Link>
+                      </li>
+                    </ul>
+                  )}
+                </li>
+              </ul>
+            )}
+          </li>
+
+          
+        
         </ul>
       </nav>
     </aside>

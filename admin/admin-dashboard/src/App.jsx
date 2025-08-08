@@ -31,7 +31,6 @@ import OutStockPage from './pages/purchase/OutStock';
 import OutStockReportPage from './pages/purchase/OutStockReport';
 import StockReportPage from './pages/purchase/StockReport';
 import ProjectPlots from './pages/projects/ProjectPlots';
-  
 
 import AddAgent from './pages/members/AddAgent';
 
@@ -43,11 +42,11 @@ import OfficeExpenses from './pages/Expenses/officeExpenses';
 import OfficeExpensesReport from './pages/Expenses/OfficeExpensesReport';
 import MiscExpenses from './pages/Expenses/miscExpenses';
 import MiscExpensesReport from './pages/Expenses/MiscExpensesReport';
-import MachineryExpenses from './pages/Expenses/MachineryExpenses'; 
+import MachineryExpenses from './pages/Expenses/MachineryExpenses';
 import MachineryExpensesReport from './pages/Expenses/MachineryExpensesReport';
-import SiteFeesExpenses from './pages/Expenses/SiteFeesExpenses'; 
-import SiteFeesReport from './pages/Expenses/SiteFeesReport'; 
-import FdSdExpenses from './pages/Expenses/FdSdExpenses'; 
+import SiteFeesExpenses from './pages/Expenses/SiteFeesExpenses';
+import SiteFeesReport from './pages/Expenses/SiteFeesReport';
+import FdSdExpenses from './pages/Expenses/FdSdExpenses';
 import FdSdExpReport from './pages/Expenses/FdSdExpReport';
 import LandPurchase from './pages/Expenses/LandPurchase';
 import LandPurchaseList from './pages/Expenses/LandPurchaseList';
@@ -55,6 +54,16 @@ import BankMaster from './pages/BankMaster';
 import Addsite from './pages/Labour/Addsite';
 import LbDesignation from './pages/Labour/LbDesignation';
 import AddLabour from './pages/Labour/addLabour';
+import Department from './pages/hr/department';
+import Designation from './pages/hr/designation';
+import BankList from './pages/hr/bank-list';
+import Employee from './pages/hr/employee';
+import EmployeeList from './pages/hr/employee-list';
+import EmployeeAttendance from './pages/hr/employee-attendance';
+import AttendanceByMonth from './pages/hr/attendance-by-month';
+import AttendanceSummary from './pages/hr/attendance-summary';
+import DocumentFormat from './pages/hr/document-format';
+import DocumentFormatList from './pages/hr/document-format-list';
 
 export default function App() {
   return (
@@ -82,26 +91,35 @@ export default function App() {
         <Route path="/members/MemberList" element={<MemberList />} />
         <Route path="/members/CustomerList" element={<CustomerList />} />
         <Route path="/members/AgentList" element={<AgentList />} />
-         <Route path="/members/addmembers/:id" element={<AddMembers />} />
-         <Route path="/Expenses/HeadMaster" element={<HeadMaster />} />
-         <Route path="/Expenses/OfficeExpenses" element={<OfficeExpenses />} />
-         <Route path="/Expenses/OfficeExpensesReport" element={<OfficeExpensesReport />} />
-         <Route path="/Expenses/miscExpenses" element={<MiscExpenses />} />
-         <Route path="/Expenses/MiscExpensesReport" element={<MiscExpensesReport />} />
-         <Route path="/Expenses/MachineryExpenses" element={<MachineryExpenses />} />   
-         <Route path="/Expenses/MachineryExpensesReport" element={<MachineryExpensesReport />} />
-         <Route path="/Expenses/SiteFeesExpenses" element={<SiteFeesExpenses />} /> 
-         <Route path="/Expenses/SiteFeesReport" element={<SiteFeesReport />} />
-          <Route path="/Expenses/FdSdExpenses" element={<FdSdExpenses />} />   
-          <Route path="/Expenses/FdSdExpReport" element={<FdSdExpReport />} />
-          <Route path="/Expenses/LandPurchase" element={<LandPurchase />} /> 
-          <Route path="/Expenses/LandPurchaseList" element={<LandPurchaseList />} /> 
-          <Route path="/BankMaster" element={<BankMaster />} />
-          <Route path="/Labour/Addsite" element={<Addsite />} />
-          <Route path="/Labour/LbDesignation" element={<LbDesignation />} />
-          <Route path="/Labour/addLabour" element={<AddLabour />} />
-        
+        <Route path="/members/addmembers/:id" element={<AddMembers />} />
+        <Route path="/Expenses/HeadMaster" element={<HeadMaster />} />
+        <Route path="/Expenses/OfficeExpenses" element={<OfficeExpenses />} />
+        <Route path="/Expenses/OfficeExpensesReport" element={<OfficeExpensesReport />} />
+        <Route path="/Expenses/miscExpenses" element={<MiscExpenses />} />
+        <Route path="/Expenses/MiscExpensesReport" element={<MiscExpensesReport />} />
+        <Route path="/Expenses/MachineryExpenses" element={<MachineryExpenses />} />
+        <Route path="/Expenses/MachineryExpensesReport" element={<MachineryExpensesReport />} />
+        <Route path="/Expenses/SiteFeesExpenses" element={<SiteFeesExpenses />} />
+        <Route path="/Expenses/SiteFeesReport" element={<SiteFeesReport />} />
+        <Route path="/Expenses/FdSdExpenses" element={<FdSdExpenses />} />
+        <Route path="/Expenses/FdSdExpReport" element={<FdSdExpReport />} />
+        <Route path="/Expenses/LandPurchase" element={<LandPurchase />} />
+        <Route path="/Expenses/LandPurchaseList" element={<LandPurchaseList />} />
+        <Route path="/BankMaster" element={<BankMaster />} />
+        <Route path="/Labour/Addsite" element={<Addsite />} />
+        <Route path="/Labour/LbDesignation" element={<LbDesignation />} />
+        <Route path="/Labour/addLabour" element={<AddLabour />} />
 
+        <Route path="/hr/department" element={<Department />} />
+        <Route path="/hr/designation" element={<Designation />} />
+        <Route path="/hr/bank-list" element={<BankList />} />
+        <Route path="/hr/employee" element={<Employee />} />
+        <Route path="/hr/employee-list" element={<EmployeeList />} />
+        <Route path="/hr/employee-attendance" element={<EmployeeAttendance />} />
+        <Route path="/hr/attendance-by-month" element={<AttendanceByMonth />} />
+        <Route path="/hr/attendance-summary" element={<AttendanceSummary />} />
+        <Route path="/hr/document-format" element={<DocumentFormat />} />
+        <Route path="/hr/document-format-list" element={<DocumentFormatList />} />
 
         <Route path="/projects/create" element={<Project />} />
         <Route path="/projects/edit/:id" element={<Project />} /> // ✅ reuse same Project component
@@ -118,8 +136,6 @@ export default function App() {
         <Route path="/purchase/out-stock-report" element={<OutStockReportPage />} />
         <Route path="/purchase/stock-report" element={<StockReportPage />} />
         <Route path="/projects/:projectId/plots" element={<ProjectPlots />} />
-        
-
 
       </Routes>
     </BrowserRouter>
