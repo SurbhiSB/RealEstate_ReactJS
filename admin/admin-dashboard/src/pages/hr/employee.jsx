@@ -114,7 +114,7 @@ export default function Employee() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
   <div>
     <label className="block mb-1 font-semibold">Employee Name</label>
-    <input type="text" name="employeeName" value={formData.employeeName} onChange={handleChange} className="w-full border px-3 py-2 rounded" required />
+    <input type="text" name="name" value={formData.name} onChange={handleChange} className="w-full border px-3 py-2 rounded" required />
   </div>
   <div>
     <label className="block mb-1 font-semibold">Contact</label>
