@@ -59,6 +59,13 @@ import LabourList from './pages/Labour/LabourList';
 import WorkStatus from './pages/Labour/WorkStatus';
 import AdvancePayment from './pages/Labour/AdvancePayment';
 import AdvanceReport from './pages/Labour/AdvanceReport';
+import SiteAttendance from './pages/Labour/SiteAttendance';
+import LabourListAttendance from './pages/Labour/LabourListAttendance';
+import AttendanceByMonthLabour from './pages/Labour/AttendanceByMonth';
+import WorkTypeList from './pages/Labour/WorkTypeList';
+import WorkAllotment from './pages/Labour/WorkAllotment';
+import WorkAllotmentHistory from './pages/Labour/WorkAllotmentHistory';
+import LeadCreation from './pages/Lead/LeadCreation';
 
 
 import Department from './pages/hr/department';
@@ -121,8 +128,14 @@ export default function App() {
            <Route path="/Labour/WorkStatus" element={<WorkStatus />} />
             <Route path="/Labour/AdvancePayment" element={<AdvancePayment />} />
             <Route path="/Labour/AdvanceReport" element={<AdvanceReport />} />
+            <Route path="/Labour/SiteAttendance" element={<SiteAttendance />} />
+            <Route path="/Labour/LabourListAttendance" element={<LabourListAttendance />} />
+            <Route path="/Labour/AttendanceByMonth" element={<AttendanceByMonthLabour />} />
+            <Route path="/Labour/WorkTypeList" element={<WorkTypeList />} />
+            <Route path="/Labour/WorkAllotment" element={<WorkAllotment />} />
+            <Route path="/Lead/LeadCreation" element={<LeadCreation />} />
         
-
+        
         <Route path="/members/addmembers/:id" element={<AddMembers />} />
         <Route path="/Expenses/HeadMaster" element={<HeadMaster />} />
         <Route path="/Expenses/OfficeExpenses" element={<OfficeExpenses />} />
@@ -141,6 +154,7 @@ export default function App() {
         <Route path="/Labour/Addsite" element={<Addsite />} />
         <Route path="/Labour/LbDesignation" element={<LbDesignation />} />
         <Route path="/Labour/addLabour" element={<AddLabour />} />
+        <Route path="/Labour/WorkAllotmentHistory" element={<WorkAllotmentHistory />} />
 
 
         <Route path="/hr/department" element={<Department />} />

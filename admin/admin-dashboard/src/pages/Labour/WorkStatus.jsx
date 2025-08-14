@@ -3,9 +3,10 @@ import Header from "../../components/Header";
 import Sidebar from "../../components/Sidebar";
 import axios from "axios";
 
-export default function POListPage() {
+export default function WorkStatus() {
   const [siteList, setSiteList] = useState([]);
   const [payments, setPayments] = useState([]);
+  const [filteredPersons, setFilteredPersons] = useState([]); // ✅ Added state
 
   const [formData, setFormData] = useState({
     site: '',
@@ -38,7 +39,7 @@ export default function POListPage() {
   useEffect(() => {
     const fetchPayments = async () => {
       try {
-        const res = await axios.get("http://localhost:3000/api/WorkStatus");
+        const res = await axios.get("http://localhost:3000/api/AddLabour/addLabours");
         if (res.data.success) {
           setPayments(res.data.data);
         }
@@ -49,6 +50,18 @@ export default function POListPage() {
 
     fetchPayments();
   }, []);
+
+
+   useEffect(() => {
+      if (formData.site) {
+        const filtered = payments.filter(
+          (labour) => labour.site === formData.site
+        );
+        setFilteredPersons(filtered);
+      } else {
+        setFilteredPersons([]);
+      }
+    }, [formData.site, payments]);
 
   return (
     <div className="flex h-screen bg-gray-100">
@@ -96,9 +109,12 @@ export default function POListPage() {
                 ))}
               </select>
             </div>
-            <button className="bg-gray-800 text-white px-4 py-2 rounded-lg mt-1 hover:bg-gray-900">
-              Submit
-            </button>
+            <button
+                type="submit"
+                className="bg-indigo-800 text-white px-4 py-2 rounded hover:bg-indigo-900"
+              >
+                Submit
+              </button>
           </div>
 
           {/* Action Buttons */}
@@ -126,14 +142,14 @@ export default function POListPage() {
     </tr>
   </thead>
   <tbody className="divide-y divide-gray-200">
-    {payments.length === 0 ? (
+    {filteredPersons.length === 0 ? (
       <tr>
         <td className="px-4 py-2 text-center" colSpan="5">
           No Data
         </td>
       </tr>
     ) : (
-      payments.map((pay, index) => (
+      filteredPersons.map((pay, index) => (
         <tr key={pay._id}>
           <td className="px-4 py-2">{pay.name || "-"}</td>
           <td className="px-4 py-2">{pay.perDay || 0}</td>

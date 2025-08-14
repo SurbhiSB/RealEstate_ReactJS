@@ -23,6 +23,12 @@ export const createaddLabours = async (req, res) => {
 // Get all addLabour with pagination
 export const getAlladdLabours = async (req, res) => {
   try {
+    const { sitename } = req.query; // read from query params
+    let query = {};
+
+    if (sitename) {
+      query.SiteName = sitename; // Match the field name in your DB exactly
+    }
     const data = await addLabour.find();
     res.status(200).json({ success: true, data });
   } catch (error) {

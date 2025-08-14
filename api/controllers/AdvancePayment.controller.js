@@ -23,11 +23,26 @@ export const createAdvancePayment = async (req, res) => {
 // Get all AdvancePayment with pagination
 export const getAllAdvancePayments = async (req, res) => {
   try {
-    const data = await AdvancePayment.find();
-    res.status(200).json({ success: true, data });
-  } catch (error) {
-    console.error("Error in getAllAdvancePayment:", error);
-    res.status(500).json({ success: false, message: "Error fetching office expenses" });
+    const { site, fromDate, toDate } = req.query; // 'site' matches your frontend params
+    let filter = {};
+
+    // Filter by site/vendor
+    if (site) {
+      filter.site = site; // change this key to match your DB field name
+    }
+
+    // Filter by date range
+    if (fromDate && toDate) {
+      filter.date = {
+        $gte: new Date(fromDate),
+        $lte: new Date(toDate),
+      };
+    }
+
+    const payments = await AdvancePayment.find(filter);
+    res.json({ success: true, data: payments });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
   }
 };
 
