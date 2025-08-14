@@ -49,6 +49,8 @@ import departmentRoutes from './routes/department.route.js';
 import designationRoutes from './routes/designation.route.js';
 import bankRoutes from './routes/bank.route.js';
 import employeeRoutes from './routes/employee.route.js';
+import employeeAttendanceRoutes from './routes/employeeAttendance.route.js';
+import attendanceRoutes from "./routes/employeeAttendance.route.js";
 
 
 
@@ -123,6 +125,9 @@ app.use('/api/departments', departmentRoutes);
 app.use('/api/designations', designationRoutes);
 app.use('/api/banks', bankRoutes);
 app.use('/api/employees', employeeRoutes);
+app.use('/api/employee-attendance', employeeAttendanceRoutes);
+app.use("/api/attendance", attendanceRoutes);
+
 
 
 
