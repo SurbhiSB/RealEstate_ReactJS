@@ -79,6 +79,12 @@ import AttendanceSummary from './pages/hr/attendance-summary';
 import DocumentFormat from './pages/hr/document-format';
 import DocumentFormatList from './pages/hr/document-format-list';
 
+import LeaveCategory from './pages/LeaveCategory';
+import LeaveDetail from './pages/LeaveDetail';
+import LeaveApplication from './pages/LeaveApplication';
+import LeaveStatus from './pages/LeaveStatus';
+import Salary from './pages/Salary';
+
 
 export default function App() {
   return (
@@ -106,57 +112,36 @@ export default function App() {
         <Route path="/members/MemberList" element={<MemberList />} />
         <Route path="/members/CustomerList" element={<CustomerList />} />
         <Route path="/members/AgentList" element={<AgentList />} />
-         <Route path="/members/addmembers/:id" element={<AddMembers />} />
-         <Route path="/Expenses/HeadMaster" element={<HeadMaster />} />
-         <Route path="/Expenses/OfficeExpenses" element={<OfficeExpenses />} />
-         <Route path="/Expenses/OfficeExpensesReport" element={<OfficeExpensesReport />} />
-         <Route path="/Expenses/miscExpenses" element={<MiscExpenses />} />
-         <Route path="/Expenses/MiscExpensesReport" element={<MiscExpensesReport />} />
-         <Route path="/Expenses/MachineryExpenses" element={<MachineryExpenses />} />   
-         <Route path="/Expenses/MachineryExpensesReport" element={<MachineryExpensesReport />} />
-         <Route path="/Expenses/SiteFeesExpenses" element={<SiteFeesExpenses />} /> 
-         <Route path="/Expenses/SiteFeesReport" element={<SiteFeesReport />} />
-          <Route path="/Expenses/FdSdExpenses" element={<FdSdExpenses />} />   
-          <Route path="/Expenses/FdSdExpReport" element={<FdSdExpReport />} />
-          <Route path="/Expenses/LandPurchase" element={<LandPurchase />} /> 
-          <Route path="/Expenses/LandPurchaseList" element={<LandPurchaseList />} /> 
-          <Route path="/BankMaster" element={<BankMaster />} />
-          <Route path="/Labour/Addsite" element={<Addsite />} />
-          <Route path="/Labour/LbDesignation" element={<LbDesignation />} />
-          <Route path="/Labour/addLabour" element={<AddLabour />} />
-          <Route path="/Labour/LabourList" element={<LabourList />} />
-           <Route path="/Labour/WorkStatus" element={<WorkStatus />} />
-            <Route path="/Labour/AdvancePayment" element={<AdvancePayment />} />
-            <Route path="/Labour/AdvanceReport" element={<AdvanceReport />} />
-            <Route path="/Labour/SiteAttendance" element={<SiteAttendance />} />
-            <Route path="/Labour/LabourListAttendance" element={<LabourListAttendance />} />
-            <Route path="/Labour/AttendanceByMonth" element={<AttendanceByMonthLabour />} />
-            <Route path="/Labour/WorkTypeList" element={<WorkTypeList />} />
-            <Route path="/Labour/WorkAllotment" element={<WorkAllotment />} />
-            <Route path="/Lead/LeadCreation" element={<LeadCreation />} />
-        
-        
         <Route path="/members/addmembers/:id" element={<AddMembers />} />
         <Route path="/Expenses/HeadMaster" element={<HeadMaster />} />
         <Route path="/Expenses/OfficeExpenses" element={<OfficeExpenses />} />
         <Route path="/Expenses/OfficeExpensesReport" element={<OfficeExpensesReport />} />
         <Route path="/Expenses/miscExpenses" element={<MiscExpenses />} />
         <Route path="/Expenses/MiscExpensesReport" element={<MiscExpensesReport />} />
-        <Route path="/Expenses/MachineryExpenses" element={<MachineryExpenses />} />
+        <Route path="/Expenses/MachineryExpenses" element={<MachineryExpenses />} />   
         <Route path="/Expenses/MachineryExpensesReport" element={<MachineryExpensesReport />} />
-        <Route path="/Expenses/SiteFeesExpenses" element={<SiteFeesExpenses />} />
+        <Route path="/Expenses/SiteFeesExpenses" element={<SiteFeesExpenses />} /> 
         <Route path="/Expenses/SiteFeesReport" element={<SiteFeesReport />} />
-        <Route path="/Expenses/FdSdExpenses" element={<FdSdExpenses />} />
+        <Route path="/Expenses/FdSdExpenses" element={<FdSdExpenses />} />   
         <Route path="/Expenses/FdSdExpReport" element={<FdSdExpReport />} />
-        <Route path="/Expenses/LandPurchase" element={<LandPurchase />} />
-        <Route path="/Expenses/LandPurchaseList" element={<LandPurchaseList />} />
+        <Route path="/Expenses/LandPurchase" element={<LandPurchase />} /> 
+        <Route path="/Expenses/LandPurchaseList" element={<LandPurchaseList />} /> 
         <Route path="/BankMaster" element={<BankMaster />} />
         <Route path="/Labour/Addsite" element={<Addsite />} />
         <Route path="/Labour/LbDesignation" element={<LbDesignation />} />
         <Route path="/Labour/addLabour" element={<AddLabour />} />
+        <Route path="/Labour/LabourList" element={<LabourList />} />
+        <Route path="/Labour/WorkStatus" element={<WorkStatus />} />
+        <Route path="/Labour/AdvancePayment" element={<AdvancePayment />} />
+        <Route path="/Labour/AdvanceReport" element={<AdvanceReport />} />
+        <Route path="/Labour/SiteAttendance" element={<SiteAttendance />} />
+        <Route path="/Labour/LabourListAttendance" element={<LabourListAttendance />} />
+        <Route path="/Labour/AttendanceByMonth" element={<AttendanceByMonthLabour />} />
+        <Route path="/Labour/WorkTypeList" element={<WorkTypeList />} />
+        <Route path="/Labour/WorkAllotment" element={<WorkAllotment />} />
         <Route path="/Labour/WorkAllotmentHistory" element={<WorkAllotmentHistory />} />
-
-
+        <Route path="/Lead/LeadCreation" element={<LeadCreation />} />
+        
         <Route path="/hr/department" element={<Department />} />
         <Route path="/hr/designation" element={<Designation />} />
         <Route path="/hr/bank-list" element={<BankList />} />
@@ -167,9 +152,15 @@ export default function App() {
         <Route path="/hr/attendance-summary" element={<AttendanceSummary />} />
         <Route path="/hr/document-format" element={<DocumentFormat />} />
         <Route path="/hr/document-format-list" element={<DocumentFormatList />} />
+        <Route path="/hr/salary" element={<Salary />} />
+
+        <Route path="/leave/category" element={<LeaveCategory />} />
+        <Route path="/leave/detail" element={<LeaveDetail />} />
+        <Route path="/leave/application" element={<LeaveApplication />} />
+        <Route path="/leave/status" element={<LeaveStatus />} />
 
         <Route path="/projects/create" element={<Project />} />
-        <Route path="/projects/edit/:id" element={<Project />} /> // ✅ reuse same Project component
+        <Route path="/projects/edit/:id" element={<Project />} />
         <Route path="/purchase/item-master" element={<ItemMasterPage />} />
         <Route path="/purchase/purchase-order" element={<PurchaseOrderPage />} />
         <Route path="/purchase/po-list" element={<POListPage />} />
@@ -183,7 +174,6 @@ export default function App() {
         <Route path="/purchase/out-stock-report" element={<OutStockReportPage />} />
         <Route path="/purchase/stock-report" element={<StockReportPage />} />
         <Route path="/projects/:projectId/plots" element={<ProjectPlots />} />
-
       </Routes>
     </BrowserRouter>
   );

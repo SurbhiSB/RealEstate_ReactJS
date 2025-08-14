@@ -51,6 +51,11 @@ import bankRoutes from './routes/bank.route.js';
 import employeeRoutes from './routes/employee.route.js';
 import employeeAttendanceRoutes from './routes/employeeAttendance.route.js';
 import attendanceRoutes from "./routes/employeeAttendance.route.js";
+import leaveCategoryRoutes from "./routes/leaveCategory.routes.js";
+import leaveDetailsRoutes from './routes/leaveDetails.route.js';
+import leaveApplicationRoutes from "./routes/leaveApplication.routes.js";
+
+
 
 
 
@@ -127,6 +132,9 @@ app.use('/api/banks', bankRoutes);
 app.use('/api/employees', employeeRoutes);
 app.use('/api/employee-attendance', employeeAttendanceRoutes);
 app.use("/api/attendance", attendanceRoutes);
+app.use("/api/leave-categories", leaveCategoryRoutes);
+app.use('/api/leave-details', leaveDetailsRoutes);
+app.use("/api/leave-applications", leaveApplicationRoutes);
 
 
 
