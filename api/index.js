@@ -60,8 +60,8 @@ import attendanceRoutes from "./routes/employeeAttendance.route.js";
 import leaveCategoryRoutes from "./routes/leaveCategory.routes.js";
 import leaveDetailsRoutes from './routes/leaveDetails.route.js';
 import leaveApplicationRoutes from "./routes/leaveApplication.routes.js";
-
-
+import salaryRoutes from "./routes/paySalary.route.js";
+import advancePayRoutes from "./routes/advancePay.route.js";
 
 
 
@@ -158,10 +158,8 @@ app.use("/api/attendance", attendanceRoutes);
 app.use("/api/leave-categories", leaveCategoryRoutes);
 app.use('/api/leave-details', leaveDetailsRoutes);
 app.use("/api/leave-applications", leaveApplicationRoutes);
-
-
-
-
+app.use("/api/salary", salaryRoutes);
+app.use("/api/advancepayment", advancePayRoutes);
 
  
 app.use("/api/company-payments", companyPaymentRoutes);
