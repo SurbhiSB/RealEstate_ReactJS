@@ -23,6 +23,7 @@ export default function Sidebar() {
   const [isHrPayrollOpen, setIsHrPayrollOpen] = useState(false);
   const [isHrOpen, setIsHrOpen] = useState(false);
   const [isLeaveManagementOpen, setIsLeaveManagementOpen] = useState(false);
+  const [isSalaryOpen, setIsSalaryOpen] = useState(false);
    const [isLeadOpen, setIsLeadOpen] = useState(false);
       const [isNotificationOpen, setIsNotificationOpen] = useState(false);
       const [isDemoOpen, setIsDemoOpen] = useState(false);
@@ -500,6 +501,57 @@ export default function Sidebar() {
                       <li>
                         <Link to="/hr/document-format-list" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
                           <Circle size={10} /> Document Format List
+                        </Link>
+                      </li>
+                    </ul>
+                  )}
+                </li>
+                <li>
+                  <button
+                    onClick={() => setIsLeaveManagementOpen(!isLeaveManagementOpen)}
+                    className="flex items-center w-full gap-2 py-1 px-4 rounded hover:bg-gray-700 focus:outline-none"
+                  >
+                    <Circle size={10} /> Leave Management
+                    {isLeaveManagementOpen ? <ChevronUp size={16} className="ml-auto" /> : <ChevronDown size={16} className="ml-auto" />}
+                  </button>
+                  {isLeaveManagementOpen && (
+                    <ul className="ml-6 mt-1 space-y-1">
+                      <li>
+                        <Link to="/leave/category" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                          <Circle size={10} /> Leave Category
+                        </Link>
+                      </li>
+                      <li>
+                        <Link to="/leave/detail" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                          <Circle size={10} /> Leave Detail
+                        </Link>
+                      </li>
+                      <li>
+                        <Link to="/leave/application" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                          <Circle size={10} /> Leave Application
+                        </Link>
+                      </li>
+                      <li>
+                        <Link to="/leave/status" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                          <Circle size={10} /> Leave Status
+                        </Link>
+                      </li>
+                    </ul>
+                  )}
+                </li>
+                <li>
+                  <button
+                    onClick={() => setIsSalaryOpen(!isSalaryOpen)}
+                    className="flex items-center w-full gap-2 py-1 px-4 rounded hover:bg-gray-700 focus:outline-none"
+                  >
+                    <Circle size={10} /> Salary
+                    {isSalaryOpen ? <ChevronUp size={16} className="ml-auto" /> : <ChevronDown size={16} className="ml-auto" />}
+                  </button>
+                  {isSalaryOpen && (
+                    <ul className="ml-6 mt-1 space-y-1">
+                      <li>
+                        <Link to="/hr/salary" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                          <Circle size={10} /> Salary
                         </Link>
                       </li>
                     </ul>
