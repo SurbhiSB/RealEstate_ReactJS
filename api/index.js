@@ -3,6 +3,9 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import morgan from 'morgan';
+import path from "path";
+
+
 import userRouter from './routes/user.route.js';
 import authRouter from './routes/auth.route.js';
 import cookieParser from 'cookie-parser';
@@ -40,6 +43,9 @@ import AdvancePaymentRoutes from "./routes/AdvancePayment.route.js";
 import WorkTypeListRoutes from "./routes/WorkTypeList.route.js";
 import WorkAllotmentRoutes from "./routes/WorkAllotment.route.js";
 import LeadCreationRoutes from "./routes/LeadCreation.route.js";
+import SendMessageRoutes from "./routes/SendMessage.route.js";
+import AddEditRoutes from "./routes/AddEdit.route.js";
+import FullPageRoutes from "./routes/FullPage.route.js";
 
 
 import companyPaymentRoutes from "./routes/companyPayment.route.js";
@@ -64,13 +70,27 @@ mongoose.connect(process.env.MONGO).then(() => {
 const app = express();
 
 
+
+
 // Use morgan middleware (in 'dev' format)
 app.use(morgan('dev'));
 
 app.use(express.json());
 app.use(cookieParser());
 
+import { fileURLToPath } from 'url';
 
+// ES module fix for __dirname
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+
+
+
+// Static serve uploads folder
+
+
+app.use('/uploads', express.static(path.join(process.cwd(), 'uploads')));
 app.use(cors({
   origin: ['http://localhost:5173', 'http://localhost:5174'], // ✅ allow your frontend
   credentials: true                // if using cookies or tokens
@@ -117,6 +137,9 @@ app.use("/api/AdvancePayment", AdvancePaymentRoutes);
 app.use("/api/WorkTypeList", WorkTypeListRoutes);
 app.use("/api/WorkAllotment", WorkAllotmentRoutes);
 app.use("/api/LeadCreation", LeadCreationRoutes);
+app.use("/api/SendMessage", SendMessageRoutes);
+app.use("/api/AddEdit", AddEditRoutes);
+app.use("/api/FullPage", FullPageRoutes);
 
 
 app.use("/api/instock", inStockRoutes);

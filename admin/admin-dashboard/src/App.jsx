@@ -66,6 +66,11 @@ import WorkTypeList from './pages/Labour/WorkTypeList';
 import WorkAllotment from './pages/Labour/WorkAllotment';
 import WorkAllotmentHistory from './pages/Labour/WorkAllotmentHistory';
 import LeadCreation from './pages/Lead/LeadCreation';
+import LeadReport from './pages/Lead/LeadReport';
+import SendMessage from './pages/Notification/SendMessage';
+import SendMessageReport from './pages/Notification/SendMessageReport';
+import AddEdit from './pages/Demo/AddEdit';
+import FullPage from './pages/Demo/FullPage';
 
 
 import Department from './pages/hr/department';
@@ -134,6 +139,11 @@ export default function App() {
             <Route path="/Labour/WorkTypeList" element={<WorkTypeList />} />
             <Route path="/Labour/WorkAllotment" element={<WorkAllotment />} />
             <Route path="/Lead/LeadCreation" element={<LeadCreation />} />
+            <Route path="/Lead/LeadReport" element={<LeadReport />} />
+             <Route path="/Notification/SendMessage" element={<SendMessage />} />
+             <Route path="/Notification/SendMessageReport" element={<SendMessageReport />} />
+             <Route path="/Demo/AddEdit" element={<AddEdit />} />
+             <Route path="/Demo/FullPage" element={<FullPage />} />
         
         
         <Route path="/members/addmembers/:id" element={<AddMembers />} />

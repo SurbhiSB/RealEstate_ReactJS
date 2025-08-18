@@ -24,6 +24,9 @@ export default function Sidebar() {
   const [isHrOpen, setIsHrOpen] = useState(false);
   const [isLeaveManagementOpen, setIsLeaveManagementOpen] = useState(false);
    const [isLeadOpen, setIsLeadOpen] = useState(false);
+      const [isNotificationOpen, setIsNotificationOpen] = useState(false);
+      const [isDemoOpen, setIsDemoOpen] = useState(false);
+
 
   return (
     <aside className="w-64 bg-gray-900 text-white p-4 flex flex-col">
@@ -525,6 +528,69 @@ export default function Sidebar() {
                 <li>
                   <Link to="/Lead/LeadReport" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
                     <Circle size={10} /> Lead Report
+                  </Link>
+                </li>
+               
+              
+             
+               
+              </ul>
+            )}
+          </li>
+
+           {/* Notification with submenu */}
+          <li>
+            <button
+              onClick={() => setIsNotificationOpen(!isNotificationOpen)}
+              className="flex items-center w-full gap-2 py-2 px-4 rounded hover:bg-gray-700 focus:outline-none"
+            >
+              <Users size={18} /> Notification
+              {isNotificationOpen ? <ChevronUp size={16} className="ml-auto" /> : <ChevronDown size={16} className="ml-auto" />}
+            </button>
+            {isNotificationOpen && (
+              <ul className="ml-6 mt-1 space-y-1">
+                <li>
+                  <Link to="/Notification/SendMessage" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                    <Circle size={10} />Send Message
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/Notification/sendMessageReport" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                    <Circle size={10} /> Send Report
+                  </Link>
+                </li>
+               
+              
+             
+               
+              </ul>
+            )}
+          </li>
+
+           {/* Demo Pages with submenu */}
+          <li>
+            <button
+              onClick={() => setIsDemoOpen(!isDemoOpen)}
+              className="flex items-center w-full gap-2 py-2 px-4 rounded hover:bg-gray-700 focus:outline-none"
+            >
+              <Users size={18} /> Demo Pages
+              {isDemoOpen ? <ChevronUp size={16} className="ml-auto" /> : <ChevronDown size={16} className="ml-auto" />}
+            </button>
+            {isDemoOpen && (
+              <ul className="ml-6 mt-1 space-y-1">
+                <li>
+                  <Link to="/Demo/AddEdit" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                    <Circle size={10} />Send Message
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/Demo/FullPage" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                    <Circle size={10} /> Send Report
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/Demo/Report" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                    <Circle size={10} /> Report
                   </Link>
                 </li>
                

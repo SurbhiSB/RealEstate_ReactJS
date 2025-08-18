@@ -27,16 +27,16 @@ export const getAllLeadCreation = async (req, res) => {
     res.status(200).json({ success: true, data });
   } catch (error) {
     console.error("Error in getAllLeadCreation:", error);
-    res.status(500).json({ success: false, message: "Error fetching office expenses" });
+    res.status(500).json({ success: false, message: "Error fetching LeadCreation data" });
   }
 };
 
 // Get LeadCreation by ID
 export const getLeadCreationById = async (req, res) => {
   try {
-    const LeadCreation = await LeadCreation.findById(req.params.id);
+    const lead = await LeadCreation.findById(req.params.id); // ✅ changed variable name
 
-    if (!LeadCreation) {
+    if (!lead) {
       return res.status(404).json({
         success: false,
         message: 'LeadCreation not found'
@@ -45,7 +45,7 @@ export const getLeadCreationById = async (req, res) => {
 
     res.status(200).json({
       success: true,
-      data: LeadCreation
+      data: lead
     });
   } catch (error) {
     console.error('Error in getLeadCreationById:', error);
