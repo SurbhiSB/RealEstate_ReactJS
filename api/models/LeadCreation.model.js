@@ -1,44 +1,64 @@
 import mongoose from 'mongoose';
 
 const LeadCreationSchema = new mongoose.Schema({
-  partyName: {
+  fullName: {
     type: String,
     required: true,
+    trim: true
+  },
+  phone: {
+    type: String,
+    required: true,
+    trim: true
+  },
+  email: {
+    type: String,
+    required: true,
+    trim: true
+  },
+  propertyType: {
+    type: String,
+    required: true,
+    trim: true
   },
   projectName: {
     type: String,
     required: true,
+    trim: true
   },
-  itemName: {
-    type: String,
-    required: true,
-  },
-  billDate: {
-    type: Date,
-    required: true,
-  },
-  billNo: {
-    type: String,
-    required: false,
-  },
-  payBy: {
-    type: String,
-    enum: ['Cash', 'Cheque', 'Online', 'Other'],
-    default: 'Cash',
-  },
-  amount: {
+  budget: {
     type: Number,
     required: true,
-    min: 0,
+    min: 0
   },
-  remark: {
+  leadSource: {
     type: String,
-    default: '',
+    required: true,
+    trim: true
+  },
+  interactionsType: {
+    type: String,
+    required: true,
+    trim: true
+  },
+  nextInteractionsDate: {
+    type: Date,
+    required: true
+  },
+  agentName: {
+    type: String,
+    required: true,
+    trim: true
+  },
+  status: {
+    type: String,
+    required: true,
+    trim: true
   },
   createdAt: {
     type: Date,
-    default: Date.now,
-  },
+    default: Date.now
+  }
 });
 
 const LeadCreation = mongoose.model('LeadCreation', LeadCreationSchema);
