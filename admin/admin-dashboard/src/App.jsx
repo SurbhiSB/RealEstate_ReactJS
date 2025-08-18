@@ -84,6 +84,14 @@ import LeaveDetail from './pages/LeaveDetail';
 import LeaveApplication from './pages/LeaveApplication';
 import LeaveStatus from './pages/LeaveStatus';
 import Salary from './pages/Salary';
+import PaySalary from './pages/Salary/PaySalary';
+import SalaryReport from './pages/Salary/SalaryReport';
+import FinanceAdvancePayment from "./pages/Salary/FinanceAdvancePayment";
+import SalaryAdvanceReport from "./pages/Salary/SalaryAdvanceReport";
+import AdvanceRecieved from './pages/Salary/AdvanceRecieved';
+import RecievedReport from './pages/Salary/RecievedReport';
+import AdvanceStatus from './pages/Salary/AdvanceStatus';
+import AdvanceSummary from './pages/Salary/AdvanceSummary';
 
 
 export default function App() {
@@ -153,6 +161,14 @@ export default function App() {
         <Route path="/hr/document-format" element={<DocumentFormat />} />
         <Route path="/hr/document-format-list" element={<DocumentFormatList />} />
         <Route path="/hr/salary" element={<Salary />} />
+        <Route path="/hr/salary/pay-salary" element={<PaySalary />} />
+        <Route path="/hr/salary/salary-report" element={<SalaryReport />} />
+        <Route path="/hr/salary/advance-payment" element={<FinanceAdvancePayment />} />
+        <Route path="/hr/salary/advance-report" element={<SalaryAdvanceReport  />} />
+        <Route path="/hr/salary/advance-recieved" element={<AdvanceRecieved />} />
+        <Route path="/hr/salary/recieved-report" element={<RecievedReport />} />
+        <Route path="/hr/salary/advance-status" element={<AdvanceStatus />} />
+        <Route path="/hr/salary/advance-summary" element={<AdvanceSummary />} />
 
         <Route path="/leave/category" element={<LeaveCategory />} />
         <Route path="/leave/detail" element={<LeaveDetail />} />

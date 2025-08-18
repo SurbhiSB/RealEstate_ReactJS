@@ -547,8 +547,43 @@ export default function Sidebar() {
                   {isSalaryOpen && (
                     <ul className="ml-6 mt-1 space-y-1">
                       <li>
-                        <Link to="/hr/salary" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
-                          <Circle size={10} /> Salary
+                        <Link to="/hr/salary/pay-salary" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                          <Circle size={10} /> Pay Salary
+                        </Link>
+                      </li>
+                      <li>
+                        <Link to="/hr/salary/salary-report" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                          <Circle size={10} /> Salary Report
+                        </Link>
+                      </li>
+                      <li>
+                        <Link to="/hr/salary/advance-payment" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                          <Circle size={10} /> Advance Payment
+                        </Link>
+                      </li>
+                      <li>
+                        <Link to="/hr/salary/advance-report" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                          <Circle size={10} /> Advance Report
+                        </Link>
+                      </li>
+                      <li>
+                        <Link to="/hr/salary/advance-recieved" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                          <Circle size={10} /> Advance Recieved
+                        </Link>
+                      </li>
+                      <li>
+                        <Link to="/hr/salary/recieved-report" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                          <Circle size={10} /> Recieved Report
+                        </Link>
+                      </li>
+                      <li>
+                        <Link to="/hr/salary/advance-status" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                          <Circle size={10} /> Advance Status
+                        </Link>
+                      </li>
+                      <li>
+                        <Link to="/hr/salary/advance-summary" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                          <Circle size={10} /> Advance Summary
                         </Link>
                       </li>
                     </ul>
