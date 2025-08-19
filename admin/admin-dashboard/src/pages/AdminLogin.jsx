@@ -16,32 +16,53 @@ export default function AdminLogin() {
     });
   };
 
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     dispatch(signInStart());
+  //     const res = await fetch('http://localhost:3000/api/AdminLogin/AdminLogin', {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify(formData),
+  //     });
+  //     const data = await res.json();
+  //     if (data.success === false) {
+  //       dispatch(signInFailure(data.message));
+  //       return;
+  //     }
+  //     if (!data.isAdmin) {
+  //       dispatch(signInFailure('You are not authorized to access this page.'));
+  //       return;
+  //     }
+  //     dispatch(signInSuccess(data));
+  //     navigate('/');
+  //   } catch (error) {
+  //     dispatch(signInFailure(error.message));
+  //   }
+  // };
+
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      dispatch(signInStart());
-      const res = await fetch('http://localhost:3000/api/auth/signin', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-      const data = await res.json();
-      if (data.success === false) {
-        dispatch(signInFailure(data.message));
-        return;
+      e.preventDefault();
+  
+      try {
+        const response = await axios.post(
+          "http://localhost:3000/api/AdminLogin/AdminLogin",
+          formData
+        );
+  
+        if (response.data.success) {
+          alert("FdSdExpenses submitted successfully");
+          handleReset();
+        } else {
+          alert("Failed to submit FdSdExpenses");
+        }
+      } catch (error) {
+        console.error("Error submitting FdSdExpenses:", error);
+        alert("Error occurred while submitting");
       }
-      if (!data.isAdmin) {
-        dispatch(signInFailure('You are not authorized to access this page.'));
-        return;
-      }
-      dispatch(signInSuccess(data));
-      navigate('/');
-    } catch (error) {
-      dispatch(signInFailure(error.message));
-    }
-  };
+    };
 
   return (
     <div className="flex items-center justify-center h-screen bg-gray-100">
@@ -57,10 +78,12 @@ export default function AdminLogin() {
             </label>
             <input
               id="email"
+              value={formData.email}
+              onChange={handleChange}
               type="email"
               required
               className="w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-              onChange={handleChange}
+              
             />
           </div>
           <div>
@@ -72,6 +95,7 @@ export default function AdminLogin() {
             </label>
             <input
               id="password"
+              value={formData.password}
               type="password"
               required
               className="w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
