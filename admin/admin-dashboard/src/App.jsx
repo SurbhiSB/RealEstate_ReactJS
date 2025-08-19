@@ -95,7 +95,11 @@ export default function App() {
     <BrowserRouter>
       <Routes>
         {/* Core */}
+
         <Route path="/login" element={<AdminLogin />} />
+
+        <Route path="/AdminLogin" element={<AdminLogin />} />
+
         <Route path="/" element={<Dashboard />} />
 
         {/* Users */}

@@ -47,6 +47,8 @@ import SendMessageRoutes from "./routes/SendMessage.route.js";
 import AddEditRoutes from "./routes/AddEdit.route.js";
 import FullPageRoutes from "./routes/FullPage.route.js";
 
+import AdminLoginRoutes from "./routes/AdminLogin.route.js";
+
 
 import companyPaymentRoutes from "./routes/companyPayment.route.js";
 import inStockRoutes from "./routes/inStock.route.js";
@@ -145,6 +147,8 @@ app.use("/api/LeadCreation", LeadCreationRoutes);
 app.use("/api/SendMessage", SendMessageRoutes);
 app.use("/api/AddEdit", AddEditRoutes);
 app.use("/api/FullPage", FullPageRoutes);
+
+app.use("/api/AdminLogin", AdminLoginRoutes);
 
 
 app.use("/api/instock", inStockRoutes);
