@@ -29,7 +29,7 @@ export default function AdvanceReceived() {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:3000/api/advancepay", formData)
+      .post("http://localhost:3000/api/advancereceived", formData)
       .then((res) => {
         alert("Advance Received saved successfully!");
         setFormData({ employeeId: "", advanceDate: "", amount: 0, remark: "" });

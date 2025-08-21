@@ -1,4 +1,4 @@
-import AdvanceReceived from "../models/AdvanceReceived.model.js";
+import AdvanceReceived from "../models/AdvanceRecieved.model.js";
 
 // Create advance received
 export const createAdvanceReceived = async (req, res) => {
