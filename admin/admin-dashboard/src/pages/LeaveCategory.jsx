@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
+import { useNavigate } from "react-router-dom";
 
 export default function LeaveCategory() {
   const [categoryName, setCategoryName] = useState("");
   const [isCarryForward, setIsCarryForward] = useState("No");
   const [categories, setCategories] = useState([]);
+    const navigate = useNavigate();
 
   // Fetch categories from backend
   const fetchCategories = async () => {
@@ -42,6 +44,14 @@ export default function LeaveCategory() {
     setCategoryName("");
     setIsCarryForward("No");
   };
+
+  const token = localStorage.getItem("adminToken");
+if (token) {
+  axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+}
+useEffect(() => {
+  if (!token) navigate("/AdminLogin");
+}, [token, navigate]);
 
   return (
     <div className="flex h-screen bg-gray-100">

@@ -11,6 +11,7 @@ import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 import "datatables.net-dt/css/dataTables.dataTables.min.css";
 import "datatables.net-buttons-dt/css/buttons.dataTables.min.css";
+import { useNavigate } from "react-router-dom";
 
 // pdfMake.vfs = pdfFonts.pdfMake.vfs;
 // window.JSZip = jszip;
@@ -19,6 +20,7 @@ export default function AttendanceByMonth() {
   const [year, setYear] = useState("2025");
   const [month, setMonth] = useState("August");
   const [department, setDepartment] = useState("All");
+  const navigate = useNavigate();
   const [tableData, setTableData] = useState([]);
 
   useEffect(() => {
@@ -39,6 +41,14 @@ export default function AttendanceByMonth() {
     ];
     setTableData(dummyData);
   };
+
+  const token = localStorage.getItem("adminToken");
+if (token) {
+  axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+}
+useEffect(() => {
+  if (!token) navigate("/AdminLogin");
+}, [token, navigate]);
 
   return (
     <div className="flex h-screen bg-gray-100">

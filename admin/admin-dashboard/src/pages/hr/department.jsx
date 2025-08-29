@@ -2,13 +2,14 @@ import React, { useState, useEffect } from "react";
 import Header from "../../components/Header";
 import Sidebar from "../../components/Sidebar";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function Department() {
   const [formData, setFormData] = useState({
     departmentName: "",
     status: "Active",
   });
-
+ const navigate = useNavigate();
   const [departments, setDepartments] = useState([]);
   const [editIndex, setEditIndex] = useState(null);
 
@@ -60,6 +61,14 @@ export default function Department() {
     setFormData({ departmentName: "", status: "Active" });
     setEditIndex(null);
   };
+
+    const token = localStorage.getItem("adminToken");
+if (token) {
+  axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+}
+useEffect(() => {
+  if (!token) navigate("/AdminLogin");
+}, [token, navigate]);
 
   return (
     <div className="flex h-screen bg-gray-100">

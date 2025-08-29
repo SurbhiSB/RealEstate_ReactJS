@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Sidebar from '../../components/Sidebar';
 import Header from '../../components/Header';
+import { useNavigate } from "react-router-dom";
 
 export default function ItemMaster() {
   const [formData, setFormData] = useState({
@@ -13,6 +14,7 @@ export default function ItemMaster() {
 
   const [itemList, setItemList] = useState([]);
   const [editIndex, setEditIndex] = useState(null);
+    const navigate = useNavigate();
 
   // Fetch items on component load
   useEffect(() => {
@@ -75,6 +77,14 @@ const fetchItems = async () => {
     setFormData(item);
     setEditIndex(index);
   };
+
+    const token = localStorage.getItem("adminToken");
+if (token) {
+  axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+}
+useEffect(() => {
+  if (!token) navigate("/AdminLogin");
+}, [token, navigate]);
 
   return (
     <div className="flex h-screen bg-gray-100">

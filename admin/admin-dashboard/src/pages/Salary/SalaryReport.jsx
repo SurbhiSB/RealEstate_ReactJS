@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Header from "../../components/Header";
 import Sidebar from "../../components/Sidebar";
+import { useNavigate } from "react-router-dom";
 
 export default function SalaryReport() {
   const [salaries, setSalaries] = useState([]);
   const [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
 
   // Fetch salary data from backend
   useEffect(() => {
@@ -22,6 +24,14 @@ export default function SalaryReport() {
 
     fetchSalaries();
   }, []);
+
+    const token = localStorage.getItem("adminToken");
+if (token) {
+  axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+}
+useEffect(() => {
+  if (!token) navigate("/AdminLogin");
+}, [token, navigate]);
 
   return (
     <div className="flex h-screen bg-gray-100">

@@ -8,6 +8,7 @@ import "datatables.net-buttons/js/dataTables.buttons";
 import "datatables.net-buttons/js/buttons.html5";
 import "datatables.net-buttons/js/buttons.print";
 import "datatables.net-buttons-dt/css/buttons.dataTables.min.css";
+import { useNavigate } from "react-router-dom";
 
 import jszip from "jszip";
 import pdfMake from "pdfmake/build/pdfmake";
@@ -16,6 +17,7 @@ pdfMake.vfs = pdfFonts.vfs;
 window.JSZip = jszip;
 
 export default function AttendanceSummary() {
+  const navigate = useNavigate();
   const tableRef = useRef(null);
 
   useEffect(() => {
@@ -37,6 +39,14 @@ export default function AttendanceSummary() {
       ],
     });
   }, []);
+
+    const token = localStorage.getItem("adminToken");
+if (token) {
+  axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+}
+useEffect(() => {
+  if (!token) navigate("/AdminLogin");
+}, [token, navigate]);
 
   return (
     <div className="flex h-screen bg-gray-100">

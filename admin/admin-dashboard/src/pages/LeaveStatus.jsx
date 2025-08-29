@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
+import { useNavigate } from "react-router-dom";
 
 export default function LeaveStatus() {
+  const navigate = useNavigate();
   const [applications, setApplications] = useState([]);
 
   // Fetch leave applications from backend
@@ -13,6 +15,14 @@ export default function LeaveStatus() {
       .then((res) => setApplications(res.data))
       .catch((err) => console.error("Error fetching leave applications:", err));
   }, []);
+
+  const token = localStorage.getItem("adminToken");
+if (token) {
+  axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+}
+useEffect(() => {
+  if (!token) navigate("/AdminLogin");
+}, [token, navigate]);
 
   return (
     <div className="flex h-screen bg-gray-100">

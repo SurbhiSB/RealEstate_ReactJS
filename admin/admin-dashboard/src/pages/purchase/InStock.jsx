@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Sidebar from "../../components/Sidebar";
 import Header from "../../components/Header";
+import { useNavigate } from "react-router-dom";
 
 export default function InStock() {
   const [projects, setProjects] = useState([]);
   const [vendors, setVendors] = useState([]);
   const [items, setItems] = useState([]);
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     projectName: "",
@@ -93,6 +95,14 @@ export default function InStock() {
       remarks: "",
     });
   };
+
+    const token = localStorage.getItem("adminToken");
+if (token) {
+  axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+}
+useEffect(() => {
+  if (!token) navigate("/AdminLogin");
+}, [token, navigate]);
 
   return (
     <div className="flex h-screen bg-gray-100">

@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Sidebar from "../../components/Sidebar";
 import Header from "../../components/Header";
+import { useNavigate } from "react-router-dom";
 
 
 export default function PurchaseOrder() {
+   const navigate = useNavigate();
   const [items, setItems] = useState([
     { itemName: '', unit: '', quantity: '', rate: '', amount: '' }
   ]);
@@ -200,7 +202,13 @@ useEffect(() => {
 }, []);
 
 
-
+  const token = localStorage.getItem("adminToken");
+if (token) {
+  axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+}
+useEffect(() => {
+  if (!token) navigate("/AdminLogin");
+}, [token, navigate]);
 
   return (
     <div className="flex">

@@ -2,9 +2,11 @@ import React, { useState, useEffect } from "react";
 import Header from "../../components/Header";
 import Sidebar from "../../components/Sidebar";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function PaySalary() {
   const [employees, setEmployees] = useState([]);
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     employeeName: "",
     salaryDate: "",
@@ -83,6 +85,14 @@ export default function PaySalary() {
       remark: "",
     });
   };
+
+    const token = localStorage.getItem("adminToken");
+if (token) {
+  axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+}
+useEffect(() => {
+  if (!token) navigate("/AdminLogin");
+}, [token, navigate]);
 
   return (
     <div className="flex h-screen bg-gray-100">

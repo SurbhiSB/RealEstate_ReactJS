@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import Header from "../../components/Header";
 import Sidebar from "../../components/Sidebar";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function Designation() {
   const [formData, setFormData] = useState({
@@ -12,6 +13,7 @@ export default function Designation() {
   });
   const [designations, setDesignations] = useState([]);
   const [editIndex, setEditIndex] = useState(null);
+  const navigate = useNavigate();
 
   const fetchDesignations = async () => {
     try {
@@ -60,6 +62,14 @@ export default function Designation() {
     setFormData({ designationName: "", status: "Active" });
     setEditIndex(null);
   };
+
+    const token = localStorage.getItem("adminToken");
+if (token) {
+  axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+}
+useEffect(() => {
+  if (!token) navigate("/AdminLogin");
+}, [token, navigate]);
 
   return (
     <div className="flex h-screen bg-gray-100">

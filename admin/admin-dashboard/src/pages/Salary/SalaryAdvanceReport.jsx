@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Header from "../../components/Header";
 import Sidebar from "../../components/Sidebar";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function SalaryAdvanceReport() {
   const [filters, setFilters] = useState({
@@ -12,6 +13,7 @@ export default function SalaryAdvanceReport() {
 
   const [employees, setEmployees] = useState([]);
   const [reportData, setReportData] = useState([]);
+    const navigate = useNavigate();
 
   // Fetch employees
   useEffect(() => {
@@ -35,6 +37,14 @@ export default function SalaryAdvanceReport() {
       .then((res) => setReportData(res.data))
       .catch((err) => console.error("Error fetching report:", err));
   };
+
+    const token = localStorage.getItem("adminToken");
+if (token) {
+  axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+}
+useEffect(() => {
+  if (!token) navigate("/AdminLogin");
+}, [token, navigate]);
 
   return (
     <div className="flex h-screen bg-gray-100">

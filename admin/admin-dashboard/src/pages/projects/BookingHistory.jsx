@@ -2,10 +2,12 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Header from "../../components/Header";
 import Sidebar from "../../components/Sidebar";
+import { useNavigate } from "react-router-dom";
 
 export default function BookingHistory() {
   const [projects, setProjects] = useState([]);
   const [selectedProject, setSelectedProject] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Fetch project names for dropdown
@@ -19,6 +21,13 @@ export default function BookingHistory() {
     console.log("Selected project:", selectedProject);
     // TODO: Fetch booking history data for selected project
   };
+  const token = localStorage.getItem("adminToken");
+if (token) {
+  axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+}
+useEffect(() => {
+  if (!token) navigate("/AdminLogin");
+}, [token, navigate]);
 
   return (
     <div className="flex h-screen bg-gray-100">

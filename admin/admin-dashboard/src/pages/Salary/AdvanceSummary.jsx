@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Header from "../../components/Header";
 import Sidebar from "../../components/Sidebar";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function AdvanceSummary() {
   const [employees, setEmployees] = useState([]);
@@ -9,6 +10,7 @@ export default function AdvanceSummary() {
   const [fromDate, setFromDate] = useState("");
   const [toDate, setToDate] = useState("");
   const [records, setRecords] = useState([]);
+  const navigate = useNavigate();
 
   // Fetch employees for dropdown
   useEffect(() => {
@@ -38,6 +40,13 @@ export default function AdvanceSummary() {
     e.preventDefault();
     fetchSummary();
   };
+    const token = localStorage.getItem("adminToken");
+if (token) {
+  axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+}
+useEffect(() => {
+  if (!token) navigate("/AdminLogin");
+}, [token, navigate]);
 
   return (
     <div className="flex h-screen bg-gray-100">

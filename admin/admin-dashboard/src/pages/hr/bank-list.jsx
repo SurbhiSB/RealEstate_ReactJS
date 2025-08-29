@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react';
 import Header from '../../components/Header';
 import Sidebar from '../../components/Sidebar';
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
 export default function BankList() {
   const [bankName, setBankName] = useState('');
   const [status, setStatus] = useState('Active');
   const [banks, setBanks] = useState([]);
   const [editId, setEditId] = useState(null);
+   const navigate = useNavigate();
 
   const fetchBanks = async () => {
     try {
@@ -50,6 +52,14 @@ export default function BankList() {
     setStatus('Active');
     setEditId(null);
   };
+
+    const token = localStorage.getItem("adminToken");
+if (token) {
+  axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+}
+useEffect(() => {
+  if (!token) navigate("/AdminLogin");
+}, [token, navigate]);
 
   return (
     <div className="flex h-screen bg-gray-100">

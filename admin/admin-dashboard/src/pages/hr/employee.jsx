@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import Sidebar from "../../components/Sidebar";
 import Header from "../../components/Header";
+import { useNavigate } from "react-router-dom";
 
 export default function Employee() {
   const [formData, setFormData] = useState({
@@ -41,7 +42,7 @@ export default function Employee() {
     passportPhoto: null,
     otherDocument: null,
   });
-
+const navigate = useNavigate();
    const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
@@ -101,6 +102,14 @@ export default function Employee() {
       status: "",
     });
   };
+
+    const token = localStorage.getItem("adminToken");
+if (token) {
+  axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+}
+useEffect(() => {
+  if (!token) navigate("/AdminLogin");
+}, [token, navigate]);
 
   return (
     <div className="flex h-screen bg-gray-100">

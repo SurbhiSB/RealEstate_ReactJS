@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import Header from "../../components/Header";
 import Sidebar from "../../components/Sidebar";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function FinanceAdvancePayment() {
   const [employees, setEmployees] = useState([]);
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     employee: "",           // will store employee _id
     advanceDate: "",        // yyyy-mm-dd
@@ -54,6 +56,14 @@ export default function FinanceAdvancePayment() {
       alert(err?.response?.data?.message || "Failed to save advance payment");
     }
   };
+
+  const token = localStorage.getItem("adminToken");
+if (token) {
+  axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+}
+useEffect(() => {
+  if (!token) navigate("/AdminLogin");
+}, [token, navigate]);
 
   return (
     <div className="flex h-screen bg-gray-100">

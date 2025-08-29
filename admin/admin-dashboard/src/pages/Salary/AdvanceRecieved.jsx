@@ -2,9 +2,11 @@ import React, { useState, useEffect } from "react";
 import Header from "../../components/Header";
 import Sidebar from "../../components/Sidebar";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function AdvanceReceived() {
   const [employees, setEmployees] = useState([]);
+   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     employeeId: "",
     advanceDate: "",
@@ -41,7 +43,13 @@ export default function AdvanceReceived() {
   const handleReset = () => {
     setFormData({ employeeId: "", advanceDate: "", amount: 0, remark: "" });
   };
-
+  const token = localStorage.getItem("adminToken");
+if (token) {
+  axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+}
+useEffect(() => {
+  if (!token) navigate("/AdminLogin");
+}, [token, navigate]);
   return (
     <div className="flex h-screen bg-gray-100">
       <Sidebar />

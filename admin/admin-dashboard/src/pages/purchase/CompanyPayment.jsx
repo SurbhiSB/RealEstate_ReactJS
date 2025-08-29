@@ -2,8 +2,10 @@ import Header from "../../components/Header";
 import Sidebar from "../../components/Sidebar";
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
 export default function CompanyPayment() {
+    const navigate = useNavigate();
   const [formData, setFormData] = useState({
     projectName: "",
     paymentType: "",
@@ -81,7 +83,13 @@ export default function CompanyPayment() {
       }, []);
     
       // Fetch plots when a project is selected
-     
+       const token = localStorage.getItem("adminToken");
+if (token) {
+  axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+}
+useEffect(() => {
+  if (!token) navigate("/AdminLogin");
+}, [token, navigate]);
 
   return (
     <div className="flex h-screen bg-gray-100">

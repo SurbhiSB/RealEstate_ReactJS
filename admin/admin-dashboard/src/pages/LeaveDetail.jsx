@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
+import { useNavigate } from "react-router-dom";
 
 export default function LeaveDetail() {
   const [leaveCategory, setLeaveCategory] = useState("");
@@ -11,6 +12,7 @@ export default function LeaveDetail() {
   const [categories, setCategories] = useState([]);
   const [departments, setDepartments] = useState([]);
   const [leaveDetails, setLeaveDetails] = useState([]);
+  const navigate = useNavigate();
 
   // Fetch categories
   
@@ -58,6 +60,14 @@ export default function LeaveDetail() {
     setLeaveDays("");
     setRemark("");
   };
+
+    const token = localStorage.getItem("adminToken");
+if (token) {
+  axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+}
+useEffect(() => {
+  if (!token) navigate("/AdminLogin");
+}, [token, navigate]);
 
   return (
     <div className="flex h-screen bg-gray-100">
