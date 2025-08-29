@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import Header from "../../components/Header";
 import Sidebar from "../../components/Sidebar";
+import { useNavigate } from "react-router-dom";
 
 const SendMessage = () => {
   const [formData, setFormData] = useState({
@@ -9,6 +10,15 @@ const SendMessage = () => {
     message: "",
     userType: "Customer", // default
   });
+
+    const navigate = useNavigate();
+    const token = localStorage.getItem("adminToken");
+if (token) {
+  axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+}
+useState(() => {
+  if (!token) navigate("/AdminLogin");
+}, [token, navigate]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });

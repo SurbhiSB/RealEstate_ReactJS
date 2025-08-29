@@ -2,11 +2,23 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Header from "../../components/Header";
 import Sidebar from "../../components/Sidebar";
+import { useNavigate } from "react-router-dom";
 
 export default function AddAgent() {
   const [states, setStates] = useState([]);
   const [activeTab, setActiveTab] = useState('other');
   const [message, setMessage] = useState('');
+    const navigate = useNavigate();
+
+     const token = localStorage.getItem("adminToken");
+if (token) {
+  axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+}
+useEffect(() => {
+  if (!token) navigate("/AdminLogin");
+}, [token, navigate]);
+
+
   const [formData, setFormData] = useState({
     fullName: '',
     mobile: '',

@@ -2,8 +2,19 @@ import React, { useState } from 'react';
 import Header from "../../components/Header";
 import Sidebar from "../../components/Sidebar";
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
 const AddCustomer = () => {
+   const navigate = useNavigate();
+
+    const token = localStorage.getItem("adminToken");
+if (token) {
+  axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+}
+useState(() => {
+  if (!token) navigate("/AdminLogin");
+}, [token, navigate]);
+
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -119,8 +130,15 @@ const AddCustomer = () => {
 
       console.log("🔍 Final payload to be submitted:", dataToSend);
 
-      const res = await axios.post('http://localhost:3000/api/AddCustomer/AddCustomer', dataToSend);
-
+      const res = await axios.post(
+  "http://localhost:3000/api/AddCustomer/AddCustomer",
+  dataToSend,
+  {
+    headers: {
+      Authorization: `Bearer ${token}`, // 👈 attach token
+    },
+  }
+);
       if (res.data.success) {
         resetForm();
         setMessage('Customer added successfully!');

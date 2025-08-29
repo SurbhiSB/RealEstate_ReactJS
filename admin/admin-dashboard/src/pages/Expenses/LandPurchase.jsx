@@ -2,8 +2,22 @@ import React, { useState } from 'react';
 import Header from "../../components/Header";
 import Sidebar from "../../components/Sidebar";
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
 const LandPurchase = () => {
+
+  const navigate = useNavigate();
+  
+  
+  
+  const token = localStorage.getItem("adminToken");
+if (token) {
+  axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+}
+useState(() => {
+  if (!token) navigate("/AdminLogin");
+}, [token, navigate]);
+
   const [formData, setFormData] = useState({
     companyName: "S Prime IT",
     panNo: "",

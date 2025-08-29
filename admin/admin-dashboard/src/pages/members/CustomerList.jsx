@@ -6,6 +6,7 @@ import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
+import { useNavigate } from "react-router-dom";
 
 export default function CustomerList() {
   const [customers, setCustomers] = useState([]);
@@ -13,6 +14,14 @@ export default function CustomerList() {
   const [customerType, setCustomerType] = useState("All");
   const [totalPages, setTotalPages] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
+    const navigate = useNavigate();
+  const token = localStorage.getItem("adminToken");
+if (token) {
+  axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+}
+useEffect(() => {
+  if (!token) navigate("/AdminLogin");
+}, [token, navigate]);
 
   useEffect(() => {
     fetchCustomers(currentPage);

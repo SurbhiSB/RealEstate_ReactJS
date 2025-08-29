@@ -10,6 +10,14 @@ const WorkAllotment = () => {
   const queryParams = new URLSearchParams(location.search);
   const id = queryParams.get("id"); // ✅ Get ?id= from URL
 
+  const token = localStorage.getItem("adminToken");
+if (token) {
+  axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+}
+useEffect(() => {
+  if (!token) navigate("/AdminLogin");
+}, [token, navigate]);
+
   const initialFormData = {
     WorkName: "",
     site: "",

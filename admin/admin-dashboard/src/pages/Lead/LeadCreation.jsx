@@ -8,6 +8,14 @@ const LeadCreation = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
+  const token = localStorage.getItem("adminToken");
+if (token) {
+  axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+}
+useEffect(() => {
+  if (!token) navigate("/AdminLogin");
+}, [token, navigate]);
+
   const initialFormData = {
     fullName: "",
     phone: "",

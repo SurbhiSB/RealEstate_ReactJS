@@ -3,10 +3,23 @@ import { useSearchParams } from "react-router-dom";
 import axios from "axios";
 import Header from "../../components/Header";
 import Sidebar from "../../components/Sidebar";
+import { useNavigate } from "react-router-dom";
 
 export default function AttendanceByMonth() {
   const [searchParams] = useSearchParams();
   const siteName = searchParams.get("sitename") || "";
+
+  const navigate = useNavigate();
+  
+  
+  
+  const token = localStorage.getItem("adminToken");
+if (token) {
+  axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+}
+useEffect(() => {
+  if (!token) navigate("/AdminLogin");
+}, [token, navigate]);
 
   const [attendanceDate, setAttendanceDate] = useState(
     new Date().toISOString().split("T")[0] // default today

@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import Header from "../../components/Header";
 import Sidebar from "../../components/Sidebar";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
+
 
 export default function POListPage() {
   const [siteList, setSiteList] = useState([]);
@@ -13,6 +16,18 @@ export default function POListPage() {
     fromDate: "",
     toDate: "",
   });
+
+  const navigate = useNavigate();
+  
+  
+  
+  const token = localStorage.getItem("adminToken");
+if (token) {
+  axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+}
+useEffect(() => {
+  if (!token) navigate("/AdminLogin");
+}, [token, navigate]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;

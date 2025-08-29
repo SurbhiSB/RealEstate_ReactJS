@@ -6,6 +6,7 @@ import * as XLSX from 'xlsx';
 import { FaCheck } from 'react-icons/fa';
 import Header from '../../components/Header';
 import Sidebar from '../../components/Sidebar';
+import { useNavigate } from "react-router-dom";
 
 const AgentList = () => {
   const [agents, setAgents] = useState([]);
@@ -15,6 +16,16 @@ const AgentList = () => {
   useEffect(() => {
     fetchAgents();
   }, []);
+
+  const navigate = useNavigate();
+  
+       const token = localStorage.getItem("adminToken");
+  if (token) {
+    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  }
+  useEffect(() => {
+    if (!token) navigate("/AdminLogin");
+  }, [token, navigate]);
 
   const fetchAgents = async () => {
     try {

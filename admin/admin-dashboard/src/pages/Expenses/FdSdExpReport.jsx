@@ -7,9 +7,21 @@ import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import Header from "../../components/Header";
 import Sidebar from "../../components/Sidebar";
+import { useNavigate } from "react-router-dom";
 
 export default function FdSdExpReport() {
   const [data, setData] = useState([]);
+
+
+  const navigate = useNavigate();
+  
+  const token = localStorage.getItem("adminToken");
+if (token) {
+  axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+}
+useEffect(() => {
+  if (!token) navigate("/AdminLogin");
+}, [token, navigate]);
 
   useEffect(() => {
     axios.get('http://localhost:3000/api/FdSdExpenses/FdSdExpenses')

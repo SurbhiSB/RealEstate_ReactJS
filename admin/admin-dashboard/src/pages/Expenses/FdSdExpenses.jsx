@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Header from "../../components/Header";
 import Sidebar from "../../components/Sidebar";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const FdSdExpenses = () => {
   const initialFormData = {
@@ -26,7 +27,18 @@ const FdSdExpenses = () => {
   const [formData, setFormData] = useState(initialFormData);
   const [projectList, setProjectList] = useState([]);
 
+   const navigate = useNavigate();
   
+  
+  
+  const token = localStorage.getItem("adminToken");
+if (token) {
+  axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+}
+useEffect(() => {
+  if (!token) navigate("/AdminLogin");
+}, [token, navigate]);
+
  useEffect(() => {
   axios
     .get("http://localhost:3000/api/projects/all")

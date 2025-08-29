@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
+import { useNavigate } from "react-router-dom";
 
 export default function BankMaster() {
   const [bankName, setBankName] = useState('');
@@ -12,6 +13,18 @@ export default function BankMaster() {
   const [status, setStatus] = useState('Active');
   const [items, setItems] = useState([]);
   const [editId, setEditId] = useState(null);
+
+   const navigate = useNavigate();
+  
+  
+  
+  const token = localStorage.getItem("adminToken");
+if (token) {
+  axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+}
+useEffect(() => {
+  if (!token) navigate("/AdminLogin");
+}, [token, navigate]);
 
   useEffect(() => {
     fetchItems();

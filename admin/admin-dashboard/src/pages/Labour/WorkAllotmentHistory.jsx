@@ -11,6 +11,14 @@ export default function WorkAllotmentHistory() {
   const [payments, setPayments] = useState([]);
   const [filteredPersons, setFilteredPersons] = useState([]);
 
+    const token = localStorage.getItem("adminToken");
+if (token) {
+  axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+}
+useEffect(() => {
+  if (!token) navigate("/AdminLogin");
+}, [token, navigate]);
+
   const [formData, setFormData] = useState({
     site: "",
     fromDate: "",

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Header from "../../components/Header";
 import Sidebar from "../../components/Sidebar";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const AdvancePayment = () => {
   const initialFormData = {
@@ -17,6 +18,18 @@ const AdvancePayment = () => {
   const [siteList, setSiteList] = useState([]);
   const [labourList, setLabourList] = useState([]);
   const [filteredPersons, setFilteredPersons] = useState([]);
+
+   const navigate = useNavigate();
+  
+  
+  
+  const token = localStorage.getItem("adminToken");
+if (token) {
+  axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+}
+useEffect(() => {
+  if (!token) navigate("/AdminLogin");
+}, [token, navigate]);
 
   // Fetch Sites
   useEffect(() => {

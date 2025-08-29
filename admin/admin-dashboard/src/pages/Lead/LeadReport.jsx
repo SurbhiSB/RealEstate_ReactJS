@@ -14,6 +14,14 @@ export default function LeadReport() {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
 
+  const token = localStorage.getItem("adminToken");
+if (token) {
+  axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+}
+useEffect(() => {
+  if (!token) navigate("/AdminLogin");
+}, [token, navigate]);
+
   useEffect(() => {
     axios
       .get("http://localhost:3000/api/LeadCreation/LeadCreation")

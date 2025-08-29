@@ -13,6 +13,14 @@ export default function SiteList() {
     fetchSites();
   }, []);
 
+   const token = localStorage.getItem("adminToken");
+if (token) {
+  axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+}
+useEffect(() => {
+  if (!token) navigate("/AdminLogin");
+}, [token, navigate]);
+
   const fetchSites = () => {
     axios.get('http://localhost:3000/api/Addsite/Addsite')
       .then((res) => {

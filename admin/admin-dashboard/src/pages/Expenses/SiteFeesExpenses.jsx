@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Header from "../../components/Header";
 import Sidebar from "../../components/Sidebar";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const SiteFeesExpenses = () => {
   const initialFormData = {
@@ -19,6 +20,17 @@ const SiteFeesExpenses = () => {
   const [memberList, setMemberList] = useState([]);
   const [headMasterList, setHeadMasterList] = useState([]);
   const [projectList, setProjectList] = useState([]);
+const navigate = useNavigate();
+  
+  
+  
+  const token = localStorage.getItem("adminToken");
+if (token) {
+  axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+}
+useEffect(() => {
+  if (!token) navigate("/AdminLogin");
+}, [token, navigate]);
 
   useEffect(() => {
     axios
