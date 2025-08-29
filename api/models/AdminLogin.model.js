@@ -24,6 +24,6 @@ const AdminLoginSchema = new mongoose.Schema(
 
 // ✅ Fix OverwriteModelError
 const AdminLogin =
-  mongoose.models.AdminLogin || mongoose.model('AdminLogin', AdminLoginSchema);
+  mongoose.models.AdminLogin || mongoose.model('adminlogins', AdminLoginSchema);
 
 export default AdminLogin;

@@ -8,6 +8,7 @@ import { saveAs } from "file-saver";
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 
+
 export default function MemberList() {
   const [members, setMembers] = useState([]);
   const [search, setSearch] = useState("");
@@ -20,6 +21,14 @@ export default function MemberList() {
   useEffect(() => {
     fetchMembers(currentPage);
   }, [currentPage]);
+
+  const token = localStorage.getItem("adminToken");
+if (token) {
+  axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+}
+useEffect(() => {
+  if (!token) navigate("/AdminLogin");
+}, [token, navigate]);
 
   const fetchMembers = async (page = 1) => {
     try {

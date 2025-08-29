@@ -3,10 +3,22 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import Header from "../../components/Header";
 import Sidebar from "../../components/Sidebar";
+import { useNavigate } from "react-router-dom";
 
 export default function AddMembers() {
   const [activeTab, setActiveTab] = useState('other');
   const { id } = useParams();
+    const navigate = useNavigate();
+
+
+
+const token = localStorage.getItem("adminToken");
+if (token) {
+  axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+}
+useEffect(() => {
+  if (!token) navigate("/AdminLogin");
+}, [token, navigate]);
 
   const [formData, setFormData] = useState({
     memberType: '',
@@ -40,9 +52,13 @@ export default function AddMembers() {
   const [sameAsBilling, setSameAsBilling] = useState(false);
   const [message, setMessage] = useState('');
 
+
+
   useEffect(() => {
     if (id) {
-      axios.get(`http://localhost:3000/api/addMembers/addmembers/${id}`)
+      axios.get(`http://localhost:3000/api/addMembers/addmembers/${id}`, {
+  headers: { Authorization: `Bearer ${token}` }
+})
         .then((res) => {
           const data = res.data.data;
           setFormData({
@@ -69,6 +85,7 @@ export default function AddMembers() {
           });
           setBillingAddress(data.billingAddress || billingAddress);
           setShippingAddress(data.shippingAddress || shippingAddress);
+           
         })
         .catch((err) => {
           console.error("Error fetching member:", err);
