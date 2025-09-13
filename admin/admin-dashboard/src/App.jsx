@@ -132,6 +132,8 @@ export default function App() {
         <Route path="/members/CustomerList" element={<CustomerList />} />
         <Route path="/members/AgentList" element={<AgentList />} />
         <Route path="/members/addmembers/:id" element={<AddMembers />} />
+        <Route path="/members/addCustomer/:id" element={<AddCustomers />} />
+        <Route path="/members/AddAgent/:id" element={<AddAgent />} />
 
         {/* Expenses */}
         <Route path="/Expenses/HeadMaster" element={<HeadMaster />} />

@@ -1,15 +1,15 @@
 import express from "express";
 import {
+  upload,
   createFullPage,
   getAllFullPage,
   getFullPageById,
   updateFullPageById,
 } from "../controllers/FullPage.controller.js";
-import upload from "../middleware/upload.js";
 
 const router = express.Router();
 
-// Multiple file fields
+// Create FullPage with multiple file fields
 router.post(
   "/FullPage",
   upload.fields([
@@ -22,8 +22,13 @@ router.post(
   createFullPage
 );
 
+// Get all FullPages
 router.get("/FullPage", getAllFullPage);
+
+// Get by ID
 router.get("/FullPage/:id", getFullPageById);
+
+// Update by ID
 router.put(
   "/FullPage/:id",
   upload.fields([
