@@ -24,13 +24,13 @@ export default function Sidebar() {
   const [isHrOpen, setIsHrOpen] = useState(false);
   const [isLeaveManagementOpen, setIsLeaveManagementOpen] = useState(false);
   const [isSalaryOpen, setIsSalaryOpen] = useState(false);
-   const [isLeadOpen, setIsLeadOpen] = useState(false);
-      const [isNotificationOpen, setIsNotificationOpen] = useState(false);
-      const [isDemoOpen, setIsDemoOpen] = useState(false);
+  const [isLeadOpen, setIsLeadOpen] = useState(false);
+  const [isNotificationOpen, setIsNotificationOpen] = useState(false);
+  const [isDemoOpen, setIsDemoOpen] = useState(false);
 
 
   return (
-    <aside className="w-64 bg-gray-900 text-white p-4 flex flex-col">
+    <aside className="w-64 bg-gray-800 text-white p-4 flex flex-col">
       <nav className="flex-1 overflow-y-auto">
         <ul>
           <li>

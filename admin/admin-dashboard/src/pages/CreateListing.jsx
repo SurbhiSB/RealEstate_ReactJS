@@ -117,7 +117,7 @@ status: 'approved',
               Submit Listing
             </button>
 
-            <p className="text-green-600">{submitSuccess}</p>
+            <p className="text-red-600">{submitSuccess}</p>
           </form>
         </main>
       </div>
