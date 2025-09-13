@@ -1,84 +1,21 @@
 import mongoose from "mongoose";
 
-const BranchOfficeSchema = new mongoose.Schema({
-  // 🏢 Branch Office Details
-  branchName: {
-    type: String,
-    required: true,
-    trim: true,
-  },
-  address: {
-    type: String,
-    required: true,
-    trim: true,
-  },
-  state: {
-    type: String,
-    required: true,
-    trim: true,
-  },
-  city: {
-    type: String,
-    required: true,
-    trim: true,
-  },
-  managerName: {
-    type: String,
-    required: true,
-    trim: true,
-  },
-  managerMobile: {
-    type: String,
-    required: true,
-    trim: true,
-  },
-  managerEmail: {
-    type: String,
-    required: true,
-    trim: true,
-    lowercase: true,
-  },
-  password: {
-    type: String,
-    required: true,
-  },
-
-  // 📑 KYC Details
-  aadharNo: {
-    type: String,
-    required: false,
-  },
-  aadharFront: {
-    type: String, // will store file path or URL
-    required: false,
-  },
-  aadharBack: {
-    type: String,
-    required: false,
-  },
-  passportPhoto: {
-    type: String,
-    required: false,
-  },
-  panNo: {
-    type: String,
-    required: false,
-  },
-  panFile: {
-    type: String,
-    required: false,
-  },
-  otherDoc: {
-    type: String,
-    required: false,
-  },
-
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
+const FullPageSchema = new mongoose.Schema({
+  branchName: String,
+  address: String,
+  state: String,
+  city: String,
+  managerName: String,
+  managerMobile: String,
+  managerEmail: String,
+  password: String,
+  aadharNo: String,
+  aadharFront: String,
+  aadharBack: String,
+  passportPhoto: String,
+  panNo: String,
+  panFile: String,
+  otherDoc: String,
 });
 
-const BranchOffice = mongoose.model("BranchOffice", BranchOfficeSchema);
-
-export default BranchOffice;
+export default mongoose.model("FullPage", FullPageSchema);

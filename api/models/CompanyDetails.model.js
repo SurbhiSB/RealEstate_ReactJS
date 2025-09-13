@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 const HeadMasterSchema = new mongoose.Schema({
-  HeadMasterName: {
+  companyName: {
     type: String,
     required: true,
   },
@@ -20,5 +20,5 @@ const HeadMasterSchema = new mongoose.Schema({
   }
 }, { timestamps: true });
 
-const AddHeadMasters = mongoose.model('AddHeadMaster', HeadMasterSchema);
+const AddHeadMasters = mongoose.model('addcompanies', HeadMasterSchema);
 export default AddHeadMasters;

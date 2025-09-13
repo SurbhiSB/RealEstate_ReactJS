@@ -687,6 +687,12 @@ export default function Sidebar() {
               </ul>
             )}
           </li>
+          <li>
+            
+              <Link to="/AdminLogin" className="flex items-center gap-2 py-1 px-4 rounded hover:bg-gray-700">
+                    <Circle size={10} />Log Out
+              </Link>
+          </li>
         
         </ul>
       </nav>

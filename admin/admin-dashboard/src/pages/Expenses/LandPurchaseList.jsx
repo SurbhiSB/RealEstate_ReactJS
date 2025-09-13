@@ -151,7 +151,7 @@ useEffect(() => {
                   <th className="p-2 border">Area in Acre</th>
                   <th className="p-2 border">Sale Deed Date</th>
                   <th className="p-2 border">Sale Deed Value</th>
-                  <th className="p-2 border">Action</th>
+                  
                 </tr>
               </thead>
               <tbody>
@@ -169,14 +169,7 @@ useEffect(() => {
                         {new Date(purchase.saleDeedDate).toLocaleDateString("en-GB")}
                       </td>
                       <td className="p-2 text-right border">{purchase.saleDeedValue}</td>
-                      <td className="p-2 text-center border">
-                        <button
-                          onClick={() => navigate(`/LandPurchases/addLandPurchases/${purchase._id}`)}
-                          className="bg-purple-800 text-white px-3 py-1 rounded text-sm"
-                        >
-                          ✎ Edit
-                        </button>
-                      </td>
+                      
                     </tr>
                   ))
                 ) : (

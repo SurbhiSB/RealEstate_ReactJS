@@ -27,6 +27,8 @@ useEffect(() => {
     fetchCustomers(currentPage);
   }, [currentPage]);
 
+    
+
   const fetchCustomers = async (page = 1) => {
     try {
       const res = await axios.get(
@@ -217,8 +219,14 @@ useEffect(() => {
                       </td>
                       <td className="p-2 text-center text-green-600 border">✔</td>
                       <td className="p-2 text-center border">
-                        <button className="bg-purple-800 text-white px-3 py-1 rounded text-sm">
+                        {/* <button className="bg-purple-800 text-white px-3 py-1 rounded text-sm">
                           ✎ Edit
+                        </button> */}
+                        <button
+                          onClick={() => navigate(`/members/AddCustomer/${c._id}`)} // ✅ Navigate with ID
+                          className="bg-purple-800 text-white px-3 py-1 rounded text-sm"
+                        >
+                          ✎ Edit Now
                         </button>
                       </td>
                     </tr>

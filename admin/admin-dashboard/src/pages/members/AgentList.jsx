@@ -146,7 +146,12 @@ const AgentList = () => {
                       {agent.status && <FaCheck />}
                     </td>
                     <td className="border px-3 py-1">
-                      <button className="bg-purple-700 text-white px-3 py-1 rounded">Edit</button>
+                      <button
+                          onClick={() => navigate(`/members/AddAgent/${agent._id}`)} // ✅ Navigate with ID
+                          className="bg-purple-800 text-white px-3 py-1 rounded text-sm"
+                        >
+                          ✎ Edit Now
+                        </button>
                     </td>
                   </tr>
                 ))}
