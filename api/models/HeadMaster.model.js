@@ -7,10 +7,7 @@ const HeadMasterSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
-    remarks: {
-      type: String,
-      trim: true,
-    },
+     status: { type: String, default: 'Active' },
   },
   {
     timestamps: true,

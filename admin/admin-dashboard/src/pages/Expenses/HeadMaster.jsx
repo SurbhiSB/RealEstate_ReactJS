@@ -37,7 +37,7 @@ useEffect(() => {
   if (!headName.trim()) return;
 
   const formData = {
-    HeadMasterName: headName,
+    headName: headName,
     status,
   };
 
@@ -74,7 +74,7 @@ useEffect(() => {
   const handleEdit = (id) => {
     const item = items.find((item) => item._id === id);
     if (item) {
-      setHeadName(item.HeadMasterName);
+      setHeadName(item.headName);
       setStatus(item.status);
       setEditId(item._id);
     }
@@ -150,7 +150,7 @@ useEffect(() => {
                   items.map((item, index) => (
                     <tr key={item._id}>
                       <td className="border px-4 py-2">{index + 1}</td>
-                      <td className="border px-4 py-2">{item.HeadMasterName}</td>
+                      <td className="border px-4 py-2">{item.headName}</td>
                       <td className="border px-4 py-2">{item.status}</td>
                       <td className="border px-4 py-2">
                         <button

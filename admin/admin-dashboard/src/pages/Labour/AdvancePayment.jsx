@@ -123,7 +123,7 @@ useEffect(() => {
         <Header />
         <div className="p-6 bg-white rounded-md shadow-md w-full">
           <h2 className="text-xl font-semibold text-gray-800 border-b-2 pb-2 mb-4">
-            🧾 Payment Report
+            🧾Labour Payment 
           </h2>
 
           <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4">
