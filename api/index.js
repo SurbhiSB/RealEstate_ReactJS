@@ -4,8 +4,6 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import morgan from 'morgan';
 import path from "path";
-
-
 import userRouter from './routes/user.route.js';
 import authRouter from './routes/auth.route.js';
 import cookieParser from 'cookie-parser';
@@ -34,8 +32,6 @@ import LandPurchaseRouter from './routes/LandPurchase.route.js';
 import purchaseOrderRoutes from "./routes/purchaseOrder.routes.js";
 import purchaseBillRoutes from "./routes/purchaseBill.route.js";
 import BankMasterRoutes from "./routes/BankMaster.route.js";
-
-
 import AddsiteRoutes from "./routes/Addsite.route.js";
 import LbDesignationRoutes from "./routes/LbDesignation.route.js";
 import addLabourRoutes from "./routes/addLabour.route.js";
@@ -46,10 +42,7 @@ import LeadCreationRoutes from "./routes/LeadCreation.route.js";
 import SendMessageRoutes from "./routes/SendMessage.route.js";
 import AddEditRoutes from "./routes/AddEdit.route.js";
 import FullPageRoutes from "./routes/FullPage.route.js";
-
 import AdminLoginRoutes from "./routes/AdminLogin.route.js";
-
-
 import companyPaymentRoutes from "./routes/companyPayment.route.js";
 import inStockRoutes from "./routes/inStock.route.js";
 import outStockRoutes from './routes/outStock.route.js';
