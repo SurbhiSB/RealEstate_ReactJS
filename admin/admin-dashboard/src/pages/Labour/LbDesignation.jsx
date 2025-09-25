@@ -86,11 +86,11 @@ useEffect(() => {
       <div className="flex-1">
         <Header />
         <div className="p-4">
-          <h2 className="text-xl font-semibold mb-4">Expenses Head</h2>
+          <h2 className="text-xl font-semibold mb-4">Designation</h2>
 
           <div className="bg-white shadow-md rounded border border-purple-300 mb-6">
             <div className="border-b border-purple-300 p-3 bg-purple-50 font-semibold text-purple-700">
-              ✏️ Expenses Head
+              ✏️ Designation
             </div>
             <form onSubmit={handleSubmit} className="p-4">
               <div className="mb-4">
@@ -100,7 +100,7 @@ useEffect(() => {
                   value={designationName}
                   onChange={(e) => setdesignationName(e.target.value)}
                   className="w-full p-2 border rounded"
-                  placeholder="Enter Head Name"
+                  placeholder="Designation Name"
                 />
               </div>
               <div className="mb-4">
