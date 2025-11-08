@@ -5,22 +5,22 @@ import { useState, useEffect } from "react";
 
 export default function Profile() {
   const fileRef = useRef(null);
-  const [showListingsError, setShowListingError] = useState(false);
+  const [showListingsError, setShowListingsError] = useState(false);
   const currentUser = useSelector((state) => state.user.currentUser);
   const [userListings, setUserListings] = useState([]);
-  const handleShowListing = async() => {
+  const handleShowListings = async() => {
     try{
-      setShowListingError(false);
+      setShowListingsError(false);
       const res = await fetch(`/api/user/listings/${currentUser._id}`, { withCredentials: true });
       const data = await res.json();
       if(data.success === false){
-        setShowListingError(true);
+        setShowListingsError(true);
         return;
       }
       setUserListings(data);
     }
     catch(error){
-setShowListingError(true);
+setShowListingsError(true);
     }
   }
 
@@ -45,7 +45,7 @@ setShowListingError(true);
         <span className="text-red-600 hover:underline cursor-pointer">Delete Account</span>
         <span className="text-red-600 hover:underline cursor-pointer">Sign Out</span>
       </div>
-      <button onClick={handleShowListing} className = 'text-green-700 w-full'>Show Listing</button>
+      <button onClick={handleShowListings} className = 'text-green-700 w-full'>Show Listing</button>
       <p className="text-red-600 mt-5">{showListingsError ? 'error showing listings': ''}
 
       </p>
