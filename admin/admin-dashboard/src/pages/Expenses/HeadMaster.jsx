@@ -2,12 +2,24 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Header from "../../components/Header";
 import Sidebar from "../../components/Sidebar";
+import { useNavigate } from "react-router-dom";
 
 export default function ExpensesHead() {
   const [headName, setHeadName] = useState('');
   const [status, setStatus] = useState('Active');
   const [items, setItems] = useState([]);
   const [editId, setEditId] = useState(null);
+  const navigate = useNavigate();
+  
+  
+  
+  const token = localStorage.getItem("adminToken");
+if (token) {
+  axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+}
+useEffect(() => {
+  if (!token) navigate("/AdminLogin");
+}, [token, navigate]);
 
   useEffect(() => {
     fetchItems();
@@ -25,7 +37,7 @@ export default function ExpensesHead() {
   if (!headName.trim()) return;
 
   const formData = {
-    HeadMasterName: headName,
+    headName: headName,
     status,
   };
 
@@ -62,7 +74,7 @@ export default function ExpensesHead() {
   const handleEdit = (id) => {
     const item = items.find((item) => item._id === id);
     if (item) {
-      setHeadName(item.HeadMasterName);
+      setHeadName(item.headName);
       setStatus(item.status);
       setEditId(item._id);
     }
@@ -138,7 +150,7 @@ export default function ExpensesHead() {
                   items.map((item, index) => (
                     <tr key={item._id}>
                       <td className="border px-4 py-2">{index + 1}</td>
-                      <td className="border px-4 py-2">{item.HeadMasterName}</td>
+                      <td className="border px-4 py-2">{item.headName}</td>
                       <td className="border px-4 py-2">{item.status}</td>
                       <td className="border px-4 py-2">
                         <button

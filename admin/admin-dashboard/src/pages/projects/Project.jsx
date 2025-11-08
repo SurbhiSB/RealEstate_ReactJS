@@ -3,6 +3,7 @@ import Header from "../../components/Header";
 import Sidebar from "../../components/Sidebar";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function Project() {
 const { id } = useParams(); // will be undefined for create mode
@@ -36,6 +37,7 @@ const isEdit = Boolean(id);
     status: "Pending",
   },
 ]);
+const navigate = useNavigate();
 
 
 // ------------------------------
@@ -197,6 +199,13 @@ useEffect(() => {
     setProjectDocuments([{ documentName: "", documentUrl: "", status: "Pending" }]);
 
   };
+  const token = localStorage.getItem("adminToken");
+if (token) {
+  axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+}
+useEffect(() => {
+  if (!token) navigate("/AdminLogin");
+}, [token, navigate]);
 
   return (
     <div className="flex bg-gray-100 min-h-screen">

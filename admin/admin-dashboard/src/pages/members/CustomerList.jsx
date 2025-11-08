@@ -6,6 +6,7 @@ import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
+import { useNavigate } from "react-router-dom";
 
 export default function CustomerList() {
   const [customers, setCustomers] = useState([]);
@@ -13,10 +14,20 @@ export default function CustomerList() {
   const [customerType, setCustomerType] = useState("All");
   const [totalPages, setTotalPages] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
+    const navigate = useNavigate();
+  const token = localStorage.getItem("adminToken");
+if (token) {
+  axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+}
+useEffect(() => {
+  if (!token) navigate("/AdminLogin");
+}, [token, navigate]);
 
   useEffect(() => {
     fetchCustomers(currentPage);
   }, [currentPage]);
+
+    
 
   const fetchCustomers = async (page = 1) => {
     try {
@@ -208,8 +219,14 @@ export default function CustomerList() {
                       </td>
                       <td className="p-2 text-center text-green-600 border">✔</td>
                       <td className="p-2 text-center border">
-                        <button className="bg-purple-800 text-white px-3 py-1 rounded text-sm">
+                        {/* <button className="bg-purple-800 text-white px-3 py-1 rounded text-sm">
                           ✎ Edit
+                        </button> */}
+                        <button
+                          onClick={() => navigate(`/members/AddCustomer/${c._id}`)} // ✅ Navigate with ID
+                          className="bg-purple-800 text-white px-3 py-1 rounded text-sm"
+                        >
+                          ✎ Edit Now
                         </button>
                       </td>
                     </tr>

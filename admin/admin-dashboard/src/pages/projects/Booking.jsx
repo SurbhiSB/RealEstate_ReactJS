@@ -3,6 +3,7 @@ import Header from "../../components/Header";
 import Sidebar from "../../components/Sidebar";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -60,6 +61,7 @@ const Booking = () => {
 
 const [projects, setProjects] = useState([]);
 const [plots, setPlots] = useState([]);
+const navigate = useNavigate();
 
 useEffect(() => {
   const fetchData = async () => {
@@ -243,7 +245,13 @@ const handleCompleteFormSubmit = async (e) => {
       }));
     }
   };
-
+const token = localStorage.getItem("adminToken");
+if (token) {
+  axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+}
+useEffect(() => {
+  if (!token) navigate("/AdminLogin");
+}, [token, navigate]);
 
   return (
     <div className="flex h-screen bg-gray-100">

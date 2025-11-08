@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Sidebar from "../../components/Sidebar";
 import Header from "../../components/Header";
-
+import { useNavigate } from "react-router-dom";
 
 
 export default function PurchaseOrder() {
+   const navigate = useNavigate();
   const [items, setItems] = useState([
     { itemName: '', unit: '', quantity: '', rate: '', amount: '' }
   ]);
@@ -201,7 +202,13 @@ useEffect(() => {
 }, []);
 
 
-
+  const token = localStorage.getItem("adminToken");
+if (token) {
+  axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+}
+useEffect(() => {
+  if (!token) navigate("/AdminLogin");
+}, [token, navigate]);
 
   return (
     <div className="flex">
@@ -519,12 +526,25 @@ useEffect(() => {
 
               </div>
 
-              <div>
-                <label className="text-sm font-medium text-gray-700 block mb-1">PO File Title</label>
-                <input type="text" className="w-full border border-gray-300 rounded-lg px-3 py-2 mb-2" />
-                <label className="text-sm font-medium text-gray-700 block mb-1">PO File</label>
-                <input type="file" className="w-full" />
-              </div>
+             <div>
+  <label className="text-sm font-medium text-gray-700 block mb-1">PO File Title</label>
+  <input
+    type="text"
+    name="fileTitle"
+    value={formData.fileTitle}
+    onChange={handleInputChange}
+    className="w-full border border-gray-300 rounded-lg px-3 py-2 mb-2"
+  />
+
+  <label className="text-sm font-medium text-gray-700 block mb-1">PO File</label>
+  <input
+    type="file"
+    name="file"
+    onChange={handleInputChange}
+    className="w-full"
+  />
+</div>
+
             </div>
 
             {/* Terms & Conditions */}

@@ -8,6 +8,7 @@ import About from './pages/about'
 import Header from './Components/header'
 import PrivateRoute from './Components/PrivateRoute'
 import CreateListing from './pages/CreateListing'
+import ProjectPlots from '../../admin/admin-dashboard/src/pages/projects/ProjectPlotsNew'
 
 export default function App() {
   return (
@@ -23,6 +24,8 @@ export default function App() {
   <Route element={<PrivateRoute />}>
   <Route path='/profile' element={<Profile />}></Route>
   <Route path='/profile/create-listing' element={<CreateListing />}></Route>
+  <Route path='/projects' element={<ProjectPlots />}></Route>
+  <Route path='/projects/:projectId/plots' element={<ProjectPlots />}></Route>
   </Route>
 
 

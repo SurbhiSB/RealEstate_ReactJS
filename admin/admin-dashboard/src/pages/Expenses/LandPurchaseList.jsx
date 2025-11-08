@@ -17,6 +17,14 @@ export default function LandPurchaseList() {
 
   const navigate = useNavigate();
 
+  const token = localStorage.getItem("adminToken");
+if (token) {
+  axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+}
+useEffect(() => {
+  if (!token) navigate("/AdminLogin");
+}, [token, navigate]);
+
   useEffect(() => {
     fetchLandPurchases(currentPage);
   }, [currentPage]);
@@ -143,7 +151,7 @@ export default function LandPurchaseList() {
                   <th className="p-2 border">Area in Acre</th>
                   <th className="p-2 border">Sale Deed Date</th>
                   <th className="p-2 border">Sale Deed Value</th>
-                  <th className="p-2 border">Action</th>
+                  
                 </tr>
               </thead>
               <tbody>
@@ -161,14 +169,7 @@ export default function LandPurchaseList() {
                         {new Date(purchase.saleDeedDate).toLocaleDateString("en-GB")}
                       </td>
                       <td className="p-2 text-right border">{purchase.saleDeedValue}</td>
-                      <td className="p-2 text-center border">
-                        <button
-                          onClick={() => navigate(`/LandPurchases/addLandPurchases/${purchase._id}`)}
-                          className="bg-purple-800 text-white px-3 py-1 rounded text-sm"
-                        >
-                          ✎ Edit
-                        </button>
-                      </td>
+                      
                     </tr>
                   ))
                 ) : (

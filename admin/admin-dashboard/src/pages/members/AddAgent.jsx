@@ -2,11 +2,27 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Header from "../../components/Header";
 import Sidebar from "../../components/Sidebar";
+import { useNavigate, useParams } from "react-router-dom";
 
 export default function AddAgent() {
   const [states, setStates] = useState([]);
   const [activeTab, setActiveTab] = useState('other');
   const [message, setMessage] = useState('');
+   const [documents, setDocuments] = useState([]);   
+    const navigate = useNavigate();
+    const { id } = useParams();
+
+     const token = localStorage.getItem("adminToken");
+if (token) {
+  axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+}
+useEffect(() => {
+  if (!token) navigate("/AdminLogin");
+}, [token, navigate]);
+
+
+
+
   const [formData, setFormData] = useState({
     fullName: '',
     mobile: '',
@@ -43,6 +59,8 @@ export default function AddAgent() {
     ifsc: '',
   });
 
+  
+
   useEffect(() => {
     axios.get('http://localhost:3000/api/states')
       .then((res) => setStates(res.data))
@@ -74,6 +92,29 @@ export default function AddAgent() {
     setActiveTab("bank");
   };
 
+    useEffect(() => {
+    if (id) {
+      axios.get(`http://localhost:3000/api/AddAgent/AddAgent/${id}`)
+        .then((res) => {
+          const data = res.data.data;
+          setFormData({
+            fullName: data.fullName || '',
+             email: data.email || '',
+              referByName: data.referByName || '',
+               commission: data.commission || '',
+           
+          });
+
+          if (data.documents && Array.isArray(data.documents)) {
+            setDocuments(data.documents);
+          }
+        })
+        .catch((err) => {
+          console.error("Error fetching customer:", err);
+        });
+    }
+  }, [id]);
+
   const handleSubmitBank = async () => {
     try {
       const dataToSend = new FormData();
@@ -81,11 +122,28 @@ export default function AddAgent() {
         dataToSend.append(key, formData[key]);
       }
 
-      const res = await axios.post(
-        'http://localhost:3000/api/AddAgent/AddAgent',
-        dataToSend,
-        { headers: { 'Content-Type': 'multipart/form-data' } }
-      );
+      // const res = await axios.post(
+      //   'http://localhost:3000/api/AddAgent/AddAgent',
+      //   dataToSend,
+      //   { headers: { 'Content-Type': 'multipart/form-data' } }
+      // );
+
+       let res;
+            if (id) {
+              // update existing
+              res = await axios.put(
+                `http://localhost:3000/api/AddAgent/AddAgent/${id}`,
+                dataToSend,
+                { headers: { Authorization: `Bearer ${token}` } }
+              );
+            } else {
+              // create new
+              res = await axios.post(
+                "http://localhost:3000/api/AddAgent/AddAgent",
+                dataToSend,
+                { headers: { Authorization: `Bearer ${token}` } }
+              );
+            }
 
       if (res.data.success) {
         handleReset();

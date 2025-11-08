@@ -3,10 +3,22 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import Header from "../../components/Header";
 import Sidebar from "../../components/Sidebar";
+import { useNavigate } from "react-router-dom";
 
 export default function AddMembers() {
   const [activeTab, setActiveTab] = useState('other');
   const { id } = useParams();
+    const navigate = useNavigate();
+
+
+
+const token = localStorage.getItem("adminToken");
+if (token) {
+  axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+}
+useEffect(() => {
+  if (!token) navigate("/AdminLogin");
+}, [token, navigate]);
 
   const [formData, setFormData] = useState({
     memberType: '',
@@ -40,6 +52,8 @@ export default function AddMembers() {
   const [sameAsBilling, setSameAsBilling] = useState(false);
   const [message, setMessage] = useState('');
 
+
+
   useEffect(() => {
     if (id) {
       axios.get(`http://localhost:3000/api/addMembers/addmembers/${id}`)
@@ -48,27 +62,13 @@ export default function AddMembers() {
           setFormData({
             memberType: data.memberType || '',
             fullName: data.fullName || '',
-            email: data.email || '',
-            phone: data.phone || '',
-            remarks: data.remarks || '',
+           
             companyName: data.companyName || '',
-            displayName: data.displayName || '',
-            mobile: data.mobile || '',
-            tds: data.tds || '0.00',
-            status: data.status || 'Active',
-            gst: data.gst || '',
-            panNo: data.panNo || '',
-            paymentTerms: data.paymentTerms || '',
-            contactPerson: data.contactPerson || '',
-            contactNumber: data.contactNumber || '',
-            contactEmail: data.contactEmail || '',
-            beneficiaryName: data.beneficiaryName || '',
-            accountNumber: data.accountNumber || '',
-            bankName: data.bankName || '',
-            ifsc: data.ifsc || ''
+            displayName: data.displayName || ''
           });
           setBillingAddress(data.billingAddress || billingAddress);
           setShippingAddress(data.shippingAddress || shippingAddress);
+           
         })
         .catch((err) => {
           console.error("Error fetching member:", err);

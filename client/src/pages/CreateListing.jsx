@@ -3,116 +3,44 @@ import uploadToCloudinary from "../uploadToCloudinary";
 import {useNavigate} from "react-router-dom";
 
 export default function CreateListing() {
-  const [files, setFiles] = useState([]);
-  const [formData, setFormData] = useState({
-    name: "",
-    description: "",
-    address: "",
-    regularPrice: 0,
-    discountPrice: 0,
-    bathrooms: 1,
-    bedrooms: 1,
-    furnished: false,
-    parking: false,
-    offer: false,
-    type: "house",
-    imageUrls: [],
-  });
-  const [imageUploadError, setImageUploadError] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
+    const [files, setFiles] = useState([]);
+    const [formData, setFormData] = useState({
+        imageUrls: [],
+    });
 
-
-  // ----------------- IMAGE UPLOAD HANDLER -----------------
- const handleImageSubmit = async (e) => {
-  e.preventDefault();
-
-  if (!files || files.length === 0) {
-    setImageUploadError("Please select images to upload");
-    return;
-  }
-
-  if (files.length + formData.imageUrls.length > 6) {
-    setImageUploadError("You can upload a maximum of 6 images");
-    return;
-  }
-
-  try {
-    setImageUploadError(false);
-    const uploadPromises = Array.from(files).map(uploadToCloudinary);
-    const urls = await Promise.all(uploadPromises);
-
-    setFormData((prev) => ({
-      ...prev,
-      imageUrls: [...prev.imageUrls, ...urls],
-    }));
-
-    console.log("Uploaded image URLs:", urls);
-  } catch (err) {
-    console.error("Image upload error:", err);
-    setImageUploadError("Image upload failed (max 2MB per image)");
-  }
-};
-
-
-  // ----------------- INPUT HANDLER -----------------
-  const handleChange = (e) => {
-    const { id, value, type, checked } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [id]:
-        type === "checkbox"
-          ? checked
-          : type === "number"
-          ? Number(value)
-          : value,
-    }));
-  };
-
-  // ----------------- DELETE IMAGE -----------------
-  const handleDeleteImage = (url) => {
-    setFormData((prev) => ({
-      ...prev,
-      imageUrls: prev.imageUrls.filter((img) => img !== url),
-    }));
-  };
-
-  // ----------------- SUBMIT LISTING -----------------
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    try {
-      const res = await fetch("http://localhost:3000/api/listing/create", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-         credentials: "include", // 🔥 send cookies automatically
-        body: JSON.stringify(formData),
-      });
-
-      const data = await res.json();
-      setLoading(false);
-
-      if (!res.ok) {
-        console.log("data.message :",data.message || "Failed to create listing");
-        return;
-      }
-
-      alert("Listing created successfully!");
-      console.log("✅ Created Listing:", data);
-      navigate(`/listing/${data._id}`);
-    } catch (err) {
-      setLoading(false);
-      alert("Error submitting listing: " + err.message);
-    }
-  };
-
-  // ----------------- JSX -----------------
-
-   
+    const [imageUploadError, setImageUploadError] = useState(false);
     const [uploading, setUploading] = useState(false);
 
+    
+    
+    const handleImageSubmit = (e) =>{
+      
+      if (files.length > 0 && files.length + formData.imageUrls.length < 7) {
+        setUploading(true);
+        setImageUploadError(false);
+      const promises = [];
+      for (let i = 0; i < files.length; i++) {
+          promises.push(storeImage(files[i]));
+      }
+      Promise.all(promises).then((urls) => {
+          setFormData({
+              ...formData,
+              imageUrls: formData.imageUrls.concat(urls)
+          });
+          console.log("formData",formData);
+          setImageUploadError(false);
+          setUploading(false);
+          
+          
+      }).catch((err) => {
+          setImageUploadError('Image upload failed(2 mb max per image)');
+          setUploading(false);
+      })
+      }else{
+        setImageUploadError('You can only upload 6 images');
+        setUploading(false);
+      }
+    };
     
 
     const storeImage = async (file) => {
@@ -125,7 +53,6 @@ export default function CreateListing() {
         imageUrls: formData.imageUrls.filter((_, i) => i !== index),
       });
     }
-
   return (
     <main className="p-3 max-w-lg mx-auto">
       <h1 className="text-3xl font-semibold text-center my-7">
@@ -239,32 +166,6 @@ export default function CreateListing() {
             <div className='flex gap-4'>
                 <input onChange={(e) => setFiles(e.target.files)} className='p-3 border border-gray-300 rounded w-full' type="file" id='images' accept='image/*' multiple />
                 <button type='' onClick={handleImageSubmit} className='p-3 text-green-700 border border-green-700 rounded-lg uppercase hover:bg-green-700 hover:text-white disabled:opacity-80'>{uploading ? 'Uploading...' : 'Upload'}</button>
-
-            </div>
-            <div className="flex gap-2">
-              <input type="checkbox" id="furnished" className="w-5" onChange={handleChange} />
-              <span>Furnished</span>
-            </div>
-            <div className="flex gap-2">
-              <input type="checkbox" id="parking" className="w-5" onChange={handleChange} />
-              <span>Parking</span>
-            </div>
-          </div>
-
-
-          {/* NUMERIC INPUTS */}
-          <div className="flex flex-wrap gap-6">
-            <div className="flex items-center gap-2">
-              <input
-                type="number"
-                id="bedrooms"
-                min="1"
-                max="10"
-                required
-                className="border border-gray-300 p-3 rounded-lg"
-                onChange={handleChange}
-              />
-              <p>Beds</p>
             </div>
 
 {

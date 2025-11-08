@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Header from "../../components/Header";
 import Sidebar from "../../components/Sidebar";
+import { useNavigate } from "react-router-dom";
 
 export default function GroupList() {
   const [groups, setGroups] = useState([]);
@@ -13,6 +14,8 @@ export default function GroupList() {
   const [editId, setEditId] = useState(null);
   const [editGroupName, setEditGroupName] = useState("");
   const [editShortName, setEditShortName] = useState("");
+    const navigate = useNavigate();
+ 
 
   const handleUpdate = async (id) => {
     try {
@@ -64,6 +67,15 @@ export default function GroupList() {
     });
     setFilteredGroups(filtered);
   }, [searchTerm, groups]);
+
+
+  const token = localStorage.getItem("adminToken");
+if (token) {
+  axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+}
+useEffect(() => {
+  if (!token) navigate("/AdminLogin");
+}, [token, navigate]);
 
   return (
     <div className="flex h-screen bg-gray-100">

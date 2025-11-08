@@ -1,13 +1,179 @@
-
-import React from 'react';
-import PaymentHistory from '../../components/purchase/PaymentHistory';
+import React, { useEffect, useState } from "react";
 import Header from "../../components/Header";
 import Sidebar from "../../components/Sidebar";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-export default function PaymentHistoryPage() {
-  return <div> <div className="flex h-screen bg-gray-100">
-          <Sidebar />
-          <div className="flex-1 flex flex-col">
-           <Header />ItemMaster Page</div></div></div>
+export default function POListPage() {
+  const [vendors, setVendors] = useState([]);
+  const [selectedVendor, setSelectedVendor] = useState("");
+   const navigate = useNavigate();
+
+useEffect(() => {
+  const fetchVendors = async () => {
+    try {
+      const res = await axios.get("http://localhost:3000/api/addMembers/addmembers");
+      console.log("RAW response:", res);
+      console.log("res.data:", res.data);
+      console.log("All memberTypes:", res.data.data.map(m => m.memberType));
+
+      const vendorList = res.data.data.filter(
+        (member) => member.memberType?.toLowerCase() === "vendor"
+      );
+      console.log("Filtered Vendors:", vendorList);
+
+      setVendors(vendorList);
+    } catch (error) {
+      console.error("Error fetching vendors:", error);
+    }
+  };
+
+  fetchVendors();
+}, []);
+
+
+const [payments, setPayments] = useState([]);
+
+useEffect(() => {
+  const fetchPayments = async () => {
+    try {
+      const res = await axios.get("http://localhost:3000/api/company-payments");
+      if (res.data.success) {
+        setPayments(res.data.data);
+      }
+    } catch (err) {
+      console.error("Error fetching payments:", err);
+    }
+  };
+
+  fetchPayments();
+}, []);
+
+  const token = localStorage.getItem("adminToken");
+if (token) {
+  axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 }
+useEffect(() => {
+  if (!token) navigate("/AdminLogin");
+}, [token, navigate]);
+  return (
+    <div className="flex h-screen bg-gray-100">
+      <Sidebar />
+      <div className="flex-1 flex flex-col overflow-y-auto">
+        <Header />
+        <div className="p-4">
+          <div className="text-xl font-semibold mb-4">PO List</div>
 
+          {/* Filter Section */}
+          <div className="bg-white p-4 rounded-lg shadow mb-4 flex flex-wrap gap-4 items-end">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">From Date</label>
+              <input type="date" className="border border-gray-300 px-3 py-2 rounded-lg" />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">To Date</label>
+              <input type="date" className="border border-gray-300 px-3 py-2 rounded-lg" />
+            </div>
+            <div>
+             <div>
+  <label className="block text-sm font-medium text-gray-700 mb-1">Vendor Name</label>
+ <select className="border border-gray-300 px-3 py-2 rounded-lg w-48">
+  <option value="">All</option>
+  {vendors.length > 0 ? (
+    vendors.map((vendor) => (
+      <option key={vendor._id} value={vendor.fullName}>
+        {vendor.fullName}
+      </option>
+    ))
+  ) : (
+    <option disabled>Loading...</option>
+  )}
+</select>
+
+</div>
+
+            </div>
+            <button className="bg-gray-800 text-white px-4 py-2 rounded-lg mt-1 hover:bg-gray-900">
+              Submit
+            </button>
+          </div>
+
+          {/* Action Buttons */}
+          <div className="flex gap-2 mb-4">
+            {["Copy", "Excel", "PDF", "Print"].map((action) => (
+              <button
+                key={action}
+                className="bg-gray-900 text-white px-4 py-2 rounded-md hover:bg-gray-950"
+              >
+                {action}
+              </button>
+            ))}
+          </div>
+
+          {/* PO List Table */}
+          <div className="overflow-x-auto bg-white rounded-lg shadow">
+            <table className="min-w-full divide-y divide-gray-300 text-sm text-left">
+              <thead className="bg-gray-100 text-gray-700">
+                <tr>
+                  <th className="px-4 py-2">#</th>
+                  <th className="px-4 py-2">Date</th>
+                  <th className="px-4 py-2">Pay For</th>
+                  <th className="px-4 py-2">Vendor Name</th>
+                  <th className="px-4 py-2">Project Name</th>
+                  <th className="px-4 py-2">Pay By</th>
+                  <th className="px-4 py-2">Amount</th>
+                  <th className="px-4 py-2">TDS</th>
+                  <th className="px-4 py-2">Pay amount</th>
+                  <th className="px-4 py-2">Remark</th>
+                  <th className="px-4 py-2">Action</th>
+                </tr>
+              </thead>
+             <tbody className="divide-y divide-gray-200">
+  {payments.length === 0 ? (
+    <tr>
+      <td className="px-4 py-2 text-center" colSpan="11">
+        No data available in table
+      </td>
+    </tr>
+  ) : (
+    payments.map((pay, index) => (
+      <tr key={pay._id}>
+        <td className="px-4 py-2">{index + 1}</td>
+        <td className="px-4 py-2">{pay.issueDate?.slice(0, 10)}</td>
+        <td className="px-4 py-2">{pay.paymentType}</td>
+        <td className="px-4 py-2">-</td> {/* Optional: If vendor name is needed, add it to schema */}
+        <td className="px-4 py-2">{pay.projectName}</td>
+        <td className="px-4 py-2">{pay.paymentMode}</td>
+        <td className="px-4 py-2">₹{parseFloat(pay.amount).toFixed(2)}</td>
+        <td className="px-4 py-2">-</td> {/* Optional: TDS if implemented */}
+        <td className="px-4 py-2">₹{parseFloat(pay.amountToPay).toFixed(2)}</td>
+        <td className="px-4 py-2">{pay.remarks}</td>
+        <td className="px-4 py-2">
+          <button className="text-blue-600 hover:underline">View</button>
+        </td>
+      </tr>
+    ))
+  )}
+</tbody>
+
+            </table>
+          </div>
+
+          {/* Pagination */}
+          <div className="flex justify-between items-center text-sm mt-4">
+            <div>Showing 0 to 0 of 0 entries</div>
+            <div className="space-x-2">
+              <button className="px-3 py-1 border rounded text-gray-500 bg-gray-100">Previous</button>
+              <button className="px-3 py-1 border rounded text-gray-500 bg-gray-100">Next</button>
+            </div>
+          </div>
+
+          {/* Footer */}
+          <div className="text-center text-xs text-gray-500 mt-8">
+            Copyright © 2025. All rights reserved.
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
