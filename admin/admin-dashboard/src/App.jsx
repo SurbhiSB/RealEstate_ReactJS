@@ -20,7 +20,7 @@ import AddCustomers from './pages/members/AddCustomer';
 
 import ItemMasterPage from './pages/purchase/ItemMaster';
 import PurchaseOrderPage from './pages/purchase/PurchaseOrder';
-import POListPage from './pages/purchase/POList';
+import PoList from './components/purchase/PoList';
 import CompanyPaymentPage from './pages/purchase/CompanyPayment';
 import PaymentHistoryPage from './pages/purchase/PaymentHistory';
 import PurchaseBillPage from './pages/purchase/PurchaseBill';
@@ -99,7 +99,7 @@ export default function App() {
         <Route path="/projects/edit/:id" element={<Project />} /> // ✅ reuse same Project component
         <Route path="/purchase/item-master" element={<ItemMasterPage />} />
         <Route path="/purchase/purchase-order" element={<PurchaseOrderPage />} />
-        <Route path="/purchase/po-list" element={<POListPage />} />
+        <Route path="/purchase/po-list" element={<PoList />} />
         <Route path="/purchase/company-payment" element={<CompanyPaymentPage />} />
         <Route path="/purchase/payment-history" element={<PaymentHistoryPage />} />
         <Route path="/purchase/purchase-bill" element={<PurchaseBillPage />} />

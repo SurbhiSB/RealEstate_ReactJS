@@ -60,9 +60,6 @@ const calculateTotal = () => {
   );
 };
 
-
-
-
 const handleSubmit = async (e) => {
   e.preventDefault();
 
